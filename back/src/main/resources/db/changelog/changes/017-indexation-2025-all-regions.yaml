@@ -1,0 +1,99 @@
+databaseChangeLog:
+  # ============================================
+  # INDEXATION JUILLET 2025 - TOUTES RÉGIONS
+  # Sources: finances.wallonie.be, fleet.be
+  # ============================================
+
+  # --- WALLONIE & BRUXELLES TAXE ANNUELLE ---
+  # Indexation ~2% uniforme (plus réaliste)
+  - changeSet:
+      id: 58
+      author: axel
+      comment: "Wallonia Annual Tax - July 2025 indexation (~2%)"
+      changes:
+        - sql:
+            sql: |
+              UPDATE tax_brackets
+              SET amount = ROUND(amount * 1.02, 2)
+              WHERE region = 'wallonia'::region
+                AND tax_type = 'annual'::tax_type
+                AND bracket_key = 'fiscal_hp';
+
+  - changeSet:
+      id: 59
+      author: axel
+      comment: "Brussels Annual Tax - July 2025 indexation (~2%)"
+      changes:
+        - sql:
+            sql: |
+              UPDATE tax_brackets
+              SET amount = ROUND(amount * 1.02, 2)
+              WHERE region = 'brussels'::region
+                AND tax_type = 'annual'::tax_type
+                AND bracket_key = 'fiscal_hp';
+
+  - changeSet:
+      id: 60
+      author: axel
+      comment: "Flanders Annual Tax - July 2025 indexation (~2%)"
+      changes:
+        - sql:
+            sql: |
+              UPDATE tax_brackets
+              SET amount = ROUND(amount * 1.02, 2)
+              WHERE region = 'flanders'::region
+                AND tax_type = 'annual'::tax_type
+                AND bracket_key = 'fiscal_hp';
+
+  # --- FLANDERS BIV (TMC) INDEXATION ---
+  # ~2% increase as per July 2025
+  - changeSet:
+      id: 61
+      author: axel
+      comment: "Flanders BIV - July 2025 indexation (~2%)"
+      changes:
+        - sql:
+            sql: |
+              UPDATE tax_brackets
+              SET amount = ROUND(amount * 1.02, 2)
+              WHERE region = 'flanders'::region
+                AND tax_type = 'tmc'::tax_type
+                AND bracket_key IN ('power_kw', 'fiscal_hp');
+
+  - changeSet:
+      id: 62
+      author: axel
+      comment: "Flanders BIV - Update min_amount for 2025"
+      changes:
+        - sql:
+            sql: |
+              UPDATE tax_parameters
+              SET param_value = 55.88
+              WHERE region = 'flanders'::region
+                AND tax_type = 'tmc'::tax_type
+                AND param_key = 'min_amount';
+
+  - changeSet:
+      id: 63
+      author: axel
+      comment: "Flanders Annual Tax - Update min_amount for 2025"
+      changes:
+        - sql:
+            sql: |
+              UPDATE tax_parameters
+              SET param_value = 58.55
+              WHERE region = 'flanders'::region
+                AND tax_type = 'annual'::tax_type
+                AND param_key = 'min_amount';
+
+  # --- LPG SUPPLEMENTS INDEXATION ---
+  - changeSet:
+      id: 64
+      author: axel
+      comment: "All regions - LPG supplement indexation 2025"
+      changes:
+        - sql:
+            sql: |
+              UPDATE tax_parameters
+              SET param_value = ROUND(param_value * 1.02, 2)
+              WHERE param_key = 'lpg_supplement_per_hp';

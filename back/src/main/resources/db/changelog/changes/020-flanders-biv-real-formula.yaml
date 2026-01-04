@@ -1,0 +1,222 @@
+databaseChangeLog:
+  # ============================================
+  # FLANDRE BIV - VRAIE FORMULE OFFICIELLE
+  # BIV = (((CO2 × f + x) / 246)^6 × 4500 + c) × LC
+  # Source: Vlaamse Codex Fiscaliteit, tools.kluwer.be
+  # ============================================
+
+  # --- SUPPRESSION DES ANCIENS PARAMETRES ---
+  - changeSet:
+      id: 77
+      author: axel
+      comment: "Remove old Flanders TMC parameters (replaced by real formula)"
+      changes:
+        - sql:
+            sql: |
+              -- Supprimer TOUS les anciens brackets Flandre TMC
+              DELETE FROM tax_brackets
+              WHERE region = 'flanders'::region
+                AND tax_type = 'tmc'::tax_type;
+
+              -- Supprimer les anciens paramètres qui ne sont plus utilisés
+              DELETE FROM tax_parameters
+              WHERE region = 'flanders'::region
+                AND tax_type = 'tmc'::tax_type
+                AND param_key IN ('co2_reference_wltp', 'co2_percent_per_gram', 'co2_max_gram', 'min_amount');
+
+  # --- PARAMETRES DE LA FORMULE ---
+
+  # x = correction CO2 (36 en 2020, +4.5g/an)
+  # 2024: 36 + 4*4.5 = 54
+  # 2025: 36 + 5*4.5 = 58.5
+  # 2026: 36 + 6*4.5 = 63
+  - changeSet:
+      id: 78
+      author: axel
+      comment: "Flanders BIV - CO2 correction term x for 2024"
+      changes:
+        - sql:
+            sql: |
+              INSERT INTO tax_parameters (region, tax_type, param_key, param_value, valid_from, valid_to)
+              VALUES ('flanders'::region, 'tmc'::tax_type, 'co2_correction_x', 54, '2024-01-01', '2024-12-31')
+              ON CONFLICT DO NOTHING;
+
+  - changeSet:
+      id: 79
+      author: axel
+      comment: "Flanders BIV - CO2 correction term x for 2025"
+      changes:
+        - sql:
+            sql: |
+              INSERT INTO tax_parameters (region, tax_type, param_key, param_value, valid_from, valid_to)
+              VALUES ('flanders'::region, 'tmc'::tax_type, 'co2_correction_x', 58.5, '2025-01-01', '2025-12-31')
+              ON CONFLICT DO NOTHING;
+
+  - changeSet:
+      id: 80
+      author: axel
+      comment: "Flanders BIV - CO2 correction term x for 2026+"
+      changes:
+        - sql:
+            sql: |
+              INSERT INTO tax_parameters (region, tax_type, param_key, param_value, valid_from)
+              VALUES ('flanders'::region, 'tmc'::tax_type, 'co2_correction_x', 63, '2026-01-01')
+              ON CONFLICT DO NOTHING;
+
+  # Diviseur (246)
+  - changeSet:
+      id: 81
+      author: axel
+      comment: "Flanders BIV - Formula divisor"
+      changes:
+        - sql:
+            sql: |
+              INSERT INTO tax_parameters (region, tax_type, param_key, param_value, valid_from)
+              VALUES ('flanders'::region, 'tmc'::tax_type, 'formula_divisor', 246, '2024-01-01')
+              ON CONFLICT DO NOTHING;
+
+  # Constante 4500
+  - changeSet:
+      id: 82
+      author: axel
+      comment: "Flanders BIV - Formula constant (4500)"
+      changes:
+        - sql:
+            sql: |
+              INSERT INTO tax_parameters (region, tax_type, param_key, param_value, valid_from)
+              VALUES ('flanders'::region, 'tmc'::tax_type, 'formula_constant', 4500, '2024-01-01')
+              ON CONFLICT DO NOTHING;
+
+  # --- FACTEUR CARBURANT (f) ---
+  - changeSet:
+      id: 83
+      author: axel
+      comment: "Flanders BIV - Fuel factor f"
+      changes:
+        - sql:
+            sql: |
+              INSERT INTO tax_parameters (region, tax_type, param_key, param_value, valid_from) VALUES
+              ('flanders'::region, 'tmc'::tax_type, 'fuel_factor_lpg', 0.88, '2024-01-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'fuel_factor_cng', 0.93, '2024-01-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'fuel_factor_default', 1.0, '2024-01-01')
+              ON CONFLICT DO NOTHING;
+
+  # --- LUCHTCOMPONENT (c) - DIESEL ---
+  # Valeurs indexées juillet 2024
+  - changeSet:
+      id: 84
+      author: axel
+      comment: "Flanders BIV - Luchtcomponent diesel (indexed July 2024)"
+      changes:
+        - sql:
+            sql: |
+              -- Supprimer les anciennes données luchtcomponent diesel
+              DELETE FROM tax_brackets
+              WHERE region = 'flanders'::region
+                AND tax_type = 'tmc'::tax_type
+                AND bracket_key = 'luchtcomponent_diesel';
+
+              INSERT INTO tax_brackets (region, tax_type, bracket_key, min_value, max_value, amount, valid_from) VALUES
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_diesel', 0, 0, 3734.98, '2024-07-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_diesel', 1, 1, 3734.98, '2024-07-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_diesel', 2, 2, 2338.49, '2024-07-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_diesel', 3, 3, 1464.48, '2024-07-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_diesel', 4, 4, 889.79, '2024-07-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_diesel', 5, 5, 556.26, '2024-07-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_diesel', 6, 7, 592.33, '2024-07-01');
+
+  # --- LUCHTCOMPONENT (c) - BENZINE/LPG/CNG ---
+  - changeSet:
+      id: 85
+      author: axel
+      comment: "Flanders BIV - Luchtcomponent petrol/LPG/CNG (indexed July 2024)"
+      changes:
+        - sql:
+            sql: |
+              -- Supprimer les anciennes données luchtcomponent petrol
+              DELETE FROM tax_brackets
+              WHERE region = 'flanders'::region
+                AND tax_type = 'tmc'::tax_type
+                AND bracket_key = 'luchtcomponent_petrol';
+
+              INSERT INTO tax_brackets (region, tax_type, bracket_key, min_value, max_value, amount, valid_from) VALUES
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_petrol', 0, 0, 1485.54, '2024-07-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_petrol', 1, 1, 1485.54, '2024-07-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_petrol', 2, 2, 889.79, '2024-07-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_petrol', 3, 3, 556.26, '2024-07-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_petrol', 4, 4, 333.87, '2024-07-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_petrol', 5, 5, 111.11, '2024-07-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_petrol', 6, 7, 26.89, '2024-07-01');
+
+  # --- INDEXATION 2025 (environ +2%) ---
+  - changeSet:
+      id: 86
+      author: axel
+      comment: "Flanders BIV - Luchtcomponent indexation July 2025 (+2%)"
+      changes:
+        - sql:
+            sql: |
+              -- Diesel luchtcomponent 2025
+              INSERT INTO tax_brackets (region, tax_type, bracket_key, min_value, max_value, amount, valid_from) VALUES
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_diesel', 0, 0, 3809.68, '2025-07-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_diesel', 1, 1, 3809.68, '2025-07-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_diesel', 2, 2, 2385.26, '2025-07-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_diesel', 3, 3, 1493.77, '2025-07-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_diesel', 4, 4, 907.59, '2025-07-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_diesel', 5, 5, 567.39, '2025-07-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_diesel', 6, 7, 604.18, '2025-07-01');
+
+              -- Petrol luchtcomponent 2025
+              INSERT INTO tax_brackets (region, tax_type, bracket_key, min_value, max_value, amount, valid_from) VALUES
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_petrol', 0, 0, 1515.25, '2025-07-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_petrol', 1, 1, 1515.25, '2025-07-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_petrol', 2, 2, 907.59, '2025-07-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_petrol', 3, 3, 567.39, '2025-07-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_petrol', 4, 4, 340.55, '2025-07-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_petrol', 5, 5, 113.33, '2025-07-01'),
+              ('flanders'::region, 'tmc'::tax_type, 'luchtcomponent_petrol', 6, 7, 27.43, '2025-07-01');
+
+              -- Marquer les anciens comme expirés
+              UPDATE tax_brackets
+              SET valid_to = '2025-06-30'
+              WHERE region = 'flanders'::region
+                AND tax_type = 'tmc'::tax_type
+                AND bracket_key IN ('luchtcomponent_diesel', 'luchtcomponent_petrol')
+                AND valid_from = '2024-07-01';
+
+  # --- MIN/MAX AMOUNTS ---
+  - changeSet:
+      id: 87
+      author: axel
+      comment: "Flanders BIV - Update min/max amounts 2025"
+      changes:
+        - sql:
+            sql: |
+              -- Min amount
+              INSERT INTO tax_parameters (region, tax_type, param_key, param_value, valid_from)
+              VALUES ('flanders'::region, 'tmc'::tax_type, 'min_amount', 55.88, '2025-07-01')
+              ON CONFLICT DO NOTHING;
+
+              -- Max amount
+              INSERT INTO tax_parameters (region, tax_type, param_key, param_value, valid_from)
+              VALUES ('flanders'::region, 'tmc'::tax_type, 'max_amount', 13969.29, '2025-07-01')
+              ON CONFLICT DO NOTHING;
+
+  # --- VEHICULES ELECTRIQUES 2026 ---
+  - changeSet:
+      id: 88
+      author: axel
+      comment: "Flanders BIV - Electric vehicles fixed rate from 2026"
+      changes:
+        - sql:
+            sql: |
+              -- Supprimer l'exemption pour les nouvelles immatriculations 2026+
+              DELETE FROM tax_exemptions
+              WHERE region = 'flanders'::region
+                AND tax_type = 'tmc'::tax_type
+                AND condition_key IN ('fuel_electric', 'fuel_hydrogen');
+
+              -- Ajouter le montant fixe pour électriques 2026+
+              INSERT INTO tax_parameters (region, tax_type, param_key, param_value, valid_from)
+              VALUES ('flanders'::region, 'tmc'::tax_type, 'electric_fixed_amount', 61.50, '2026-01-01')
+              ON CONFLICT DO NOTHING;

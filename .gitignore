@@ -1,0 +1,22 @@
+# IDE
+.idea/
+*.iws
+*.iml
+*.ipr
+.vscode/
+
+# Claude Code local config
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Environment files
+.env
+.env.*
+!.env.example

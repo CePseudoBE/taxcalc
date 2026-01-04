@@ -1,0 +1,115 @@
+databaseChangeLog:
+  # Table pour stocker les calculs en attente de completion par les moderateurs
+  - changeSet:
+      id: 65
+      author: axel
+      comment: "Create pending_calculations table for incomplete vehicle data"
+      changes:
+        - createTable:
+            tableName: pending_calculations
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: session_id
+                  type: uuid
+                  constraints:
+                    nullable: true
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_pending_calc_user
+                    references: users(id)
+              - column:
+                  name: region
+                  type: region
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(20)
+                  defaultValue: "pending"
+                  constraints:
+                    nullable: false
+              # Donnees vehicule (toutes optionnelles)
+              - column:
+                  name: brand_name
+                  type: varchar(100)
+              - column:
+                  name: model_name
+                  type: varchar(100)
+              - column:
+                  name: variant_name
+                  type: varchar(150)
+              - column:
+                  name: year_start
+                  type: int
+              - column:
+                  name: power_kw
+                  type: int
+              - column:
+                  name: fiscal_hp
+                  type: int
+              - column:
+                  name: fuel
+                  type: fuel_type
+              - column:
+                  name: euro_norm
+                  type: euro_norm
+              - column:
+                  name: co2_wltp
+                  type: int
+              - column:
+                  name: co2_nedc
+                  type: int
+              - column:
+                  name: mma_kg
+                  type: int
+              # Resultats du calcul partiel
+              - column:
+                  name: calculated_tmc
+                  type: decimal(12,2)
+              - column:
+                  name: calculated_annual
+                  type: decimal(12,2)
+              - column:
+                  name: tmc_calculable
+                  type: boolean
+                  defaultValueBoolean: false
+              - column:
+                  name: annual_calculable
+                  type: boolean
+                  defaultValueBoolean: false
+              # Moderation
+              - column:
+                  name: reviewed_by
+                  type: bigint
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_pending_calc_reviewer
+                    references: users(id)
+              - column:
+                  name: reviewed_at
+                  type: timestamptz
+              - column:
+                  name: created_submission_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_pending_calc_submission
+                    references: vehicle_submissions(id)
+              # Timestamps
+              - column:
+                  name: created_at
+                  type: timestamptz
+                  defaultValueComputed: now()
+              - column:
+                  name: updated_at
+                  type: timestamptz
+                  defaultValueComputed: now()

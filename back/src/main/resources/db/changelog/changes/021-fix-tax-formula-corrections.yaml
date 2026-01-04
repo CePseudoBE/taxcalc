@@ -1,0 +1,116 @@
+databaseChangeLog:
+  # ============================================
+  # CORRECTIONS DES FORMULES FISCALES
+  # Basées sur la vérification des sources officielles
+  # Références: GPT_DOCS.md, CLAUDE_DOCS.md, Vlaamse Codex Fiscaliteit
+  # ============================================
+
+  # --- CORRECTION 1: COEFFICIENT 15+ ANS FLANDRE ---
+  # En Flandre, les véhicules de 15+ ans paient le minimum BIV (~55-57€)
+  # Le coefficient devrait être 0.10 (10%), pas 0.00 (exempt)
+  # Source: GPT_DOCS - "le solde étant plafonné à 10% du montant initial"
+  - changeSet:
+      id: 89
+      author: axel
+      comment: "Fix Flanders age 15+ coefficient: 0.10 instead of 0.00"
+      changes:
+        - sql:
+            sql: |
+              UPDATE age_coefficients
+              SET coefficient = 0.10
+              WHERE region = 'flanders'::region
+                AND tax_type = 'tmc'::tax_type
+                AND vehicle_age_years = 15;
+
+  # --- CORRECTION 2: LUCHTCOMPONENT EURO 0 vs EURO 1 ---
+  # Les valeurs Euro 0 et Euro 1 doivent être DIFFERENTES
+  # Source: GPT_DOCS - "Euro 0 diesel 2024 était ~3 613,58 € et Euro 1 diesel ~1 060,16 €"
+  # Valeurs officielles:
+  # - Euro 0 diesel: 3809.68€ (2025) ✓ correct
+  # - Euro 1 diesel: ~1081€ (2025) ✗ était 3809.68€
+  # - Euro 0 petrol: 1515.25€ (2025) ✓ correct
+  # - Euro 1 petrol: ~656€ (2025) ✗ était 1515.25€
+  - changeSet:
+      id: 90
+      author: axel
+      comment: "Fix Flanders luchtcomponent Euro 1 values (different from Euro 0)"
+      changes:
+        - sql:
+            sql: |
+              -- Corriger Euro 1 diesel (valeur 2024-07-01)
+              UPDATE tax_brackets
+              SET amount = 1060.16
+              WHERE region = 'flanders'::region
+                AND tax_type = 'tmc'::tax_type
+                AND bracket_key = 'luchtcomponent_diesel'
+                AND min_value = 1 AND max_value = 1
+                AND valid_from = '2024-07-01';
+
+              -- Corriger Euro 1 diesel (valeur 2025-07-01)
+              UPDATE tax_brackets
+              SET amount = 1081.36
+              WHERE region = 'flanders'::region
+                AND tax_type = 'tmc'::tax_type
+                AND bracket_key = 'luchtcomponent_diesel'
+                AND min_value = 1 AND max_value = 1
+                AND valid_from = '2025-07-01';
+
+              -- Corriger Euro 1 petrol (valeur 2024-07-01)
+              UPDATE tax_brackets
+              SET amount = 643.00
+              WHERE region = 'flanders'::region
+                AND tax_type = 'tmc'::tax_type
+                AND bracket_key = 'luchtcomponent_petrol'
+                AND min_value = 1 AND max_value = 1
+                AND valid_from = '2024-07-01';
+
+              -- Corriger Euro 1 petrol (valeur 2025-07-01)
+              UPDATE tax_brackets
+              SET amount = 655.86
+              WHERE region = 'flanders'::region
+                AND tax_type = 'tmc'::tax_type
+                AND bracket_key = 'luchtcomponent_petrol'
+                AND min_value = 1 AND max_value = 1
+                AND valid_from = '2025-07-01';
+
+  # --- CORRECTION 3: FACTEUR BICARBURATION CNG ---
+  # f = 0.744 pour les véhicules bicarburation essence+CNG homologués comme essence
+  # Source: GPT_DOCS - "0,744 pour les véhicules bicarburation essence+CNG homologués comme essence"
+  - changeSet:
+      id: 91
+      author: axel
+      comment: "Add Flanders bicarburation CNG fuel factor (0.744)"
+      changes:
+        - sql:
+            sql: |
+              INSERT INTO tax_parameters (region, tax_type, param_key, param_value, valid_from)
+              VALUES ('flanders'::region, 'tmc'::tax_type, 'fuel_factor_cng_petrol', 0.744, '2024-01-01')
+              ON CONFLICT DO NOTHING;
+
+  # --- CORRECTION 4: DOUBLE FORMULE FLANDRE NEDC vs WLTP ---
+  # Pré-2021 (NEDC): (((CO₂ × f + x) / 246)^6 × 4500 + c) × LC
+  # 2021+ (WLTP): (((CO₂ × f × q) / 246)^6 × 4500 + c) × LC
+  # Source: CLAUDE_DOCS - "q = 1.07 + (année-2021) × 0.035"
+  # q values: 2021=1.07, 2022=1.105, 2023=1.14, 2024=1.175, 2025=1.21, 2026=1.245
+  - changeSet:
+      id: 92
+      author: axel
+      comment: "Add Flanders WLTP q factor for dual formula support"
+      changes:
+        - sql:
+            sql: |
+              -- Facteur q pour véhicules WLTP (2021+)
+              -- q = 1.07 + (année-2021) × 0.035
+              INSERT INTO tax_parameters (region, tax_type, param_key, param_value, valid_from, valid_to) VALUES
+              ('flanders'::region, 'tmc'::tax_type, 'wltp_q_factor', 1.07, '2021-01-01', '2021-12-31'),
+              ('flanders'::region, 'tmc'::tax_type, 'wltp_q_factor', 1.105, '2022-01-01', '2022-12-31'),
+              ('flanders'::region, 'tmc'::tax_type, 'wltp_q_factor', 1.14, '2023-01-01', '2023-12-31'),
+              ('flanders'::region, 'tmc'::tax_type, 'wltp_q_factor', 1.175, '2024-01-01', '2024-12-31'),
+              ('flanders'::region, 'tmc'::tax_type, 'wltp_q_factor', 1.21, '2025-01-01', '2025-12-31'),
+              ('flanders'::region, 'tmc'::tax_type, 'wltp_q_factor', 1.245, '2026-01-01', NULL)
+              ON CONFLICT DO NOTHING;
+
+              -- Date pivot NEDC→WLTP (1er janvier 2021)
+              INSERT INTO tax_parameters (region, tax_type, param_key, param_value, valid_from)
+              VALUES ('flanders'::region, 'tmc'::tax_type, 'wltp_start_date', 20210101, '2021-01-01')
+              ON CONFLICT DO NOTHING;

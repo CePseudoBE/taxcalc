@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: 52
+      author: axel
+      comment: "Remove Brussels TMC exemptions for electric vehicles - they pay minimum 74.29 EUR"
+      changes:
+        - sql:
+            sql: |
+              DELETE FROM tax_exemptions
+              WHERE region = 'brussels'::region
+                AND tax_type = 'tmc'::tax_type
+                AND condition_key IN ('fuel_electric', 'fuel_hydrogen');
+
+  - changeSet:
+      id: 53
+      author: axel
+      comment: "Add Brussels TMC electric minimum amount parameter"
+      changes:
+        - sql:
+            sql: |
+              INSERT INTO tax_parameters (region, tax_type, param_key, param_value, valid_from)
+              VALUES ('brussels'::region, 'tmc'::tax_type, 'electric_min_amount', 74.29, '2024-07-01')
+              ON CONFLICT (region, tax_type, param_key, valid_from) DO UPDATE
+              SET param_value = EXCLUDED.param_value;

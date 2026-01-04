@@ -1,0 +1,293 @@
+databaseChangeLog:
+  - changeSet:
+      id: 8
+      author: axel
+      changes:
+        - createTable:
+            tableName: tax_brackets
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: region
+                  type: region
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tax_type
+                  type: tax_type
+                  constraints:
+                    nullable: false
+              - column:
+                  name: bracket_key
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: min_value
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: max_value
+                  type: int
+              - column:
+                  name: amount
+                  type: decimal(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: valid_from
+                  type: date
+                  defaultValue: '2000-01-01'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: valid_to
+                  type: date
+        - createIndex:
+            tableName: tax_brackets
+            indexName: idx_brackets_lookup
+            columns:
+              - column:
+                  name: region
+              - column:
+                  name: tax_type
+              - column:
+                  name: bracket_key
+
+  - changeSet:
+      id: 9
+      author: axel
+      changes:
+        - createTable:
+            tableName: age_coefficients
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: region
+                  type: region
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tax_type
+                  type: tax_type
+                  constraints:
+                    nullable: false
+              - column:
+                  name: vehicle_age_years
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: coefficient
+                  type: decimal(5,4)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: valid_from
+                  type: date
+                  defaultValue: '2000-01-01'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: valid_to
+                  type: date
+        - addUniqueConstraint:
+            tableName: age_coefficients
+            columnNames: region, tax_type, vehicle_age_years, valid_from
+            constraintName: uk_age_coefficients
+        - createIndex:
+            tableName: age_coefficients
+            indexName: idx_age_lookup
+            columns:
+              - column:
+                  name: region
+              - column:
+                  name: tax_type
+              - column:
+                  name: vehicle_age_years
+
+  - changeSet:
+      id: 10
+      author: axel
+      changes:
+        - createTable:
+            tableName: tax_parameters
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: region
+                  type: region
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tax_type
+                  type: tax_type
+                  constraints:
+                    nullable: false
+              - column:
+                  name: param_key
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: param_value
+                  type: decimal(12,4)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: valid_from
+                  type: date
+                  defaultValue: '2000-01-01'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: valid_to
+                  type: date
+        - addUniqueConstraint:
+            tableName: tax_parameters
+            columnNames: region, tax_type, param_key, valid_from
+            constraintName: uk_tax_parameters
+        - createIndex:
+            tableName: tax_parameters
+            indexName: idx_params_lookup
+            columns:
+              - column:
+                  name: region
+              - column:
+                  name: tax_type
+              - column:
+                  name: param_key
+
+  - changeSet:
+      id: 11
+      author: axel
+      changes:
+        - createTable:
+            tableName: tax_exemptions
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: region
+                  type: region
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tax_type
+                  type: tax_type
+                  constraints:
+                    nullable: false
+              - column:
+                  name: condition_key
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: valid_from
+                  type: date
+                  defaultValue: '2000-01-01'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: valid_to
+                  type: date
+
+  - changeSet:
+      id: 12
+      author: axel
+      changes:
+        - createTable:
+            tableName: user_reduction_types
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: code
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: description
+                  type: text
+
+  - changeSet:
+      id: 13
+      author: axel
+      changes:
+        - createTable:
+            tableName: user_reductions
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: region
+                  type: region
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tax_type
+                  type: tax_type
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reduction_type_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_percentage
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: value
+                  type: decimal(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: max_co2
+                  type: int
+              - column:
+                  name: valid_from
+                  type: date
+                  defaultValue: '2000-01-01'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: valid_to
+                  type: date
+        - addForeignKeyConstraint:
+            baseTableName: user_reductions
+            baseColumnNames: reduction_type_id
+            referencedTableName: user_reduction_types
+            referencedColumnNames: id
+            constraintName: fk_user_reductions_type

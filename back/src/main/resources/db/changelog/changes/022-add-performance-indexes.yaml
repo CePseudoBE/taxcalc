@@ -1,0 +1,76 @@
+databaseChangeLog:
+  - changeSet:
+      id: 30
+      author: axel
+      comment: Add indexes for validity date lookups on tax tables
+      changes:
+        - createIndex:
+            tableName: tax_brackets
+            indexName: idx_brackets_validity
+            columns:
+              - column:
+                  name: region
+              - column:
+                  name: tax_type
+              - column:
+                  name: bracket_key
+              - column:
+                  name: valid_from
+              - column:
+                  name: valid_to
+
+        - createIndex:
+            tableName: tax_parameters
+            indexName: idx_params_validity
+            columns:
+              - column:
+                  name: region
+              - column:
+                  name: tax_type
+              - column:
+                  name: param_key
+              - column:
+                  name: valid_from
+              - column:
+                  name: valid_to
+
+        - createIndex:
+            tableName: age_coefficients
+            indexName: idx_age_validity
+            columns:
+              - column:
+                  name: region
+              - column:
+                  name: tax_type
+              - column:
+                  name: vehicle_age_years
+              - column:
+                  name: valid_from
+              - column:
+                  name: valid_to
+
+  - changeSet:
+      id: 31
+      author: axel
+      comment: Add index for fuel type searches on variants
+      changes:
+        - createIndex:
+            tableName: variants
+            indexName: idx_variants_fuel
+            columns:
+              - column:
+                  name: fuel
+
+        - createIndex:
+            tableName: variants
+            indexName: idx_variants_euro_norm
+            columns:
+              - column:
+                  name: euro_norm
+
+        - createIndex:
+            tableName: variants
+            indexName: idx_variants_power
+            columns:
+              - column:
+                  name: power_kw

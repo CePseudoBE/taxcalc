@@ -1,0 +1,56 @@
+databaseChangeLog:
+  - changeSet:
+      id: 54
+      author: axel
+      comment: "Brussels TMC - Apply indexation +20.79% from July 2024 to power_kw brackets"
+      changes:
+        - sql:
+            sql: |
+              UPDATE tax_brackets
+              SET amount = ROUND(amount * 1.2079, 2)
+              WHERE region = 'brussels'::region
+                AND tax_type = 'tmc'::tax_type
+                AND bracket_key = 'power_kw'
+                AND valid_from = '2024-07-01';
+
+  - changeSet:
+      id: 55
+      author: axel
+      comment: "Brussels TMC - Apply indexation +20.79% from July 2024 to fiscal_hp brackets"
+      changes:
+        - sql:
+            sql: |
+              UPDATE tax_brackets
+              SET amount = ROUND(amount * 1.2079, 2)
+              WHERE region = 'brussels'::region
+                AND tax_type = 'tmc'::tax_type
+                AND bracket_key = 'fiscal_hp'
+                AND valid_from = '2024-07-01';
+
+  - changeSet:
+      id: 56
+      author: axel
+      comment: "Brussels TMC - Update min_amount parameter with indexation"
+      changes:
+        - sql:
+            sql: |
+              UPDATE tax_parameters
+              SET param_value = 74.29
+              WHERE region = 'brussels'::region
+                AND tax_type = 'tmc'::tax_type
+                AND param_key = 'min_amount'
+                AND valid_from = '2024-07-01';
+
+  - changeSet:
+      id: 57
+      author: axel
+      comment: "Brussels TMC - Update LPG reduction with indexation +20.79%"
+      changes:
+        - sql:
+            sql: |
+              UPDATE tax_parameters
+              SET param_value = ROUND(298 * 1.2079, 2)
+              WHERE region = 'brussels'::region
+                AND tax_type = 'tmc'::tax_type
+                AND param_key = 'lpg_reduction'
+                AND valid_from = '2024-07-01';

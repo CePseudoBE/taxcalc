@@ -1,0 +1,366 @@
+databaseChangeLog:
+  - changeSet:
+      id: 14
+      author: axel
+      comment: "Wallonia TMC 2025 - Power brackets (MB)"
+      changes:
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 0 }
+              - column: { name: max_value, valueNumeric: 70 }
+              - column: { name: amount, valueNumeric: 61.50 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 71 }
+              - column: { name: max_value, valueNumeric: 85 }
+              - column: { name: amount, valueNumeric: 123.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 86 }
+              - column: { name: max_value, valueNumeric: 100 }
+              - column: { name: amount, valueNumeric: 495.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 101 }
+              - column: { name: max_value, valueNumeric: 110 }
+              - column: { name: amount, valueNumeric: 867.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 111 }
+              - column: { name: max_value, valueNumeric: 120 }
+              - column: { name: amount, valueNumeric: 1239.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 121 }
+              - column: { name: max_value, valueNumeric: 155 }
+              - column: { name: amount, valueNumeric: 2478.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 156 }
+              - column: { name: max_value, value: null }
+              - column: { name: amount, valueNumeric: 4957.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  - changeSet:
+      id: 15
+      author: axel
+      comment: "Wallonia TMC 2025 - Energy coefficients (C)"
+      changes:
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: energy_electric_kw }
+              - column: { name: min_value, valueNumeric: 0 }
+              - column: { name: max_value, valueNumeric: 120 }
+              - column: { name: amount, valueNumeric: 0.01 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: energy_electric_kw }
+              - column: { name: min_value, valueNumeric: 121 }
+              - column: { name: max_value, valueNumeric: 155 }
+              - column: { name: amount, valueNumeric: 0.10 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: energy_electric_kw }
+              - column: { name: min_value, valueNumeric: 156 }
+              - column: { name: max_value, valueNumeric: 249 }
+              - column: { name: amount, valueNumeric: 0.18 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: energy_electric_kw }
+              - column: { name: min_value, valueNumeric: 250 }
+              - column: { name: max_value, value: null }
+              - column: { name: amount, valueNumeric: 0.26 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  - changeSet:
+      id: 16
+      author: axel
+      comment: "Wallonia TMC 2025 - Parameters"
+      changes:
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: co2_reference_wltp }
+              - column: { name: param_value, valueNumeric: 136 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: co2_reference_nedc }
+              - column: { name: param_value, valueNumeric: 115 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: mma_reference }
+              - column: { name: param_value, valueNumeric: 1838 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: min_amount }
+              - column: { name: param_value, valueNumeric: 50 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: max_amount }
+              - column: { name: param_value, valueNumeric: 9000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: min_base_amount }
+              - column: { name: param_value, valueNumeric: 61.50 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: energy_hybrid }
+              - column: { name: param_value, valueNumeric: 0.8 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: energy_thermal }
+              - column: { name: param_value, valueNumeric: 1 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  - changeSet:
+      id: 17
+      author: axel
+      comment: "Wallonia TMC 2025 - Age coefficients"
+      changes:
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 0 }
+              - column: { name: coefficient, valueNumeric: 1.0 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 1 }
+              - column: { name: coefficient, valueNumeric: 0.9 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 2 }
+              - column: { name: coefficient, valueNumeric: 0.8 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 3 }
+              - column: { name: coefficient, valueNumeric: 0.7 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 4 }
+              - column: { name: coefficient, valueNumeric: 0.6 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 5 }
+              - column: { name: coefficient, valueNumeric: 0.55 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 6 }
+              - column: { name: coefficient, valueNumeric: 0.5 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 7 }
+              - column: { name: coefficient, valueNumeric: 0.45 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 8 }
+              - column: { name: coefficient, valueNumeric: 0.4 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 9 }
+              - column: { name: coefficient, valueNumeric: 0.35 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 10 }
+              - column: { name: coefficient, valueNumeric: 0.3 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 11 }
+              - column: { name: coefficient, valueNumeric: 0.25 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 12 }
+              - column: { name: coefficient, valueNumeric: 0.2 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 13 }
+              - column: { name: coefficient, valueNumeric: 0.15 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 14 }
+              - column: { name: coefficient, valueNumeric: 0.1 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 15 }
+              - column: { name: coefficient, valueNumeric: 0 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  - changeSet:
+      id: 18
+      author: axel
+      comment: "User reduction types"
+      changes:
+        - insert:
+            tableName: user_reduction_types
+            columns:
+              - column: { name: code, value: large_family }
+              - column: { name: description, value: "Famille nombreuse (3+ enfants)" }
+        - insert:
+            tableName: user_reduction_types
+            columns:
+              - column: { name: code, value: single_parent }
+              - column: { name: description, value: "Famille monoparentale" }
+
+  - changeSet:
+      id: 19
+      author: axel
+      comment: "Wallonia TMC 2025 - User reductions"
+      changes:
+        - insert:
+            tableName: user_reductions
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: reduction_type_id, valueNumeric: 1 }
+              - column: { name: is_percentage, valueBoolean: false }
+              - column: { name: value, valueNumeric: 250 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: user_reductions
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: reduction_type_id, valueNumeric: 2 }
+              - column: { name: is_percentage, valueBoolean: false }
+              - column: { name: value, valueNumeric: 250 }
+              - column: { name: valid_from, valueDate: '2026-07-01' }

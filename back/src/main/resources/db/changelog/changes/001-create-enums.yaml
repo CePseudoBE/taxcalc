@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: axel
+      changes:
+        - sql:
+            sql: |
+              CREATE TYPE fuel_type AS ENUM (
+                'petrol', 'diesel', 'lpg', 'cng',
+                'hybrid_petrol', 'hybrid_diesel',
+                'plug_in_hybrid_petrol', 'plug_in_hybrid_diesel',
+                'electric', 'hydrogen'
+              );
+              
+              CREATE TYPE euro_norm AS ENUM (
+                'euro_1', 'euro_2', 'euro_3', 'euro_4',
+                'euro_5', 'euro_6', 'euro_6d_temp', 'euro_6d', 'euro_7'
+              );
+              
+              CREATE TYPE submission_status AS ENUM ('pending', 'approved', 'rejected');
+              
+              CREATE TYPE region AS ENUM ('wallonia', 'flanders', 'brussels');
+              
+              CREATE TYPE tax_type AS ENUM ('tmc', 'annual');
