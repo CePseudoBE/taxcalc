@@ -1,0 +1,1279 @@
+databaseChangeLog:
+  # ============================================
+  # USERS & AUTH
+  # ============================================
+  - changeSet:
+      id: 2
+      author: backtaxes
+      comment: "Create users table"
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: password_hash
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_moderator
+                  type: boolean
+                  defaultValueBoolean: false
+              - column:
+                  name: is_admin
+                  type: boolean
+                  defaultValueBoolean: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+
+  - changeSet:
+      id: 3
+      author: backtaxes
+      comment: "Create access_tokens table for OAT authentication"
+      changes:
+        - createTable:
+            tableName: access_tokens
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: token
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: client_name
+                  type: varchar(100)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: expires_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_used_at
+                  type: timestamp
+        - addForeignKeyConstraint:
+            baseTableName: access_tokens
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_access_tokens_user
+            onDelete: CASCADE
+        - createIndex:
+            tableName: access_tokens
+            indexName: idx_access_tokens_token
+            unique: true
+            columns:
+              - column:
+                  name: token
+        - createIndex:
+            tableName: access_tokens
+            indexName: idx_access_tokens_user_id
+            columns:
+              - column:
+                  name: user_id
+
+  # ============================================
+  # VEHICLES
+  # ============================================
+  - changeSet:
+      id: 4
+      author: backtaxes
+      comment: "Create brands table"
+      changes:
+        - createTable:
+            tableName: brands
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+
+  - changeSet:
+      id: 5
+      author: backtaxes
+      comment: "Create models table"
+      changes:
+        - createTable:
+            tableName: models
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: brand_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+        - addForeignKeyConstraint:
+            baseTableName: models
+            baseColumnNames: brand_id
+            referencedTableName: brands
+            referencedColumnNames: id
+            constraintName: fk_models_brand
+        - addUniqueConstraint:
+            tableName: models
+            columnNames: brand_id, name
+            constraintName: uk_models_brand_name
+
+  - changeSet:
+      id: 6
+      author: backtaxes
+      comment: "Create variants table"
+      changes:
+        - createTable:
+            tableName: variants
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: model_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(150)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: year_start
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: year_end
+                  type: int
+              - column:
+                  name: displacement_cc
+                  type: int
+              - column:
+                  name: power_kw
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: fiscal_hp
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: fuel
+                  type: fuel_type
+                  constraints:
+                    nullable: false
+              - column:
+                  name: euro_norm
+                  type: euro_norm
+                  constraints:
+                    nullable: false
+              - column:
+                  name: co2_wltp
+                  type: int
+              - column:
+                  name: co2_nedc
+                  type: int
+              - column:
+                  name: mma_kg
+                  type: int
+              - column:
+                  name: has_particle_filter
+                  type: boolean
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+        - addForeignKeyConstraint:
+            baseTableName: variants
+            baseColumnNames: model_id
+            referencedTableName: models
+            referencedColumnNames: id
+            constraintName: fk_variants_model
+        - addUniqueConstraint:
+            tableName: variants
+            columnNames: model_id, name, year_start
+            constraintName: uk_variants_model_name_year
+        - createIndex:
+            tableName: variants
+            indexName: idx_variants_model
+            columns:
+              - column:
+                  name: model_id
+
+  # ============================================
+  # SUBMISSIONS
+  # ============================================
+  - changeSet:
+      id: 7
+      author: backtaxes
+      comment: "Create vehicle_submissions table"
+      changes:
+        - createTable:
+            tableName: vehicle_submissions
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: submission_status
+                  defaultValue: pending
+                  constraints:
+                    nullable: false
+              - column:
+                  name: brand_name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: model_name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: variant_name
+                  type: varchar(150)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: year_start
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: year_end
+                  type: int
+              - column:
+                  name: displacement_cc
+                  type: int
+              - column:
+                  name: power_kw
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: fiscal_hp
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: fuel
+                  type: fuel_type
+                  constraints:
+                    nullable: false
+              - column:
+                  name: euro_norm
+                  type: euro_norm
+                  constraints:
+                    nullable: false
+              - column:
+                  name: co2_wltp
+                  type: int
+              - column:
+                  name: co2_nedc
+                  type: int
+              - column:
+                  name: mma_kg
+                  type: int
+              - column:
+                  name: has_particle_filter
+                  type: boolean
+              - column:
+                  name: reviewed_by
+                  type: bigint
+              - column:
+                  name: reviewed_at
+                  type: timestamp
+              - column:
+                  name: feedback
+                  type: text
+              - column:
+                  name: created_variant_id
+                  type: bigint
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+        - addForeignKeyConstraint:
+            baseTableName: vehicle_submissions
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_submissions_submitter
+        - addForeignKeyConstraint:
+            baseTableName: vehicle_submissions
+            baseColumnNames: reviewed_by
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_submissions_reviewer
+        - addForeignKeyConstraint:
+            baseTableName: vehicle_submissions
+            baseColumnNames: created_variant_id
+            referencedTableName: variants
+            referencedColumnNames: id
+            constraintName: fk_submissions_variant
+        - createIndex:
+            tableName: vehicle_submissions
+            indexName: idx_submissions_status
+            columns:
+              - column:
+                  name: status
+
+  # ============================================
+  # SAVED SEARCHES
+  # ============================================
+  - changeSet:
+      id: 8
+      author: backtaxes
+      comment: "Create saved_searches table"
+      changes:
+        - createTable:
+            tableName: saved_searches
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: variant_id
+                  type: bigint
+              - column:
+                  name: submission_id
+                  type: bigint
+              - column:
+                  name: region
+                  type: region
+                  constraints:
+                    nullable: false
+              - column:
+                  name: first_registration_date
+                  type: date
+              - column:
+                  name: label
+                  type: varchar(100)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+        - addForeignKeyConstraint:
+            baseTableName: saved_searches
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_saved_searches_user
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: saved_searches
+            baseColumnNames: variant_id
+            referencedTableName: variants
+            referencedColumnNames: id
+            constraintName: fk_saved_searches_variant
+        - addForeignKeyConstraint:
+            baseTableName: saved_searches
+            baseColumnNames: submission_id
+            referencedTableName: vehicle_submissions
+            referencedColumnNames: id
+            constraintName: fk_saved_searches_submission
+        - createIndex:
+            tableName: saved_searches
+            indexName: idx_saved_searches_user
+            columns:
+              - column:
+                  name: user_id
+
+  # ============================================
+  # TAX TABLES
+  # ============================================
+  - changeSet:
+      id: 9
+      author: backtaxes
+      comment: "Create tax_brackets table"
+      changes:
+        - createTable:
+            tableName: tax_brackets
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: region
+                  type: region
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tax_type
+                  type: tax_type
+                  constraints:
+                    nullable: false
+              - column:
+                  name: bracket_key
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: min_value
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: max_value
+                  type: int
+              - column:
+                  name: amount
+                  type: decimal(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: valid_from
+                  type: date
+                  defaultValue: '2025-01-01'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: valid_to
+                  type: date
+        - createIndex:
+            tableName: tax_brackets
+            indexName: idx_brackets_lookup
+            columns:
+              - column:
+                  name: region
+              - column:
+                  name: tax_type
+              - column:
+                  name: bracket_key
+              - column:
+                  name: min_value
+
+  - changeSet:
+      id: 10
+      author: backtaxes
+      comment: "Create age_coefficients table"
+      changes:
+        - createTable:
+            tableName: age_coefficients
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: region
+                  type: region
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tax_type
+                  type: tax_type
+                  constraints:
+                    nullable: false
+              - column:
+                  name: vehicle_age_years
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: coefficient
+                  type: decimal(5,4)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: valid_from
+                  type: date
+                  defaultValue: '2025-01-01'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: valid_to
+                  type: date
+        - addUniqueConstraint:
+            tableName: age_coefficients
+            columnNames: region, tax_type, vehicle_age_years, valid_from
+            constraintName: uk_age_coefficients
+        - createIndex:
+            tableName: age_coefficients
+            indexName: idx_age_lookup
+            columns:
+              - column:
+                  name: region
+              - column:
+                  name: tax_type
+              - column:
+                  name: vehicle_age_years
+
+  - changeSet:
+      id: 11
+      author: backtaxes
+      comment: "Create tax_parameters table"
+      changes:
+        - createTable:
+            tableName: tax_parameters
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: region
+                  type: region
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tax_type
+                  type: tax_type
+                  constraints:
+                    nullable: false
+              - column:
+                  name: param_key
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: param_value
+                  type: decimal(12,4)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: valid_from
+                  type: date
+                  defaultValue: '2025-01-01'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: valid_to
+                  type: date
+        - addUniqueConstraint:
+            tableName: tax_parameters
+            columnNames: region, tax_type, param_key, valid_from
+            constraintName: uk_tax_parameters
+        - createIndex:
+            tableName: tax_parameters
+            indexName: idx_params_lookup
+            columns:
+              - column:
+                  name: region
+              - column:
+                  name: tax_type
+              - column:
+                  name: param_key
+
+  - changeSet:
+      id: 12
+      author: backtaxes
+      comment: "Create tax_exemptions table"
+      changes:
+        - createTable:
+            tableName: tax_exemptions
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: region
+                  type: region
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tax_type
+                  type: tax_type
+                  constraints:
+                    nullable: false
+              - column:
+                  name: condition_key
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: valid_from
+                  type: date
+                  defaultValue: '2025-01-01'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: valid_to
+                  type: date
+
+  # ============================================
+  # USER REDUCTIONS
+  # ============================================
+  - changeSet:
+      id: 100
+      author: backtaxes
+      comment: "Create user_reduction_types table"
+      changes:
+        - createTable:
+            tableName: user_reduction_types
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: code
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: description
+                  type: text
+
+  - changeSet:
+      id: 101
+      author: backtaxes
+      comment: "Create user_reductions table"
+      changes:
+        - createTable:
+            tableName: user_reductions
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: region
+                  type: region
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tax_type
+                  type: tax_type
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reduction_type_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_percentage
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: value
+                  type: decimal(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: max_co2
+                  type: int
+              - column:
+                  name: valid_from
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: valid_to
+                  type: date
+        - addForeignKeyConstraint:
+            baseTableName: user_reductions
+            baseColumnNames: reduction_type_id
+            referencedTableName: user_reduction_types
+            referencedColumnNames: id
+            constraintName: fk_user_reductions_type
+
+  # ============================================
+  # ANALYTICS
+  # ============================================
+  - changeSet:
+      id: 102
+      author: backtaxes
+      comment: "Create search_events table"
+      changes:
+        - createTable:
+            tableName: search_events
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: session_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+              - column:
+                  name: brand_id
+                  type: bigint
+              - column:
+                  name: model_id
+                  type: bigint
+              - column:
+                  name: variant_id
+                  type: bigint
+              - column:
+                  name: region
+                  type: region
+              - column:
+                  name: fuel_type
+                  type: fuel_type
+              - column:
+                  name: is_new_vehicle
+                  type: boolean
+              - column:
+                  name: first_registration_date
+                  type: date
+              - column:
+                  name: search_type
+                  type: search_type
+                  constraints:
+                    nullable: false
+              - column:
+                  name: device_type
+                  type: device_type
+              - column:
+                  name: referrer_source
+                  type: varchar(100)
+              - column:
+                  name: user_agent_hash
+                  type: varchar(64)
+              - column:
+                  name: language
+                  type: varchar(10)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+        - addForeignKeyConstraint:
+            baseTableName: search_events
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_search_events_user
+        - addForeignKeyConstraint:
+            baseTableName: search_events
+            baseColumnNames: brand_id
+            referencedTableName: brands
+            referencedColumnNames: id
+            constraintName: fk_search_events_brand
+        - addForeignKeyConstraint:
+            baseTableName: search_events
+            baseColumnNames: model_id
+            referencedTableName: models
+            referencedColumnNames: id
+            constraintName: fk_search_events_model
+        - addForeignKeyConstraint:
+            baseTableName: search_events
+            baseColumnNames: variant_id
+            referencedTableName: variants
+            referencedColumnNames: id
+            constraintName: fk_search_events_variant
+        - createIndex:
+            tableName: search_events
+            indexName: idx_search_events_session
+            columns:
+              - column:
+                  name: session_id
+        - createIndex:
+            tableName: search_events
+            indexName: idx_search_events_created
+            columns:
+              - column:
+                  name: created_at
+
+  - changeSet:
+      id: 103
+      author: backtaxes
+      comment: "Create tax_calculations table"
+      changes:
+        - createTable:
+            tableName: tax_calculations
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: search_event_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: variant_id
+                  type: bigint
+              - column:
+                  name: submission_id
+                  type: bigint
+              - column:
+                  name: region
+                  type: region
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tax_type
+                  type: tax_type
+                  constraints:
+                    nullable: false
+              - column:
+                  name: calculated_amount
+                  type: decimal(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: power_kw
+                  type: int
+              - column:
+                  name: cv_fiscal
+                  type: int
+              - column:
+                  name: co2_gkm
+                  type: int
+              - column:
+                  name: vehicle_age_months
+                  type: int
+              - column:
+                  name: is_exempt
+                  type: boolean
+                  defaultValueBoolean: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+        - addForeignKeyConstraint:
+            baseTableName: tax_calculations
+            baseColumnNames: search_event_id
+            referencedTableName: search_events
+            referencedColumnNames: id
+            constraintName: fk_tax_calculations_event
+        - addForeignKeyConstraint:
+            baseTableName: tax_calculations
+            baseColumnNames: variant_id
+            referencedTableName: variants
+            referencedColumnNames: id
+            constraintName: fk_tax_calculations_variant
+        - addForeignKeyConstraint:
+            baseTableName: tax_calculations
+            baseColumnNames: submission_id
+            referencedTableName: vehicle_submissions
+            referencedColumnNames: id
+            constraintName: fk_tax_calculations_submission
+
+  - changeSet:
+      id: 104
+      author: backtaxes
+      comment: "Create daily_aggregates table"
+      changes:
+        - createTable:
+            tableName: daily_aggregates
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: region
+                  type: region
+              - column:
+                  name: brand_id
+                  type: bigint
+              - column:
+                  name: model_id
+                  type: bigint
+              - column:
+                  name: fuel_type
+                  type: fuel_type
+              - column:
+                  name: is_new_vehicle
+                  type: boolean
+              - column:
+                  name: search_count
+                  type: int
+                  defaultValueNumeric: 0
+              - column:
+                  name: calculation_count
+                  type: int
+                  defaultValueNumeric: 0
+              - column:
+                  name: unique_sessions
+                  type: int
+                  defaultValueNumeric: 0
+              - column:
+                  name: avg_tax_amount
+                  type: decimal(12,2)
+              - column:
+                  name: max_tax_amount
+                  type: decimal(12,2)
+              - column:
+                  name: min_tax_amount
+                  type: decimal(12,2)
+        - addForeignKeyConstraint:
+            baseTableName: daily_aggregates
+            baseColumnNames: brand_id
+            referencedTableName: brands
+            referencedColumnNames: id
+            constraintName: fk_daily_aggregates_brand
+        - addForeignKeyConstraint:
+            baseTableName: daily_aggregates
+            baseColumnNames: model_id
+            referencedTableName: models
+            referencedColumnNames: id
+            constraintName: fk_daily_aggregates_model
+        - createIndex:
+            tableName: daily_aggregates
+            indexName: idx_daily_aggregates_date
+            columns:
+              - column:
+                  name: date
+
+  - changeSet:
+      id: 105
+      author: backtaxes
+      comment: "Create popular_vehicles table"
+      changes:
+        - createTable:
+            tableName: popular_vehicles
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: week_start
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: region
+                  type: region
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ranking_type
+                  type: ranking_type
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rank
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: variant_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: brand_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: model_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: search_count
+                  type: int
+                  defaultValueNumeric: 0
+              - column:
+                  name: avg_tax_tmc
+                  type: decimal(12,2)
+              - column:
+                  name: avg_tax_annual
+                  type: decimal(12,2)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+        - addForeignKeyConstraint:
+            baseTableName: popular_vehicles
+            baseColumnNames: variant_id
+            referencedTableName: variants
+            referencedColumnNames: id
+            constraintName: fk_popular_vehicles_variant
+        - addForeignKeyConstraint:
+            baseTableName: popular_vehicles
+            baseColumnNames: brand_id
+            referencedTableName: brands
+            referencedColumnNames: id
+            constraintName: fk_popular_vehicles_brand
+        - addForeignKeyConstraint:
+            baseTableName: popular_vehicles
+            baseColumnNames: model_id
+            referencedTableName: models
+            referencedColumnNames: id
+            constraintName: fk_popular_vehicles_model
+        - addUniqueConstraint:
+            tableName: popular_vehicles
+            columnNames: week_start, region, ranking_type, rank
+            constraintName: uk_popular_vehicles
+
+  - changeSet:
+      id: 106
+      author: backtaxes
+      comment: "Create analytics_reports table"
+      changes:
+        - createTable:
+            tableName: analytics_reports
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: report_type
+                  type: report_type
+                  constraints:
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: text
+              - column:
+                  name: period_start
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: period_end
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: region
+                  type: region
+              - column:
+                  name: report_data
+                  type: jsonb
+                  constraints:
+                    nullable: false
+              - column:
+                  name: metadata
+                  type: jsonb
+              - column:
+                  name: is_public
+                  type: boolean
+                  defaultValueBoolean: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+        - createIndex:
+            tableName: analytics_reports
+            indexName: idx_analytics_reports_type
+            columns:
+              - column:
+                  name: report_type
+
+  - changeSet:
+      id: 107
+      author: backtaxes
+      comment: "Create pending_calculations table"
+      changes:
+        - createTable:
+            tableName: pending_calculations
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: session_id
+                  type: uuid
+              - column:
+                  name: user_id
+                  type: bigint
+              - column:
+                  name: region
+                  type: region
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(20)
+                  defaultValue: 'pending'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: brand_name
+                  type: varchar(100)
+              - column:
+                  name: model_name
+                  type: varchar(100)
+              - column:
+                  name: variant_name
+                  type: varchar(150)
+              - column:
+                  name: year_start
+                  type: int
+              - column:
+                  name: power_kw
+                  type: int
+              - column:
+                  name: fiscal_hp
+                  type: int
+              - column:
+                  name: fuel
+                  type: fuel_type
+              - column:
+                  name: euro_norm
+                  type: euro_norm
+              - column:
+                  name: co2_wltp
+                  type: int
+              - column:
+                  name: co2_nedc
+                  type: int
+              - column:
+                  name: mma_kg
+                  type: int
+              - column:
+                  name: calculated_tmc
+                  type: decimal(12,2)
+              - column:
+                  name: calculated_annual
+                  type: decimal(12,2)
+              - column:
+                  name: tmc_calculable
+                  type: boolean
+                  defaultValueBoolean: false
+              - column:
+                  name: annual_calculable
+                  type: boolean
+                  defaultValueBoolean: false
+              - column:
+                  name: reviewed_by
+                  type: bigint
+              - column:
+                  name: reviewed_at
+                  type: timestamp
+              - column:
+                  name: created_submission_id
+                  type: bigint
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+        - addForeignKeyConstraint:
+            baseTableName: pending_calculations
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_pending_calculations_user
+        - addForeignKeyConstraint:
+            baseTableName: pending_calculations
+            baseColumnNames: reviewed_by
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_pending_calculations_reviewer
+        - addForeignKeyConstraint:
+            baseTableName: pending_calculations
+            baseColumnNames: created_submission_id
+            referencedTableName: vehicle_submissions
+            referencedColumnNames: id
+            constraintName: fk_pending_calculations_submission

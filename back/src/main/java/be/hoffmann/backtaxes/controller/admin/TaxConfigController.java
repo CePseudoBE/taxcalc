@@ -1,6 +1,7 @@
 package be.hoffmann.backtaxes.controller.admin;
 
 import be.hoffmann.backtaxes.dto.response.ApiResponse;
+import be.hoffmann.backtaxes.dto.response.PagedResponse;
 import be.hoffmann.backtaxes.entity.AgeCoefficient;
 import be.hoffmann.backtaxes.entity.TaxBracket;
 import be.hoffmann.backtaxes.entity.TaxExemption;
@@ -16,6 +17,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -45,16 +48,31 @@ public class TaxConfigController {
 
     // ==================== Tax Brackets ====================
 
-    @Operation(summary = "Liste des tranches", description = "Liste toutes les tranches de taxes avec filtres optionnels")
+    @Operation(summary = "Liste des tranches", description = "Liste les tranches de taxes avec filtres optionnels et pagination optionnelle")
     @GetMapping("/tax-brackets")
-    public ResponseEntity<ApiResponse<List<TaxBracket>>> getAllTaxBrackets(
+    public ResponseEntity<ApiResponse<?>> getAllTaxBrackets(
             @Parameter(description = "Region") @RequestParam(required = false) Region region,
-            @Parameter(description = "Type de taxe") @RequestParam(required = false) TaxType taxType) {
+            @Parameter(description = "Type de taxe") @RequestParam(required = false) TaxType taxType,
+            @Parameter(description = "Numero de page (0-indexed)") @RequestParam(required = false) Integer page,
+            @Parameter(description = "Nombre d'elements par page") @RequestParam(required = false) Integer size) {
 
-        List<TaxBracket> brackets = (region != null && taxType != null)
-                ? taxBracketRepository.findByRegionAndTaxType(region, taxType)
-                : taxBracketRepository.findAll();
-        return ResponseEntity.ok(ApiResponse.success(brackets));
+        // Si pas de pagination demandee, retourner toutes les tranches
+        if (page == null && size == null) {
+            List<TaxBracket> brackets = (region != null || taxType != null)
+                    ? taxBracketRepository.findByFilters(region, taxType, PageRequest.of(0, Integer.MAX_VALUE)).getContent()
+                    : taxBracketRepository.findAll();
+            return ResponseEntity.ok(ApiResponse.success(brackets));
+        }
+
+        // Pagination avec valeurs par defaut
+        int pageNum = page != null ? page : 0;
+        int pageSize = size != null ? size : 50;
+        var pageable = PageRequest.of(pageNum, pageSize, Sort.by("region", "taxType", "bracketKey", "minValue").ascending());
+
+        var pagedBrackets = taxBracketRepository.findByFilters(region, taxType, pageable);
+        var response = PagedResponse.from(pagedBrackets);
+
+        return ResponseEntity.ok(ApiResponse.success(response));
     }
 
     @Operation(summary = "Detail d'une tranche", description = "Recupere une tranche de taxe par son ID")

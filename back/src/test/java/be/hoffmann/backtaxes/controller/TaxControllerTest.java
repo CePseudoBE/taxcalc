@@ -138,11 +138,8 @@ class TaxControllerTest {
         @Test
         @DisplayName("should return 400 when both variantId and submissionId provided")
         void shouldReturn400WhenBothVehicleReferences() throws Exception {
-            // This test validates that the service throws when both IDs are provided
-            // No analytics mock needed - exception thrown before analytics call
-            when(taxCalculationService.calculateBoth(any()))
-                    .thenThrow(new ValidationException("Either variantId or submissionId must be provided, but not both"));
-
+            // With @AssertTrue validation on isValidVehicleReference, the request
+            // is rejected by Spring validation before reaching the service
             mockMvc.perform(post("/api/tax/calculate")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content("""

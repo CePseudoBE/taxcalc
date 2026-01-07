@@ -3,6 +3,8 @@ package be.hoffmann.backtaxes.repository;
 import be.hoffmann.backtaxes.entity.TaxBracket;
 import be.hoffmann.backtaxes.entity.enums.Region;
 import be.hoffmann.backtaxes.entity.enums.TaxType;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -50,4 +52,18 @@ public interface TaxBracketRepository extends JpaRepository<TaxBracket, Long> {
             @Param("date") LocalDate date,
             @Param("region") Region region,
             @Param("taxType") TaxType taxType);
+
+    /**
+     * Recupere les tranches avec pagination et filtres optionnels.
+     */
+    @Query(value = "SELECT tb FROM TaxBracket tb " +
+           "WHERE (:region IS NULL OR tb.region = :region) " +
+           "AND (:taxType IS NULL OR tb.taxType = :taxType)",
+           countQuery = "SELECT COUNT(tb) FROM TaxBracket tb " +
+           "WHERE (:region IS NULL OR tb.region = :region) " +
+           "AND (:taxType IS NULL OR tb.taxType = :taxType)")
+    Page<TaxBracket> findByFilters(
+            @Param("region") Region region,
+            @Param("taxType") TaxType taxType,
+            Pageable pageable);
 }

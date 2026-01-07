@@ -1,24 +1,40 @@
 databaseChangeLog:
   - changeSet:
       id: 1
-      author: axel
+      author: backtaxes
+      comment: "Create all PostgreSQL enum types"
       changes:
         - sql:
             sql: |
+              -- Vehicle & tax enums
               CREATE TYPE fuel_type AS ENUM (
                 'petrol', 'diesel', 'lpg', 'cng',
                 'hybrid_petrol', 'hybrid_diesel',
                 'plug_in_hybrid_petrol', 'plug_in_hybrid_diesel',
                 'electric', 'hydrogen'
               );
-              
+
               CREATE TYPE euro_norm AS ENUM (
                 'euro_1', 'euro_2', 'euro_3', 'euro_4',
-                'euro_5', 'euro_6', 'euro_6d_temp', 'euro_6d', 'euro_7'
+                'euro_5', 'euro_5b', 'euro_6', 'euro_6d_temp', 'euro_6d', 'euro_7'
               );
-              
-              CREATE TYPE submission_status AS ENUM ('pending', 'approved', 'rejected');
-              
+
               CREATE TYPE region AS ENUM ('wallonia', 'flanders', 'brussels');
-              
+
               CREATE TYPE tax_type AS ENUM ('tmc', 'annual');
+
+              CREATE TYPE submission_status AS ENUM ('pending', 'approved', 'rejected');
+
+              -- Analytics enums
+              CREATE TYPE report_type AS ENUM (
+                'market_trends', 'tax_analysis', 'user_behavior',
+                'regional_comparison', 'monthly_summary', 'data_retention'
+              );
+
+              CREATE TYPE search_type AS ENUM (
+                'catalog_search', 'manual_entry', 'quick_estimate', 'comparison'
+              );
+
+              CREATE TYPE device_type AS ENUM ('desktop', 'mobile', 'tablet');
+
+              CREATE TYPE ranking_type AS ENUM ('most_searched', 'highest_tax', 'lowest_tax');

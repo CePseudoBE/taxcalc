@@ -36,6 +36,14 @@ public class User {
     @Column(name = "is_moderator")
     private Boolean isModerator = false;
 
+    /**
+     * Est-ce que l'utilisateur est administrateur?
+     * Les admins peuvent gerer les utilisateurs et la configuration.
+     * Par defaut: false.
+     */
+    @Column(name = "is_admin")
+    private Boolean isAdmin = false;
+
     @Column(name = "created_at", insertable = false, updatable = false)
     private Instant createdAt;
 
@@ -91,6 +99,14 @@ public class User {
 
     public void setIsModerator(Boolean moderator) {
         isModerator = moderator;
+    }
+
+    public Boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(Boolean admin) {
+        isAdmin = admin;
     }
 
     public Instant getCreatedAt() {

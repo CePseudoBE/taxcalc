@@ -1,5 +1,6 @@
 package be.hoffmann.backtaxes.service;
 
+import be.hoffmann.backtaxes.dto.request.UserProfileUpdateRequest;
 import be.hoffmann.backtaxes.dto.request.UserRegistrationRequest;
 import be.hoffmann.backtaxes.dto.response.UserResponse;
 import be.hoffmann.backtaxes.entity.User;
@@ -76,6 +77,7 @@ public class UserService {
                 user.getId(),
                 user.getEmail(),
                 user.getIsModerator(),
+                user.getIsAdmin(),
                 user.getCreatedAt()
         );
     }
@@ -87,6 +89,60 @@ public class UserService {
     public User setModeratorStatus(Long userId, boolean isModerator) {
         User user = findById(userId);
         user.setIsModerator(isModerator);
+        return userRepository.save(user);
+    }
+
+    /**
+     * Met a jour le profil de l'utilisateur.
+     * Seuls les champs non-null dans la requete seront mis a jour.
+     */
+    @Transactional
+    public User updateProfile(User user, UserProfileUpdateRequest request) {
+        // Si changement de mot de passe, verifier le mot de passe actuel
+        if (request.newPassword() != null && !request.newPassword().isBlank()) {
+            if (request.currentPassword() == null || request.currentPassword().isBlank()) {
+                throw new ValidationException("currentPassword", "Current password is required to change password");
+            }
+            if (!passwordEncoder.matches(request.currentPassword(), user.getPasswordHash())) {
+                throw new ValidationException("currentPassword", "Current password is incorrect");
+            }
+            user.setPasswordHash(passwordEncoder.encode(request.newPassword()));
+        }
+
+        // Mise a jour de l'email si fourni
+        if (request.email() != null && !request.email().isBlank() && !request.email().equals(user.getEmail())) {
+            if (userRepository.existsByEmail(request.email())) {
+                throw new ValidationException("email", "Email already exists");
+            }
+            user.setEmail(request.email());
+        }
+
+        return userRepository.save(user);
+    }
+
+    /**
+     * Supprime le compte de l'utilisateur.
+     */
+    @Transactional
+    public void deleteAccount(Long userId) {
+        User user = findById(userId);
+        userRepository.delete(user);
+    }
+
+    /**
+     * Liste tous les utilisateurs (pour admin).
+     */
+    public java.util.List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    /**
+     * Met a jour le statut admin d'un utilisateur.
+     */
+    @Transactional
+    public User setAdminStatus(Long userId, boolean isAdmin) {
+        User user = findById(userId);
+        user.setIsAdmin(isAdmin);
         return userRepository.save(user);
     }
 }

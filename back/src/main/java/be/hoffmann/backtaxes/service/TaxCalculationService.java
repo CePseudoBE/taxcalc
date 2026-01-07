@@ -607,8 +607,8 @@ public class TaxCalculationService {
      * Valide la requete de calcul.
      */
     private void validateRequest(TaxCalculationRequest request) {
-        if (!request.hasValidVehicleReference()) {
-            throw new ValidationException("Either variantId or submissionId must be provided, but not both");
+        if (!request.isValidVehicleReference()) {
+            throw new ValidationException("Vous devez fournir soit variantId, soit submissionId, soit les specs manuelles (fiscalHp + fuel minimum)");
         }
         if (request.getRegion() == null) {
             throw new ValidationException("region", "Region is required");
@@ -619,16 +619,19 @@ public class TaxCalculationService {
     }
 
     /**
-     * Recupere les donnees du vehicule depuis une variante ou soumission.
+     * Recupere les donnees du vehicule depuis une variante, soumission ou specs manuelles.
      */
     private VehicleData getVehicleData(TaxCalculationRequest request) {
         if (request.getVariantId() != null) {
             Variant variant = variantService.findById(request.getVariantId());
             return VehicleData.fromVariant(variant);
-        } else {
+        } else if (request.getSubmissionId() != null) {
             VehicleSubmission submission = submissionRepository.findById(request.getSubmissionId())
                     .orElseThrow(() -> new ResourceNotFoundException("VehicleSubmission", "id", request.getSubmissionId()));
             return VehicleData.fromSubmission(submission);
+        } else {
+            // Mode specs manuelles - calcul anonyme sans enregistrement
+            return VehicleData.fromManualSpecs(request);
         }
     }
 
@@ -666,6 +669,12 @@ public class TaxCalculationService {
             return new VehicleData(
                     s.getPowerKw(), s.getFiscalHp(), s.getFuel(),
                     s.getEuroNorm(), s.getCo2Wltp(), s.getCo2Nedc(), s.getMmaKg());
+        }
+
+        public static VehicleData fromManualSpecs(TaxCalculationRequest r) {
+            return new VehicleData(
+                    r.getPowerKw(), r.getFiscalHp(), r.getFuel(),
+                    r.getEuroNorm(), r.getCo2Wltp(), r.getCo2Nedc(), r.getMmaKg());
         }
     }
 

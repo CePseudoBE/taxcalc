@@ -4,6 +4,7 @@ import be.hoffmann.backtaxes.dto.mapper.SubmissionMapper;
 import be.hoffmann.backtaxes.dto.request.SubmissionReviewRequest;
 import be.hoffmann.backtaxes.dto.request.VehicleSubmissionRequest;
 import be.hoffmann.backtaxes.dto.response.ApiResponse;
+import be.hoffmann.backtaxes.dto.response.PagedResponse;
 import be.hoffmann.backtaxes.dto.response.SubmissionResponse;
 import be.hoffmann.backtaxes.entity.User;
 import be.hoffmann.backtaxes.entity.VehicleSubmission;
@@ -15,6 +16,8 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -79,13 +82,28 @@ public class SubmissionController {
 
     // ==================== Endpoints Moderation ====================
 
-    @Operation(summary = "Liste des soumissions (moderation)", description = "Liste les soumissions par statut pour les moderateurs")
+    @Operation(summary = "Liste des soumissions (moderation)", description = "Liste les soumissions par statut pour les moderateurs (avec pagination optionnelle)")
     @GetMapping("/moderation/submissions")
-    public ResponseEntity<ApiResponse<List<SubmissionResponse>>> getSubmissionsByStatus(
-            @Parameter(description = "Statut des soumissions") @RequestParam(defaultValue = "pending") SubmissionStatus status) {
+    public ResponseEntity<ApiResponse<?>> getSubmissionsByStatus(
+            @Parameter(description = "Statut des soumissions") @RequestParam(defaultValue = "pending") SubmissionStatus status,
+            @Parameter(description = "Numero de page (0-indexed)") @RequestParam(required = false) Integer page,
+            @Parameter(description = "Nombre d'elements par page") @RequestParam(required = false) Integer size) {
 
-        List<VehicleSubmission> submissions = submissionService.findByStatus(status);
-        return ResponseEntity.ok(ApiResponse.success(SubmissionMapper.toResponseList(submissions)));
+        // Si pas de pagination demandee, retourner toutes les soumissions
+        if (page == null && size == null) {
+            List<VehicleSubmission> submissions = submissionService.findByStatus(status);
+            return ResponseEntity.ok(ApiResponse.success(SubmissionMapper.toResponseList(submissions)));
+        }
+
+        // Pagination avec valeurs par defaut
+        int pageNum = page != null ? page : 0;
+        int pageSize = size != null ? size : 20;
+        var pageable = PageRequest.of(pageNum, pageSize, Sort.by("createdAt").descending());
+
+        var pagedSubmissions = submissionService.findByStatus(status, pageable);
+        var response = PagedResponse.from(pagedSubmissions, SubmissionMapper::toResponse);
+
+        return ResponseEntity.ok(ApiResponse.success(response));
     }
 
     @Operation(summary = "Evaluer une soumission", description = "Approuve ou rejette une soumission de vehicule")
@@ -111,19 +129,13 @@ public class SubmissionController {
     }
 
     /**
-     * Recupere l'utilisateur connecte depuis la session.
-     * En mode dev local (sans auth), utilise l'utilisateur ID 1 par defaut.
+     * Recupere l'utilisateur connecte depuis le contexte de securite.
      */
     private User getCurrentUser(HttpSession session) {
-        Long userId = (Long) session.getAttribute(USER_SESSION_KEY);
-        if (userId == null) {
-            // Mode dev: tenter d'utiliser l'utilisateur par defaut (ID 1)
-            try {
-                return userService.findById(1L);
-            } catch (Exception e) {
-                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not authenticated");
-            }
+        var authentication = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated() || !(authentication.getPrincipal() instanceof User)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not authenticated");
         }
-        return userService.findById(userId);
+        return (User) authentication.getPrincipal();
     }
 }

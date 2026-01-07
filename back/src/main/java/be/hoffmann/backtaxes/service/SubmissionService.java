@@ -10,6 +10,8 @@ import be.hoffmann.backtaxes.repository.BrandRepository;
 import be.hoffmann.backtaxes.repository.ModelRepository;
 import be.hoffmann.backtaxes.repository.VariantRepository;
 import be.hoffmann.backtaxes.repository.VehicleSubmissionRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -79,6 +81,14 @@ public class SubmissionService {
      */
     public List<VehicleSubmission> findByStatus(SubmissionStatus status) {
         return submissionRepository.findByStatusWithDetails(status);
+    }
+
+    /**
+     * Liste les soumissions par statut avec pagination.
+     * Utilise JOIN FETCH pour eviter N+1.
+     */
+    public Page<VehicleSubmission> findByStatus(SubmissionStatus status, Pageable pageable) {
+        return submissionRepository.findByStatusWithDetailsPaged(status, pageable);
     }
 
     /**

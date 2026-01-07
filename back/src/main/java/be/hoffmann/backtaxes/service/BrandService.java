@@ -3,6 +3,8 @@ package be.hoffmann.backtaxes.service;
 import be.hoffmann.backtaxes.entity.Brand;
 import be.hoffmann.backtaxes.exception.ResourceNotFoundException;
 import be.hoffmann.backtaxes.repository.BrandRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,5 +52,12 @@ public class BrandService {
      */
     public boolean existsById(Long id) {
         return brandRepository.existsById(id);
+    }
+
+    /**
+     * Recupere toutes les marques avec pagination.
+     */
+    public Page<Brand> findAll(Pageable pageable) {
+        return brandRepository.findAll(pageable);
     }
 }

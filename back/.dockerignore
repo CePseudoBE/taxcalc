@@ -1,0 +1,49 @@
+# Back-Taxes Backend - Docker Ignore
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Test reports
+test-results/
+jacoco/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+*.md
+!README.md
+
+# Docker (avoid recursive copy)
+Dockerfile
+.dockerignore
+
+# Local configuration
+*.local
+.env
+.env.*
+!.env.example
+
+# Temporary files
+tmp/
+temp/

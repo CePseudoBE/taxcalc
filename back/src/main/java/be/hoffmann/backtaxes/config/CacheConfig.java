@@ -1,6 +1,7 @@
 package be.hoffmann.backtaxes.config;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
@@ -14,20 +15,30 @@ import java.util.concurrent.TimeUnit;
  *
  * Les donnees de taxes (brackets, parameters, coefficients) changent rarement
  * (au plus une fois par an lors des indexations), donc on peut les cacher longtemps.
+ *
+ * Configuration via application.properties:
+ * - app.cache.ttl-hours: duree de vie en heures (defaut: 24)
+ * - app.cache.max-size: nombre max d'entrees (defaut: 1000)
  */
 @Configuration
 @EnableCaching
 public class CacheConfig {
 
+    @Value("${app.cache.ttl-hours:24}")
+    private int ttlHours;
+
+    @Value("${app.cache.max-size:1000}")
+    private int maxSize;
+
     @Bean
     public CacheManager cacheManager() {
         CaffeineCacheManager cacheManager = new CaffeineCacheManager();
 
-        // Configuration par defaut: 24h TTL, max 1000 entrees
+        // Configuration avec TTL et taille max configurables
         cacheManager.setCaffeine(Caffeine.newBuilder()
-                .expireAfterWrite(24, TimeUnit.HOURS)
-                .maximumSize(1000)
-                .recordStats()); // Pour le monitoring
+                .expireAfterWrite(ttlHours, TimeUnit.HOURS)
+                .maximumSize(maxSize)
+                .recordStats()); // Pour le monitoring via actuator
 
         // Caches specifiques
         cacheManager.setCacheNames(java.util.List.of(

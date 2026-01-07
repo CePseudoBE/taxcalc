@@ -84,19 +84,13 @@ public class SavedSearchController {
     }
 
     /**
-     * Recupere l'utilisateur connecte depuis la session.
-     * En mode dev local (sans auth), utilise l'utilisateur ID 1 par defaut.
+     * Recupere l'utilisateur connecte depuis le contexte de securite.
      */
     private User getCurrentUser(HttpSession session) {
-        Long userId = (Long) session.getAttribute(USER_SESSION_KEY);
-        if (userId == null) {
-            // Mode dev: tenter d'utiliser l'utilisateur par defaut (ID 1)
-            try {
-                return userService.findById(1L);
-            } catch (Exception e) {
-                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not authenticated");
-            }
+        var authentication = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated() || !(authentication.getPrincipal() instanceof User)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not authenticated");
         }
-        return userService.findById(userId);
+        return (User) authentication.getPrincipal();
     }
 }

@@ -5,11 +5,14 @@ import be.hoffmann.backtaxes.dto.mapper.ModelMapper;
 import be.hoffmann.backtaxes.dto.response.ApiResponse;
 import be.hoffmann.backtaxes.dto.response.BrandResponse;
 import be.hoffmann.backtaxes.dto.response.ModelResponse;
+import be.hoffmann.backtaxes.dto.response.PagedResponse;
 import be.hoffmann.backtaxes.service.BrandService;
 import be.hoffmann.backtaxes.service.ModelService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,11 +35,27 @@ public class BrandController {
         this.modelService = modelService;
     }
 
-    @Operation(summary = "Liste toutes les marques", description = "Retourne la liste complete des marques automobiles")
+    @Operation(summary = "Liste toutes les marques", description = "Retourne la liste des marques automobiles (avec pagination optionnelle)")
     @GetMapping
-    public ResponseEntity<ApiResponse<List<BrandResponse>>> getAllBrands() {
-        var brands = brandService.findAll();
-        return ResponseEntity.ok(ApiResponse.success(BrandMapper.toResponseList(brands)));
+    public ResponseEntity<ApiResponse<?>> getAllBrands(
+            @Parameter(description = "Numero de page (0-indexed)") @RequestParam(required = false) Integer page,
+            @Parameter(description = "Nombre d'elements par page") @RequestParam(required = false) Integer size) {
+
+        // Si pas de pagination demandee, retourner toutes les marques
+        if (page == null && size == null) {
+            var brands = brandService.findAll();
+            return ResponseEntity.ok(ApiResponse.success(BrandMapper.toResponseList(brands)));
+        }
+
+        // Pagination avec valeurs par defaut
+        int pageNum = page != null ? page : 0;
+        int pageSize = size != null ? size : 20;
+        var pageable = PageRequest.of(pageNum, pageSize, Sort.by("name").ascending());
+
+        var pagedBrands = brandService.findAll(pageable);
+        var response = PagedResponse.from(pagedBrands, BrandMapper::toResponse);
+
+        return ResponseEntity.ok(ApiResponse.success(response));
     }
 
     @Operation(summary = "Recupere une marque", description = "Retourne les details d'une marque par son ID")
