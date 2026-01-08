@@ -1,23 +1,82 @@
 <script setup lang="ts">
 const { t } = useI18n()
+const auth = useAuth()
+const router = useRouter()
+const submissions = useSubmissions()
+const NuxtLink = resolveComponent('NuxtLink')
+
+// Check authentication and moderator status
+onMounted(async () => {
+  await auth.checkAuth()
+  if (!auth.isAuthenticated.value || !auth.isModerator.value) {
+    router.push('/')
+  } else {
+    // Load pending submissions count
+    await submissions.fetchAllSubmissions('pending').catch(() => {})
+  }
+})
 
 useSeoMeta({
   title: () => t('admin.title'),
   robots: 'noindex, nofollow'
 })
 
-const stats = [
-  { label: 'Soumissions en attente', value: 0, icon: 'i-lucide-clock', color: 'amber' },
-  { label: 'Véhicules', value: '12,345', icon: 'i-lucide-car', color: 'blue' },
-  { label: 'Utilisateurs', value: '1,234', icon: 'i-lucide-users', color: 'green' },
-  { label: 'Calculs ce mois', value: '45,678', icon: 'i-lucide-calculator', color: 'purple' }
-]
+// Stats computed from data
+const stats = computed(() => [
+  {
+    label: t('admin.pendingSubmissions'),
+    value: submissions.adminSubmissions.value.filter(s => s.status === 'pending').length,
+    icon: 'i-lucide-clock',
+    color: 'amber'
+  },
+  {
+    label: t('admin.approvedSubmissions'),
+    value: submissions.adminSubmissions.value.filter(s => s.status === 'approved').length,
+    icon: 'i-lucide-check-circle',
+    color: 'green'
+  },
+  {
+    label: t('admin.rejectedSubmissions'),
+    value: submissions.adminSubmissions.value.filter(s => s.status === 'rejected').length,
+    icon: 'i-lucide-x-circle',
+    color: 'red'
+  },
+  {
+    label: t('admin.totalSubmissions'),
+    value: submissions.adminSubmissions.value.length,
+    icon: 'i-lucide-inbox',
+    color: 'blue'
+  }
+])
 
 const menuItems = [
-  { label: 'Modération', description: 'Gérer les soumissions de véhicules', icon: 'i-lucide-shield-check', to: '/admin/submissions' },
-  { label: 'Tranches de taxes', description: 'Configurer les tranches TMC et annuelles', icon: 'i-lucide-layers', to: '/admin/tax-brackets' },
-  { label: 'Paramètres de taxes', description: 'Coefficients et paramètres de calcul', icon: 'i-lucide-settings', to: '/admin/tax-parameters' },
-  { label: 'Indexation', description: 'Appliquer une indexation annuelle', icon: 'i-lucide-trending-up', to: '/admin/indexation' }
+  {
+    label: t('admin.moderation'),
+    description: t('admin.moderationDesc'),
+    icon: 'i-lucide-shield-check',
+    to: '/admin/submissions'
+  },
+  {
+    label: t('admin.taxBrackets'),
+    description: t('admin.taxBracketsDesc'),
+    icon: 'i-lucide-layers',
+    to: '/admin/tax-brackets',
+    disabled: true
+  },
+  {
+    label: t('admin.taxParameters'),
+    description: t('admin.taxParametersDesc'),
+    icon: 'i-lucide-settings',
+    to: '/admin/tax-parameters',
+    disabled: true
+  },
+  {
+    label: t('admin.indexation'),
+    description: t('admin.indexationDesc'),
+    icon: 'i-lucide-trending-up',
+    to: '/admin/indexation',
+    disabled: true
+  }
 ]
 </script>
 
@@ -27,7 +86,7 @@ const menuItems = [
       <!-- Header -->
       <div class="mb-8">
         <h1 class="text-3xl font-semibold mb-2">{{ t('admin.title') }}</h1>
-        <p class="text-neutral-500 dark:text-neutral-400">Tableau de bord administrateur</p>
+        <p class="text-neutral-500 dark:text-neutral-400">{{ t('admin.dashboard') }}</p>
       </div>
 
       <!-- Stats -->
@@ -44,6 +103,7 @@ const menuItems = [
                 'bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400': stat.color === 'amber',
                 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400': stat.color === 'blue',
                 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400': stat.color === 'green',
+                'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400': stat.color === 'red',
                 'bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400': stat.color === 'purple'
               }"
             >
@@ -56,26 +116,38 @@ const menuItems = [
       </div>
 
       <!-- Menu -->
-      <h2 class="text-lg font-semibold mb-4">Gestion</h2>
+      <h2 class="text-lg font-semibold mb-4">{{ t('admin.management') }}</h2>
       <div class="grid sm:grid-cols-2 gap-4">
-        <NuxtLink
+        <component
+          :is="item.disabled ? 'div' : NuxtLink"
           v-for="item in menuItems"
           :key="item.label"
-          :to="item.to"
-          class="group bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 p-5 hover:border-primary-300 dark:hover:border-primary-700 transition-colors"
+          :to="item.disabled ? undefined : item.to"
+          class="group bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 p-5 transition-colors"
+          :class="item.disabled
+            ? 'opacity-50 cursor-not-allowed'
+            : 'hover:border-primary-300 dark:hover:border-primary-700 cursor-pointer'"
         >
           <div class="flex items-start gap-4">
             <div class="w-10 h-10 rounded-lg bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 flex items-center justify-center shrink-0">
               <UIcon :name="item.icon" class="w-5 h-5" />
             </div>
             <div>
-              <h3 class="font-medium group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
-                {{ item.label }}
-              </h3>
+              <div class="flex items-center gap-2">
+                <h3 class="font-medium transition-colors" :class="!item.disabled && 'group-hover:text-primary-600 dark:group-hover:text-primary-400'">
+                  {{ item.label }}
+                </h3>
+                <span
+                  v-if="item.disabled"
+                  class="text-xs px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-500"
+                >
+                  {{ t('common.comingSoon') }}
+                </span>
+              </div>
               <p class="text-sm text-neutral-500 dark:text-neutral-400">{{ item.description }}</p>
             </div>
           </div>
-        </NuxtLink>
+        </component>
       </div>
     </UContainer>
   </div>

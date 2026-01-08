@@ -1,5 +1,11 @@
 import type { ApiResponse } from '~/types/api'
 
+/**
+ * Composable pour les appels API publics (taxes, vehicules, etc.).
+ *
+ * Note: Les endpoints authentifies (submissions, saved-searches)
+ * doivent passer par les routes serveur Nuxt qui gerent le token.
+ */
 export function useApi() {
   const config = useRuntimeConfig()
   const baseUrl = config.public.apiBaseUrl as string
@@ -12,7 +18,6 @@ export function useApi() {
 
     const response = await fetch(url, {
       ...options,
-      credentials: 'include', // For session cookies
       headers: {
         'Content-Type': 'application/json',
         ...options.headers

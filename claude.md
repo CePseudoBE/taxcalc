@@ -166,3 +166,54 @@ Les migrations sont dans `back/src/main/resources/db/changelog/changes/` :
 ### Enums PostgreSQL
 
 Le projet utilise des types ENUM PostgreSQL natifs pour la sécurité de type.
+
+---
+
+## TODO Backend - Tâches Restantes
+
+### 🔴 CRITIQUE (Avant production)
+
+| Tâche | Fichier | Description |
+|-------|---------|-------------|
+| Rate Limiting | N/A | Implémenter rate limiting (100 req/min par IP) avec Bucket4j |
+| Rôle ADMIN | `User.java`, `SecurityConfig.java` | Ajouter champ `is_admin` et gérer le rôle |
+| Supprimer fallback dev | `SubmissionController.java:117`, `SavedSearchController.java:90` | Supprimer le fallback à l'utilisateur dev (ID 1) |
+| Variables d'env credentials | `application.properties` | Utiliser `${DATABASE_URL}` au lieu de credentials en dur |
+| Activer sécurité prod | `SecurityConfig.java:31` | Changer `app.security.enabled=true` par défaut |
+| Migration utilisateur dev | `019-seed-dev-user.yaml` | Ajouter `context: dev` ou supprimer |
+
+### 🟠 HAUTE
+
+| Tâche | Fichier | Description |
+|-------|---------|-------------|
+| Headers sécurité HTTP | N/A | Créer `SecurityHeadersConfig.java` (X-Content-Type-Options, X-Frame-Options, etc.) |
+| Forcer HTTPS | `SecurityConfig.java` | Ajouter `requiresSecure()` en production |
+| Tests sécurité | N/A | Tests pour 401/403, tokens expirés/révoqués |
+| Tests controllers manquants | N/A | `VariantController`, `SavedSearchController`, `AdminTaxController` |
+| Tests services manquants | N/A | `AdminTaxService`, `AnalyticsService`, `SavedSearchService` |
+| Validation JSR-303 | `TaxCalculationRequest.java:62` | Ajouter `@AssertTrue` sur `hasValidVehicleReference()` |
+| Pagination | Tous les GET listes | Ajouter `Page<T>` Spring Data |
+| Actuator | N/A | Configurer endpoints /health, /metrics, /prometheus |
+| Gestion d'erreurs | `GlobalExceptionHandler.java` | Handlers pour `DataIntegrityViolation`, `OptimisticLock`, etc. |
+
+### 🟡 MOYENNE
+
+| Tâche | Fichier | Description |
+|-------|---------|-------------|
+| Endpoints utilisateur | `UserController.java` | `PUT /api/users/me`, `DELETE /api/users/me` |
+| Endpoints admin users | N/A | `GET /api/admin/users`, `PUT /api/admin/users/{id}/role` |
+| Endpoints analytics | N/A | Dashboard analytics (véhicules populaires, stats) |
+| Cache Caffeine TTL | `CacheConfig.java` | Configurer TTL explicite et optimiser clés |
+| Audit N+1 queries | Services | Vérifier et ajouter `JOIN FETCH` où nécessaire |
+| Documentation Swagger | Controllers | Ajouter `@ApiResponses` pour codes d'erreur |
+| Indexes composés | Migrations | Index sur (region, tax_type, bracket_key, date) |
+| Job agrégation analytics | `AnalyticsService.java` | @Scheduled pour calculer DailyAggregate |
+
+### 🟢 BASSE
+
+| Tâche | Fichier | Description |
+|-------|---------|-------------|
+| Mappers standardisés | `dto/mapper/` | Créer mappers pour toutes les entités |
+| Configuration async | `AsyncConfig.java` | Rendre pool configurable via properties |
+| Prometheus metrics | N/A | Métriques custom (calculs, cache hit/miss) |
+| Documentation architecture | N/A | Diagramme C4/UML |

@@ -1,0 +1,107 @@
+# Back-Taxes - Docker Compose
+# Production deployment with PostgreSQL, Backend, and Frontend
+
+services:
+  # ============================================
+  # PostgreSQL Database
+  # ============================================
+  db:
+    image: postgres:16-alpine
+    container_name: backtaxes-db
+    restart: unless-stopped
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-backtaxes}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-backtaxes}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - backtaxes-network
+
+  # ============================================
+  # Backend (Spring Boot)
+  # ============================================
+  backend:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    container_name: backtaxes-backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${BACKEND_PORT:-8080}:8080"
+    environment:
+      # Database
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB:-backtaxes}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-postgres}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      # Spring profiles
+      SPRING_PROFILES_ACTIVE: prod
+      # Security
+      APP_SECURITY_ENABLED: "true"
+      # JVM options
+      JAVA_OPTS: "-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0 -Djava.security.egd=file:/dev/./urandom"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    networks:
+      - backtaxes-network
+
+  # ============================================
+  # Frontend (Nuxt)
+  # ============================================
+  frontend:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    container_name: backtaxes-frontend
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "${FRONTEND_PORT:-3000}:3000"
+    environment:
+      NODE_ENV: production
+      NUXT_HOST: 0.0.0.0
+      NUXT_PORT: 3000
+      # Backend URL (internal Docker network)
+      NUXT_BACKEND_URL: http://backend:8080/api
+      NUXT_PUBLIC_API_BASE_URL: http://backend:8080/api
+      # Session secret (override in .env for production!)
+      NUXT_SESSION_SECRET: ${SESSION_SECRET:-super-secret-session-key-minimum-32-characters!!}
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    networks:
+      - backtaxes-network
+
+# ============================================
+# Networks
+# ============================================
+networks:
+  backtaxes-network:
+    driver: bridge
+
+# ============================================
+# Volumes
+# ============================================
+volumes:
+  postgres_data:
+    driver: local

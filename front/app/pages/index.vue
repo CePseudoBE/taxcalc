@@ -69,7 +69,7 @@ useSeoMeta({
       <p class="text-2xl font-semibold mb-8">{{ t('home.step1Desc') }}</p>
       <div class="grid md:grid-cols-3 gap-6">
         <NuxtLink
-          to="/"
+          to="/calculator?region=wallonia"
           class="group p-6 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:border-primary-300 dark:hover:border-primary-700 hover:shadow-lg hover:shadow-primary-500/10 transition-all duration-300 cursor-pointer bg-white dark:bg-neutral-900"
         >
           <div class="flex items-center gap-4 mb-4">
@@ -90,7 +90,7 @@ useSeoMeta({
         </NuxtLink>
 
         <NuxtLink
-          to="/"
+          to="/calculator?region=flanders"
           class="group p-6 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:border-primary-300 dark:hover:border-primary-700 hover:shadow-lg hover:shadow-primary-500/10 transition-all duration-300 cursor-pointer bg-white dark:bg-neutral-900"
         >
           <div class="flex items-center gap-4 mb-4">
@@ -111,7 +111,7 @@ useSeoMeta({
         </NuxtLink>
 
         <NuxtLink
-          to="/"
+          to="/calculator?region=brussels"
           class="group p-6 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:border-primary-300 dark:hover:border-primary-700 hover:shadow-lg hover:shadow-primary-500/10 transition-all duration-300 cursor-pointer bg-white dark:bg-neutral-900"
         >
           <div class="flex items-center gap-4 mb-4">

@@ -81,6 +81,14 @@ export interface FirstRegistrationDate {
 export interface TaxCalculationRequest {
   variantId?: number
   submissionId?: number
+  // Specs manuelles pour calcul anonyme
+  fiscalHp?: number
+  powerKw?: number
+  fuel?: FuelType
+  euroNorm?: EuroNorm
+  co2Wltp?: number
+  co2Nedc?: number
+  mmaKg?: number
   region: Region
   firstRegistrationDate: FirstRegistrationDate
 }

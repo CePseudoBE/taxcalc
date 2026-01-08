@@ -14,6 +14,11 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   runtimeConfig: {
+    // Configuration privee (serveur uniquement)
+    backendUrl: 'http://localhost:8080/api',
+    sessionSecret: 'super-secret-session-key-minimum-32-characters!!',
+
+    // Configuration publique (client + serveur)
     public: {
       apiBaseUrl: 'http://localhost:8080/api'
     }

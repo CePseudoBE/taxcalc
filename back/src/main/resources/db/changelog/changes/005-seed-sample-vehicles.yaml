@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: 200
+      author: backtaxes
+      comment: "Seed sample vehicle data for testing"
+      changes:
+        - sql:
+            sql: |
+              -- Marques
+              INSERT INTO brands (id, name) VALUES
+              (1, 'BMW'),
+              (2, 'Audi'),
+              (3, 'Volkswagen'),
+              (4, 'Tesla'),
+              (5, 'Dacia');
+
+              -- Modèles
+              INSERT INTO models (id, brand_id, name) VALUES
+              (1, 1, 'Serie 3'),
+              (2, 1, 'Serie 5'),
+              (3, 2, 'A4'),
+              (4, 2, 'e-tron'),
+              (5, 3, 'Golf'),
+              (6, 3, 'ID.4'),
+              (7, 4, 'Model 3'),
+              (8, 4, 'Model Y'),
+              (9, 5, 'Sandero'),
+              (10, 5, 'Duster');
+
+              -- Variantes
+              INSERT INTO variants (model_id, name, year_start, year_end, displacement_cc, power_kw, fiscal_hp, fuel, euro_norm, co2_wltp, co2_nedc, mma_kg, has_particle_filter) VALUES
+              -- BMW Serie 3
+              (1, '318i', 2019, NULL, 1998, 115, 8, 'petrol', 'euro_6d', 142, 130, 1820, true),
+              (1, '320d xDrive', 2020, NULL, 1995, 140, 10, 'diesel', 'euro_6d', 138, 125, 1920, true),
+              (1, '330e Hybrid', 2021, NULL, 1998, 215, 12, 'plug_in_hybrid_petrol', 'euro_6d', 38, NULL, 1960, true),
+              -- BMW Serie 5
+              (2, '520d', 2020, NULL, 1995, 140, 10, 'diesel', 'euro_6d', 132, 120, 1960, true),
+              (2, '530e', 2021, NULL, 1998, 215, 12, 'plug_in_hybrid_petrol', 'euro_6d', 41, NULL, 2040, true),
+              -- Audi A4
+              (3, '35 TFSI', 2020, NULL, 1984, 110, 8, 'petrol', 'euro_6d', 148, 135, 1750, true),
+              (3, '40 TDI quattro', 2020, NULL, 1968, 140, 10, 'diesel', 'euro_6d', 142, 128, 1850, true),
+              -- Audi e-tron
+              (4, '50 quattro', 2021, NULL, NULL, 230, 1, 'electric', 'euro_6d', 0, NULL, 2520, false),
+              (4, '55 quattro', 2021, NULL, NULL, 300, 1, 'electric', 'euro_6d', 0, NULL, 2565, false),
+              -- VW Golf
+              (5, '1.5 TSI', 2020, NULL, 1498, 96, 7, 'petrol', 'euro_6d', 125, 115, 1615, true),
+              (5, '2.0 TDI', 2020, NULL, 1968, 110, 8, 'diesel', 'euro_6d', 118, 108, 1680, true),
+              (5, 'GTE', 2021, NULL, 1395, 180, 10, 'plug_in_hybrid_petrol', 'euro_6d', 25, NULL, 1785, true),
+              -- VW ID.4
+              (6, 'Pure', 2021, NULL, NULL, 125, 1, 'electric', 'euro_6d', 0, NULL, 2124, false),
+              (6, 'Pro Performance', 2021, NULL, NULL, 150, 1, 'electric', 'euro_6d', 0, NULL, 2184, false),
+              -- Tesla Model 3
+              (7, 'Standard Range Plus', 2021, NULL, NULL, 208, 1, 'electric', 'euro_6d', 0, NULL, 1830, false),
+              (7, 'Long Range', 2021, NULL, NULL, 324, 1, 'electric', 'euro_6d', 0, NULL, 1930, false),
+              (7, 'Performance', 2021, NULL, NULL, 377, 1, 'electric', 'euro_6d', 0, NULL, 1950, false),
+              -- Tesla Model Y
+              (8, 'Long Range', 2022, NULL, NULL, 324, 1, 'electric', 'euro_6d', 0, NULL, 2086, false),
+              (8, 'Performance', 2022, NULL, NULL, 393, 1, 'electric', 'euro_6d', 0, NULL, 2086, false),
+              -- Dacia Sandero
+              (9, 'TCe 90', 2021, NULL, 999, 67, 5, 'petrol', 'euro_6d', 125, 115, 1410, true),
+              (9, 'TCe 100 ECO-G', 2021, NULL, 999, 74, 5, 'lpg', 'euro_6d', 117, 107, 1430, true),
+              -- Dacia Duster
+              (10, 'TCe 130', 2021, NULL, 1332, 96, 7, 'petrol', 'euro_6d', 145, 132, 1610, true),
+              (10, 'Blue dCi 115 4x4', 2021, NULL, 1461, 84, 6, 'diesel', 'euro_6d', 138, 125, 1750, true);

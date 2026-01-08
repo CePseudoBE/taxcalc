@@ -219,3 +219,103 @@ Le backend accepte les requêtes depuis :
 - Nommer les composants en **PascalCase**
 - Utiliser **TypeScript** pour tout le code
 - Suivre les règles ESLint configurées (pas de trailing comma, braces 1tbs)
+
+---
+
+## TODO Frontend - Tâches Restantes
+
+### 🔴 HAUTE - Pages à implémenter
+
+| Page | Fichier | État | Action |
+|------|---------|------|--------|
+| Recherche | `pages/search.vue` | Skeleton | Connecter filtres, API recherche, pagination |
+| Comparaison | `pages/compare.vue` | Skeleton | Sélecteur véhicule, calcul 3 régions en parallèle |
+| Soumission | `pages/submit.vue` | Skeleton | Formulaire complet, validation, appel API |
+| Compte | `pages/account.vue` | Partiel | Charger données réelles (email, date, recherches) |
+| Admin Modération | `pages/admin/submissions.vue` | Skeleton | Liste soumissions, boutons approuver/rejeter |
+| Admin Dashboard | `pages/admin/index.vue` | Skeleton | Stats réelles depuis API |
+
+### 🔴 HAUTE - Composables à créer
+
+| Composable | Description |
+|------------|-------------|
+| `useSavedSearches.ts` | `fetchSavedSearches()`, `saveSearch()`, `deleteSavedSearch()` |
+| `useSubmissions.ts` | `fetchMySubmissions()`, `createSubmission()`, `approveSubmission()`, `rejectSubmission()` |
+| `useUser.ts` | `fetchUserProfile()`, `updateProfile()`, `deleteAccount()` |
+
+### 🔴 HAUTE - Routes serveur à créer
+
+| Route | Description |
+|-------|-------------|
+| `GET /api/auth/user` | Récupérer profil utilisateur |
+| `POST /api/saved-searches` | Créer recherche sauvegardée |
+| `GET /api/saved-searches` | Lister recherches sauvegardées |
+| `DELETE /api/saved-searches/:id` | Supprimer recherche |
+| `POST /api/submissions` | Créer soumission |
+| `GET /api/submissions/my` | Mes soumissions |
+| `GET /api/admin/submissions` | Toutes les soumissions (admin) |
+| `PUT /api/admin/submissions/:id/approve` | Approuver |
+| `PUT /api/admin/submissions/:id/reject` | Rejeter |
+
+### 🔴 HAUTE - Bugs à corriger
+
+| Bug | Fichier | Ligne | Correction |
+|-----|---------|-------|------------|
+| Liens régions cassés | `pages/index.vue` | 71-132 | Changer `to="/"` → `to="/calculator?region=..."` |
+| Email hardcodé | `pages/account.vue` | 25 | Utiliser `auth.user.value?.email` |
+| Date hardcodée | `pages/account.vue` | 96 | Formater `auth.user.value?.createdAt` |
+| Bouton logout inactif | `pages/account.vue` | 31 | Ajouter `@click="handleLogout"` |
+| Locale hardcodée | `pages/calculator.vue` | 98 | Utiliser `useI18n()` pour la locale |
+| Boutons Save/Share | `pages/calculator.vue` | - | Implémenter fonctionnalité |
+
+### 🟡 MOYENNE
+
+| Tâche | Description |
+|-------|-------------|
+| Tests unitaires composables | Créer `__tests__/composables/*.spec.ts` |
+| Tests pages | Créer `__tests__/pages/*.spec.ts` |
+| Validation formulaires | Ajouter validation stricte sur `submit.vue`, `search.vue` |
+| Mot de passe oublié | Créer page et flow de récupération |
+| Indicateurs chargement | Spinners/skeletons pendant les appels API |
+| Améliorer useAuth | Ajouter `changePassword()`, `resetPassword()`, `isAdmin` |
+
+### 🟢 BASSE
+
+| Tâche | Description |
+|-------|-------------|
+| Accessibilité | Attributs `aria-label`, `role`, contraste |
+| Tests responsive | Vérifier mobile/tablette/desktop |
+| Configuration Vitest | Créer `vitest.config.ts` |
+| `.env.example` | Documenter les variables d'environnement |
+
+### État actuel des pages
+
+| Page | État | Fonctionnel |
+|------|------|-------------|
+| `/` (index) | ✅ Complet | ⚠️ Liens à corriger |
+| `/calculator` | ✅ Complet | ✅ Oui |
+| `/auth/login` | ✅ Complet | ✅ Oui |
+| `/auth/register` | ✅ Complet | ✅ Oui |
+| `/search` | 🔲 Skeleton | ❌ Non |
+| `/compare` | 🔲 Skeleton | ❌ Non |
+| `/submit` | 🔲 Skeleton | ❌ Non |
+| `/account` | ⚠️ Partiel | ❌ Non |
+| `/admin` | 🔲 Skeleton | ❌ Non |
+| `/admin/submissions` | 🔲 Skeleton | ❌ Non |
+
+### Composables existants
+
+| Composable | État | Notes |
+|------------|------|-------|
+| `useAuth.ts` | ✅ 90% | Manque `isAdmin`, refresh token |
+| `useApi.ts` | ✅ Complet | OK |
+| `useVehicles.ts` | ✅ 80% | Manque recherche avec filtres |
+| `useTax.ts` | ✅ 70% | Manque cache, historique |
+
+### Traductions i18n
+
+| Langue | État |
+|--------|------|
+| Français (fr.json) | ✅ Complet |
+| Néerlandais (nl.json) | ✅ Complet |
+| Anglais (en.json) | ✅ Complet |
