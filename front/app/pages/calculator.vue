@@ -44,6 +44,7 @@ const manualBrandName = ref<string>('')
 const manualModelName = ref<string>('')
 const manualVariantName = ref<string>('')
 const manualFiscalHp = ref<number | undefined>(undefined)
+const manualDisplacementCc = ref<number | undefined>(undefined)
 const manualPowerKw = ref<number | undefined>(undefined)
 const manualFuelOption = ref<{ value: FuelType; label: string } | undefined>(undefined)
 const manualEuroNormOption = ref<{ value: EuroNorm; label: string } | undefined>(undefined)
@@ -168,8 +169,9 @@ const canCalculate = computed(() => {
   if (inputMode.value === 'catalog') {
     return hasRegion && hasDate && !!selectedVariant.value
   } else {
-    // Manual mode: fiscalHp + fuel required
-    const hasBasicSpecs = !!manualFiscalHp.value && !!manualFuel.value
+    // Manual mode: (fiscalHp OR displacementCc) + fuel required
+    const hasFiscalHpOrDisplacement = !!manualFiscalHp.value || !!manualDisplacementCc.value
+    const hasBasicSpecs = hasFiscalHpOrDisplacement && !!manualFuel.value
 
     // Logged-in users must also provide brand/model/variant for catalog submission
     if (auth.isAuthenticated.value) {
@@ -202,11 +204,12 @@ async function handleCalculate() {
         monthUnknown: monthUnknown.value
       }
     })
-  } else if (inputMode.value === 'manual' && manualFiscalHp.value && manualFuel.value) {
+  } else if (inputMode.value === 'manual' && (manualFiscalHp.value || manualDisplacementCc.value) && manualFuel.value) {
     // Calculate taxes
     await tax.calculate({
       region: selectedRegion.value,
       fiscalHp: manualFiscalHp.value,
+      displacementCc: manualDisplacementCc.value,
       powerKw: manualPowerKw.value,
       fuel: manualFuel.value,
       euroNorm: manualEuroNorm.value,
@@ -452,10 +455,10 @@ async function handleShare() {
             </div>
 
             <div class="grid md:grid-cols-2 gap-4">
-              <!-- Fiscal HP (required) -->
+              <!-- Fiscal HP (required, OR displacement) -->
               <div>
                 <label class="block text-sm font-medium mb-2">
-                  {{ t('vehicle.fiscalHp') }} <span class="text-red-500">*</span>
+                  {{ t('vehicle.fiscalHp') }} <span v-if="!manualDisplacementCc" class="text-red-500">*</span>
                 </label>
                 <UInput
                   v-model.number="manualFiscalHp"
@@ -466,6 +469,22 @@ async function handleShare() {
                   class="w-full"
                 />
                 <p class="text-xs text-stone-500 mt-1">{{ t('vehicle.fiscalHpHelp') }}</p>
+              </div>
+
+              <!-- Displacement (alternative to fiscal HP) -->
+              <div>
+                <label class="block text-sm font-medium mb-2">
+                  {{ t('vehicle.displacementCc') }} <span v-if="!manualFiscalHp" class="text-red-500">*</span>
+                </label>
+                <UInput
+                  v-model.number="manualDisplacementCc"
+                  type="number"
+                  :placeholder="t('vehicle.displacementCcPlaceholder')"
+                  min="50"
+                  max="10000"
+                  class="w-full"
+                />
+                <p class="text-xs text-stone-500 mt-1">{{ t('vehicle.displacementCcHelp') }}</p>
               </div>
 
               <!-- Fuel Type (required) -->
@@ -591,7 +610,9 @@ async function handleShare() {
                     <div class="flex flex-col">
                       <span>{{ item.name }}</span>
                       <span class="text-xs text-stone-500">
-                        {{ item.powerKw }}kW · {{ item.fiscalHp }}CV · {{ t(`fuel.${item.fuel}`) }}
+                        {{ item.powerKw }}kW · {{ item.fiscalHp }}CV
+                        <template v-if="item.displacementCc"> · {{ item.displacementCc }}cm³</template>
+                        · {{ t(`fuel.${item.fuel}`) }}
                       </span>
                     </div>
                   </template>
@@ -603,7 +624,7 @@ async function handleShare() {
                 v-if="selectedVariant"
                 class="p-4 rounded-lg bg-stone-50 dark:bg-stone-800/50 border border-stone-200 dark:border-stone-700"
               >
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-4 text-sm">
                   <div>
                     <span class="text-stone-500 dark:text-stone-400">{{ t('vehicle.powerKw') }}</span>
                     <p class="font-medium">{{ selectedVariant.powerKw }} kW</p>
@@ -611,6 +632,10 @@ async function handleShare() {
                   <div>
                     <span class="text-stone-500 dark:text-stone-400">{{ t('vehicle.fiscalHp') }}</span>
                     <p class="font-medium">{{ selectedVariant.fiscalHp }} CV</p>
+                  </div>
+                  <div v-if="selectedVariant.displacementCc">
+                    <span class="text-stone-500 dark:text-stone-400">{{ t('vehicle.displacementCc') }}</span>
+                    <p class="font-medium">{{ selectedVariant.displacementCc }} cm³</p>
                   </div>
                   <div>
                     <span class="text-stone-500 dark:text-stone-400">{{ t('fuel.title') }}</span>

@@ -13,6 +13,7 @@ public record VariantResponse(
         Integer yearEnd,
         Integer powerKw,
         Integer fiscalHp,
+        Integer displacementCc,
         FuelType fuel,
         EuroNorm euroNorm,
         Integer co2Wltp

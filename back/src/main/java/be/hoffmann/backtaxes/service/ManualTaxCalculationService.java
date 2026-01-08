@@ -26,12 +26,15 @@ import java.util.UUID;
 public class ManualTaxCalculationService {
 
     private final TaxCalculationService taxCalculationService;
+    private final TaxConfigService taxConfigService;
     private final PendingCalculationRepository pendingCalculationRepository;
 
     public ManualTaxCalculationService(
             TaxCalculationService taxCalculationService,
+            TaxConfigService taxConfigService,
             PendingCalculationRepository pendingCalculationRepository) {
         this.taxCalculationService = taxCalculationService;
+        this.taxConfigService = taxConfigService;
         this.pendingCalculationRepository = pendingCalculationRepository;
     }
 
@@ -116,6 +119,8 @@ public class ManualTaxCalculationService {
     private RegionRequirements buildRequirements(ManualTaxCalculationRequest request) {
         RegionRequirements req = new RegionRequirements();
 
+        boolean hasFiscalHpOrDisplacement = request.getFiscalHp() != null || request.getDisplacementCc() != null;
+
         switch (request.getRegion()) {
             case brussels -> {
                 req.setTmc(List.of(
@@ -123,7 +128,7 @@ public class ManualTaxCalculationService {
                         new FieldRequirement("powerKw", "Power in kW (alternative)", request.getPowerKw() != null)
                 ));
                 req.setAnnual(List.of(
-                        new FieldRequirement("fiscalHp", "Fiscal HP", request.getFiscalHp() != null)
+                        new FieldRequirement("fiscalHp", "Fiscal HP or Displacement", hasFiscalHpOrDisplacement)
                 ));
             }
             case flanders -> {
@@ -134,7 +139,7 @@ public class ManualTaxCalculationService {
                         new FieldRequirement("co2Wltp", "CO2 emissions WLTP (g/km)", request.getCo2Wltp() != null)
                 ));
                 req.setAnnual(List.of(
-                        new FieldRequirement("fiscalHp", "Fiscal HP", request.getFiscalHp() != null)
+                        new FieldRequirement("fiscalHp", "Fiscal HP or Displacement", hasFiscalHpOrDisplacement)
                 ));
             }
             case wallonia -> {
@@ -145,7 +150,7 @@ public class ManualTaxCalculationService {
                         new FieldRequirement("mmaKg", "Maximum authorized mass (kg)", request.getMmaKg() != null)
                 ));
                 req.setAnnual(List.of(
-                        new FieldRequirement("fiscalHp", "Fiscal HP", request.getFiscalHp() != null)
+                        new FieldRequirement("fiscalHp", "Fiscal HP or Displacement", hasFiscalHpOrDisplacement)
                 ));
             }
         }
@@ -173,9 +178,18 @@ public class ManualTaxCalculationService {
     }
 
     private VehicleData createVehicleData(ManualTaxCalculationRequest request) {
+        // Si fiscalHp n'est pas fourni mais displacementCc l'est, convertir via les tranches
+        Integer effectiveFiscalHp = request.getFiscalHp();
+        if (effectiveFiscalHp == null && request.getDisplacementCc() != null) {
+            effectiveFiscalHp = taxConfigService.getFiscalHpFromDisplacement(
+                    request.getRegion(),
+                    request.getDisplacementCc(),
+                    LocalDate.now()
+            ).orElse(4); // Minimum 4 CV si pas de tranche trouvee
+        }
         return new VehicleData(
                 request.getPowerKw(),
-                request.getFiscalHp(),
+                effectiveFiscalHp,
                 request.getFuel(),
                 request.getEuroNorm(),
                 request.getCo2Wltp(),

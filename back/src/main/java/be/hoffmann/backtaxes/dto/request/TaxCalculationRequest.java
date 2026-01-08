@@ -27,6 +27,10 @@ public class TaxCalculationRequest {
     @Max(value = 100, message = "La puissance fiscale ne peut pas dépasser 100 CV")
     private Integer fiscalHp;
 
+    @Min(value = 50, message = "La cylindrée doit être au moins 50 cm³")
+    @Max(value = 10000, message = "La cylindrée ne peut pas dépasser 10000 cm³")
+    private Integer displacementCc;
+
     @Min(value = 1, message = "La puissance doit être au moins 1 kW")
     @Max(value = 1000, message = "La puissance ne peut pas dépasser 1000 kW")
     private Integer powerKw;
@@ -79,6 +83,14 @@ public class TaxCalculationRequest {
 
     public void setFiscalHp(Integer fiscalHp) {
         this.fiscalHp = fiscalHp;
+    }
+
+    public Integer getDisplacementCc() {
+        return displacementCc;
+    }
+
+    public void setDisplacementCc(Integer displacementCc) {
+        this.displacementCc = displacementCc;
     }
 
     public Integer getPowerKw() {
@@ -146,10 +158,10 @@ public class TaxCalculationRequest {
     }
 
     /**
-     * Verifie si des specs manuelles sont fournies (minimum: fiscalHp + fuel).
+     * Verifie si des specs manuelles sont fournies (minimum: fiscalHp ou displacementCc + fuel).
      */
     public boolean hasManualSpecs() {
-        return fiscalHp != null && fuel != null;
+        return (fiscalHp != null || displacementCc != null) && fuel != null;
     }
 
     /**

@@ -127,4 +127,20 @@ public class TaxConfigService {
     public Optional<BigDecimal> getMaxAmount(Region region, TaxType taxType, LocalDate date) {
         return getParameter(region, taxType, "max_amount", date);
     }
+
+    /**
+     * Convertit une cylindree en CV fiscaux selon les tranches officielles belges.
+     * Utilise pour la taxe annuelle quand l'utilisateur connait la cylindree mais pas les CV fiscaux.
+     *
+     * @param region Region (les tranches sont identiques pour toutes les regions)
+     * @param displacementCc Cylindree en cm3
+     * @param date Date pour determiner les tranches valides
+     * @return CV fiscaux correspondant a la tranche de cylindree
+     */
+    @Cacheable(value = "displacementToFiscalHp",
+            key = "#region.name() + '_' + #displacementCc + '_' + #date.toString()")
+    public Optional<Integer> getFiscalHpFromDisplacement(Region region, int displacementCc, LocalDate date) {
+        return findBracket(region, TaxType.annual, "displacement_cc", displacementCc, date)
+                .map(bracket -> bracket.getAmount().intValue());
+    }
 }

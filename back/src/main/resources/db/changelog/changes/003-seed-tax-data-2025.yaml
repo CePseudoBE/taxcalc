@@ -273,25 +273,24 @@ databaseChangeLog:
       changes:
         - sql:
             sql: |
-              -- Source: https://www.mon-assurance-auto.be/taxes/taxe-circulation-auto-belgique.html
               INSERT INTO tax_brackets (region, tax_type, bracket_key, min_value, max_value, amount, valid_from) VALUES
-              ('wallonia', 'annual', 'fiscal_hp', 0, 4, 100.98, '2025-01-01'),
-              ('wallonia', 'annual', 'fiscal_hp', 5, 5, 126.32, '2025-01-01'),
-              ('wallonia', 'annual', 'fiscal_hp', 6, 6, 182.56, '2025-01-01'),
-              ('wallonia', 'annual', 'fiscal_hp', 7, 7, 238.52, '2025-01-01'),
-              ('wallonia', 'annual', 'fiscal_hp', 8, 8, 295.02, '2025-01-01'),
-              ('wallonia', 'annual', 'fiscal_hp', 9, 9, 351.27, '2025-01-01'),
-              ('wallonia', 'annual', 'fiscal_hp', 10, 10, 407.22, '2025-01-01'),
-              ('wallonia', 'annual', 'fiscal_hp', 11, 11, 528.40, '2025-01-01'),
-              ('wallonia', 'annual', 'fiscal_hp', 12, 12, 649.70, '2025-01-01'),
-              ('wallonia', 'annual', 'fiscal_hp', 13, 13, 770.62, '2025-01-01'),
-              ('wallonia', 'annual', 'fiscal_hp', 14, 14, 891.79, '2025-01-01'),
-              ('wallonia', 'annual', 'fiscal_hp', 15, 15, 1013.10, '2025-01-01'),
-              ('wallonia', 'annual', 'fiscal_hp', 16, 16, 1326.86, '2025-01-01'),
-              ('wallonia', 'annual', 'fiscal_hp', 17, 17, 1640.89, '2025-01-01'),
-              ('wallonia', 'annual', 'fiscal_hp', 18, 18, 1954.92, '2025-01-01'),
-              ('wallonia', 'annual', 'fiscal_hp', 19, 19, 2268.29, '2025-01-01'),
-              ('wallonia', 'annual', 'fiscal_hp', 20, NULL, 2582.32, '2025-01-01');
+              ('wallonia', 'annual', 'fiscal_hp', 0, 4, 99.98, '2025-01-01'),
+              ('wallonia', 'annual', 'fiscal_hp', 5, 5, 133.07, '2025-01-01'),
+              ('wallonia', 'annual', 'fiscal_hp', 6, 6, 182.89, '2025-01-01'),
+              ('wallonia', 'annual', 'fiscal_hp', 7, 7, 232.70, '2025-01-01'),
+              ('wallonia', 'annual', 'fiscal_hp', 8, 8, 282.52, '2025-01-01'),
+              ('wallonia', 'annual', 'fiscal_hp', 9, 9, 382.40, '2025-01-01'),
+              ('wallonia', 'annual', 'fiscal_hp', 10, 10, 482.03, '2025-01-01'),
+              ('wallonia', 'annual', 'fiscal_hp', 11, 11, 581.91, '2025-01-01'),
+              ('wallonia', 'annual', 'fiscal_hp', 12, 12, 681.79, '2025-01-01'),
+              ('wallonia', 'annual', 'fiscal_hp', 13, 13, 781.67, '2025-01-01'),
+              ('wallonia', 'annual', 'fiscal_hp', 14, 14, 881.55, '2025-01-01'),
+              ('wallonia', 'annual', 'fiscal_hp', 15, 15, 981.42, '2025-01-01'),
+              ('wallonia', 'annual', 'fiscal_hp', 16, 16, 1181.18, '2025-01-01'),
+              ('wallonia', 'annual', 'fiscal_hp', 17, 17, 1380.94, '2025-01-01'),
+              ('wallonia', 'annual', 'fiscal_hp', 18, 18, 1580.69, '2025-01-01'),
+              ('wallonia', 'annual', 'fiscal_hp', 19, 19, 1780.45, '2025-01-01'),
+              ('wallonia', 'annual', 'fiscal_hp', 20, NULL, 1980.21, '2025-01-01');
 
   - changeSet:
       id: 29
@@ -313,25 +312,24 @@ databaseChangeLog:
       changes:
         - sql:
             sql: |
-              -- Source: https://cartax.be/taxe-de-circulation-bruxelles-2025/
               INSERT INTO tax_brackets (region, tax_type, bracket_key, min_value, max_value, amount, valid_from) VALUES
-              ('brussels', 'annual', 'fiscal_hp', 0, 4, 102.96, '2025-01-01'),
-              ('brussels', 'annual', 'fiscal_hp', 5, 5, 128.96, '2025-01-01'),
-              ('brussels', 'annual', 'fiscal_hp', 6, 6, 186.25, '2025-01-01'),
+              ('brussels', 'annual', 'fiscal_hp', 0, 4, 104.57, '2025-01-01'),
+              ('brussels', 'annual', 'fiscal_hp', 5, 5, 139.20, '2025-01-01'),
+              ('brussels', 'annual', 'fiscal_hp', 6, 6, 191.29, '2025-01-01'),
               ('brussels', 'annual', 'fiscal_hp', 7, 7, 243.41, '2025-01-01'),
-              ('brussels', 'annual', 'fiscal_hp', 8, 8, 300.96, '2025-01-01'),
-              ('brussels', 'annual', 'fiscal_hp', 9, 9, 358.51, '2025-01-01'),
-              ('brussels', 'annual', 'fiscal_hp', 10, 10, 415.40, '2025-01-01'),
-              ('brussels', 'annual', 'fiscal_hp', 11, 11, 539.09, '2025-01-01'),
-              ('brussels', 'annual', 'fiscal_hp', 12, 12, 662.64, '2025-01-01'),
-              ('brussels', 'annual', 'fiscal_hp', 13, 13, 786.06, '2025-01-01'),
-              ('brussels', 'annual', 'fiscal_hp', 14, 14, 909.74, '2025-01-01'),
-              ('brussels', 'annual', 'fiscal_hp', 15, 15, 1033.43, '2025-01-01'),
-              ('brussels', 'annual', 'fiscal_hp', 16, 16, 1353.53, '2025-01-01'),
-              ('brussels', 'annual', 'fiscal_hp', 17, 17, 1673.89, '2025-01-01'),
-              ('brussels', 'annual', 'fiscal_hp', 18, 18, 1994.26, '2025-01-01'),
-              ('brussels', 'annual', 'fiscal_hp', 19, 19, 2313.83, '2025-01-01'),
-              ('brussels', 'annual', 'fiscal_hp', 20, NULL, 2634.32, '2025-01-01');
+              ('brussels', 'annual', 'fiscal_hp', 8, 8, 295.52, '2025-01-01'),
+              ('brussels', 'annual', 'fiscal_hp', 9, 9, 400.01, '2025-01-01'),
+              ('brussels', 'annual', 'fiscal_hp', 10, 10, 504.21, '2025-01-01'),
+              ('brussels', 'annual', 'fiscal_hp', 11, 11, 608.66, '2025-01-01'),
+              ('brussels', 'annual', 'fiscal_hp', 12, 12, 713.11, '2025-01-01'),
+              ('brussels', 'annual', 'fiscal_hp', 13, 13, 817.57, '2025-01-01'),
+              ('brussels', 'annual', 'fiscal_hp', 14, 14, 922.02, '2025-01-01'),
+              ('brussels', 'annual', 'fiscal_hp', 15, 15, 1026.48, '2025-01-01'),
+              ('brussels', 'annual', 'fiscal_hp', 16, 16, 1235.51, '2025-01-01'),
+              ('brussels', 'annual', 'fiscal_hp', 17, 17, 1444.54, '2025-01-01'),
+              ('brussels', 'annual', 'fiscal_hp', 18, 18, 1653.57, '2025-01-01'),
+              ('brussels', 'annual', 'fiscal_hp', 19, 19, 1862.60, '2025-01-01'),
+              ('brussels', 'annual', 'fiscal_hp', 20, NULL, 2071.64, '2025-01-01');
 
   - changeSet:
       id: 31
@@ -353,25 +351,24 @@ databaseChangeLog:
       changes:
         - sql:
             sql: |
-              -- Base rates same as Wallonia, Flanders applies bonus-malus separately
               INSERT INTO tax_brackets (region, tax_type, bracket_key, min_value, max_value, amount, valid_from) VALUES
-              ('flanders', 'annual', 'fiscal_hp', 0, 4, 100.98, '2025-01-01'),
-              ('flanders', 'annual', 'fiscal_hp', 5, 5, 126.32, '2025-01-01'),
-              ('flanders', 'annual', 'fiscal_hp', 6, 6, 182.56, '2025-01-01'),
-              ('flanders', 'annual', 'fiscal_hp', 7, 7, 238.52, '2025-01-01'),
-              ('flanders', 'annual', 'fiscal_hp', 8, 8, 295.02, '2025-01-01'),
-              ('flanders', 'annual', 'fiscal_hp', 9, 9, 351.27, '2025-01-01'),
-              ('flanders', 'annual', 'fiscal_hp', 10, 10, 407.22, '2025-01-01'),
-              ('flanders', 'annual', 'fiscal_hp', 11, 11, 528.40, '2025-01-01'),
-              ('flanders', 'annual', 'fiscal_hp', 12, 12, 649.70, '2025-01-01'),
-              ('flanders', 'annual', 'fiscal_hp', 13, 13, 770.62, '2025-01-01'),
-              ('flanders', 'annual', 'fiscal_hp', 14, 14, 891.79, '2025-01-01'),
-              ('flanders', 'annual', 'fiscal_hp', 15, 15, 1013.10, '2025-01-01'),
-              ('flanders', 'annual', 'fiscal_hp', 16, 16, 1326.86, '2025-01-01'),
-              ('flanders', 'annual', 'fiscal_hp', 17, 17, 1640.89, '2025-01-01'),
-              ('flanders', 'annual', 'fiscal_hp', 18, 18, 1954.92, '2025-01-01'),
-              ('flanders', 'annual', 'fiscal_hp', 19, 19, 2268.29, '2025-01-01'),
-              ('flanders', 'annual', 'fiscal_hp', 20, NULL, 2582.32, '2025-01-01');
+              ('flanders', 'annual', 'fiscal_hp', 0, 4, 99.98, '2025-01-01'),
+              ('flanders', 'annual', 'fiscal_hp', 5, 5, 133.07, '2025-01-01'),
+              ('flanders', 'annual', 'fiscal_hp', 6, 6, 182.89, '2025-01-01'),
+              ('flanders', 'annual', 'fiscal_hp', 7, 7, 232.70, '2025-01-01'),
+              ('flanders', 'annual', 'fiscal_hp', 8, 8, 282.52, '2025-01-01'),
+              ('flanders', 'annual', 'fiscal_hp', 9, 9, 382.40, '2025-01-01'),
+              ('flanders', 'annual', 'fiscal_hp', 10, 10, 482.03, '2025-01-01'),
+              ('flanders', 'annual', 'fiscal_hp', 11, 11, 581.91, '2025-01-01'),
+              ('flanders', 'annual', 'fiscal_hp', 12, 12, 681.79, '2025-01-01'),
+              ('flanders', 'annual', 'fiscal_hp', 13, 13, 781.67, '2025-01-01'),
+              ('flanders', 'annual', 'fiscal_hp', 14, 14, 881.55, '2025-01-01'),
+              ('flanders', 'annual', 'fiscal_hp', 15, 15, 981.42, '2025-01-01'),
+              ('flanders', 'annual', 'fiscal_hp', 16, 16, 1181.18, '2025-01-01'),
+              ('flanders', 'annual', 'fiscal_hp', 17, 17, 1380.94, '2025-01-01'),
+              ('flanders', 'annual', 'fiscal_hp', 18, 18, 1580.69, '2025-01-01'),
+              ('flanders', 'annual', 'fiscal_hp', 19, 19, 1780.45, '2025-01-01'),
+              ('flanders', 'annual', 'fiscal_hp', 20, NULL, 1980.21, '2025-01-01');
 
   - changeSet:
       id: 33

@@ -41,6 +41,8 @@ public class ManualTaxCalculationRequest {
 
     private Integer fiscalHp;
 
+    private Integer displacementCc;
+
     private FuelType fuel;
 
     private EuroNorm euroNorm;
@@ -112,12 +114,13 @@ public class ManualTaxCalculationRequest {
 
     /**
      * Valide les champs requis pour la taxe annuelle.
+     * Accepte soit fiscalHp soit displacementCc.
      */
     public List<String> getMissingFieldsForAnnual() {
         List<String> missing = new ArrayList<>();
 
-        if (fiscalHp == null) {
-            missing.add("fiscalHp");
+        if (fiscalHp == null && displacementCc == null) {
+            missing.add("fiscalHp ou displacementCc (cylindrée)");
         }
 
         return missing;
@@ -183,6 +186,14 @@ public class ManualTaxCalculationRequest {
 
     public void setFiscalHp(Integer fiscalHp) {
         this.fiscalHp = fiscalHp;
+    }
+
+    public Integer getDisplacementCc() {
+        return displacementCc;
+    }
+
+    public void setDisplacementCc(Integer displacementCc) {
+        this.displacementCc = displacementCc;
     }
 
     public FuelType getFuel() {

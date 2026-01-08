@@ -62,7 +62,7 @@ class TaxCalculationServiceTest {
 
             assertThatThrownBy(() -> taxCalculationService.calculateBoth(request))
                     .isInstanceOf(ValidationException.class)
-                    .hasMessageContaining("variantId or submissionId");
+                    .hasMessageContaining("variantId");
         }
 
         @Test
@@ -75,7 +75,7 @@ class TaxCalculationServiceTest {
 
             assertThatThrownBy(() -> taxCalculationService.calculateBoth(request))
                     .isInstanceOf(ValidationException.class)
-                    .hasMessageContaining("variantId or submissionId");
+                    .hasMessageContaining("variantId");
         }
 
         @Test

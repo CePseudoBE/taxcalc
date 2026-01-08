@@ -26,6 +26,7 @@ public final class VariantMapper {
                 variant.getYearEnd(),
                 variant.getPowerKw(),
                 variant.getFiscalHp(),
+                variant.getDisplacementCc(),
                 variant.getFuel(),
                 variant.getEuroNorm(),
                 variant.getCo2Wltp()

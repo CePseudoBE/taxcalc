@@ -608,7 +608,7 @@ public class TaxCalculationService {
      */
     private void validateRequest(TaxCalculationRequest request) {
         if (!request.isValidVehicleReference()) {
-            throw new ValidationException("Vous devez fournir soit variantId, soit submissionId, soit les specs manuelles (fiscalHp + fuel minimum)");
+            throw new ValidationException("Vous devez fournir soit variantId, soit submissionId, soit les specs manuelles (fiscalHp ou displacementCc + fuel minimum)");
         }
         if (request.getRegion() == null) {
             throw new ValidationException("region", "Region is required");
@@ -631,7 +631,16 @@ public class TaxCalculationService {
             return VehicleData.fromSubmission(submission);
         } else {
             // Mode specs manuelles - calcul anonyme sans enregistrement
-            return VehicleData.fromManualSpecs(request);
+            // Si fiscalHp n'est pas fourni mais displacementCc l'est, convertir via les tranches
+            Integer effectiveFiscalHp = request.getFiscalHp();
+            if (effectiveFiscalHp == null && request.getDisplacementCc() != null) {
+                effectiveFiscalHp = taxConfigService.getFiscalHpFromDisplacement(
+                        request.getRegion(),
+                        request.getDisplacementCc(),
+                        LocalDate.now()
+                ).orElse(4); // Minimum 4 CV si pas de tranche trouvee
+            }
+            return VehicleData.fromManualSpecs(request, effectiveFiscalHp);
         }
     }
 
@@ -671,9 +680,9 @@ public class TaxCalculationService {
                     s.getEuroNorm(), s.getCo2Wltp(), s.getCo2Nedc(), s.getMmaKg());
         }
 
-        public static VehicleData fromManualSpecs(TaxCalculationRequest r) {
+        public static VehicleData fromManualSpecs(TaxCalculationRequest r, Integer effectiveFiscalHp) {
             return new VehicleData(
-                    r.getPowerKw(), r.getFiscalHp(), r.getFuel(),
+                    r.getPowerKw(), effectiveFiscalHp, r.getFuel(),
                     r.getEuroNorm(), r.getCo2Wltp(), r.getCo2Nedc(), r.getMmaKg());
         }
     }

@@ -58,6 +58,7 @@ export interface VariantResponse {
   yearEnd: number | null
   powerKw: number
   fiscalHp: number
+  displacementCc: number | null
   fuel: FuelType
   euroNorm: EuroNorm
   co2Wltp: number | null
@@ -83,6 +84,7 @@ export interface TaxCalculationRequest {
   submissionId?: number
   // Specs manuelles pour calcul anonyme
   fiscalHp?: number
+  displacementCc?: number
   powerKw?: number
   fuel?: FuelType
   euroNorm?: EuroNorm
