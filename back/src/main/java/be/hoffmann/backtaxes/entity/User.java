@@ -23,11 +23,19 @@ public class User {
     private String email;
 
     /**
-     * Mot de passe hashe (JAMAIS en clair!).
-     * On utilisera BCrypt via Spring Security.
+     * Mot de passe hashe - DEPRECATED.
+     * Garde pour compatibilite avec les anciens utilisateurs.
+     * Les nouveaux utilisateurs utilisent uniquement Google OAuth.
      */
-    @Column(name = "password_hash", nullable = false)
+    @Column(name = "password_hash")
     private String passwordHash;
+
+    /**
+     * Google ID unique de l'utilisateur (pour OAuth).
+     * Requis pour tous les nouveaux utilisateurs.
+     */
+    @Column(name = "google_id", unique = true)
+    private String googleId;
 
     /**
      * Est-ce que l'utilisateur peut moderer les soumissions?
@@ -62,9 +70,12 @@ public class User {
     public User() {
     }
 
-    public User(String email, String passwordHash) {
+    /**
+     * Constructeur pour utilisateur Google OAuth.
+     */
+    public User(String email, String googleId) {
         this.email = email;
-        this.passwordHash = passwordHash;
+        this.googleId = googleId;
     }
 
     // ==================== GETTERS & SETTERS ====================
@@ -91,6 +102,14 @@ public class User {
 
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
+    }
+
+    public String getGoogleId() {
+        return googleId;
+    }
+
+    public void setGoogleId(String googleId) {
+        this.googleId = googleId;
     }
 
     public Boolean getIsModerator() {

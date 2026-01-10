@@ -129,17 +129,8 @@ export interface UserResponse {
   id: number
   email: string
   isModerator: boolean
+  isAdmin?: boolean
   createdAt: string
-}
-
-export interface LoginRequest {
-  email: string
-  password: string
-}
-
-export interface UserRegistrationRequest {
-  email: string
-  password: string
 }
 
 // Saved Search

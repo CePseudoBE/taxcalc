@@ -9,7 +9,11 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +26,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/admin/users")
 public class AdminUserController {
+
+    private static final Logger audit = LoggerFactory.getLogger("audit");
 
     private final UserService userService;
 
@@ -61,6 +67,13 @@ public class AdminUserController {
 
         if (request.isAdmin() != null) {
             user = userService.setAdminStatus(id, request.isAdmin());
+        }
+
+        // Audit log
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.getPrincipal() instanceof User admin) {
+            audit.info("ROLE_CHANGED admin_id={} target_user_id={} target_email={} is_moderator={} is_admin={}",
+                    admin.getId(), user.getId(), user.getEmail(), user.getIsModerator(), user.getIsAdmin());
         }
 
         return ResponseEntity.ok(ApiResponse.success(userService.toResponse(user), "User roles updated."));

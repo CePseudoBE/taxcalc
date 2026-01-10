@@ -11,7 +11,7 @@ const submissions = useSubmissions()
 onMounted(async () => {
   await auth.checkAuth()
   if (!auth.isAuthenticated.value) {
-    router.push('/auth/login')
+    router.push('/auth')
   } else {
     // Load data
     await Promise.all([
@@ -21,10 +21,7 @@ onMounted(async () => {
   }
 })
 
-useSeoMeta({
-  title: () => `${t('account.title')} - ${t('app.name')}`,
-  robots: 'noindex'
-})
+useSeo('account')
 
 const tabs = [
   { key: 'searches', label: 'account.savedSearches', icon: 'i-lucide-bookmark' },

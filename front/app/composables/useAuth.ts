@@ -1,12 +1,17 @@
-import type { UserResponse, LoginRequest, UserRegistrationRequest } from '~/types/api'
+import type { UserResponse } from '~/types/api'
 
 interface ApiResponse<T> {
   data: T
   message?: string
 }
 
+interface GoogleAuthRequest {
+  idToken: string
+}
+
 /**
  * Composable pour la gestion de l'authentification.
+ * Authentification uniquement via Google OAuth.
  *
  * Les appels passent par les routes serveur Nuxt qui gerent
  * le stockage securise du token (BFF pattern).
@@ -18,6 +23,7 @@ export function useAuth() {
 
   const isAuthenticated = computed(() => !!user.value)
   const isModerator = computed(() => user.value?.isModerator ?? false)
+  const isAdmin = computed(() => user.value?.isAdmin ?? false)
 
   /**
    * Verifie l'etat de l'authentification au chargement.
@@ -32,43 +38,21 @@ export function useAuth() {
   }
 
   /**
-   * Connecte un utilisateur.
+   * Connecte un utilisateur via Google OAuth.
    */
-  async function login(credentials: LoginRequest) {
+  async function loginWithGoogle(idToken: string) {
     loading.value = true
     error.value = null
 
     try {
-      const response = await $fetch<ApiResponse<UserResponse>>('/api/auth/login', {
+      const response = await $fetch<ApiResponse<UserResponse>>('/api/auth/google', {
         method: 'POST',
-        body: credentials
+        body: { idToken } as GoogleAuthRequest
       })
       user.value = response.data
       return user.value
     } catch (e: any) {
-      error.value = e.data?.message || e.message || 'Login failed'
-      throw e
-    } finally {
-      loading.value = false
-    }
-  }
-
-  /**
-   * Inscrit un nouvel utilisateur.
-   */
-  async function register(data: UserRegistrationRequest) {
-    loading.value = true
-    error.value = null
-
-    try {
-      const response = await $fetch<ApiResponse<UserResponse>>('/api/auth/register', {
-        method: 'POST',
-        body: data
-      })
-      user.value = response.data
-      return user.value
-    } catch (e: any) {
-      error.value = e.data?.message || e.message || 'Registration failed'
+      error.value = e.data?.message || e.message || 'Google login failed'
       throw e
     } finally {
       loading.value = false
@@ -104,9 +88,9 @@ export function useAuth() {
     error,
     isAuthenticated,
     isModerator,
+    isAdmin,
     checkAuth,
-    login,
-    register,
+    loginWithGoogle,
     logout,
     fetchCurrentUser
   }

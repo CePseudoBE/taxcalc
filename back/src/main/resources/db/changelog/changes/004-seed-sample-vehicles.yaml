@@ -1,0 +1,434 @@
+databaseChangeLog:
+  # ============================================
+  # SAMPLE VEHICLES FOR TESTING
+  # ============================================
+  - changeSet:
+      id: 004-seed-brands
+      author: backtaxes
+      comment: Seed sample brands
+      changes:
+        - insert:
+            tableName: brands
+            columns:
+              - column: {name: name, value: 'BMW'}
+        - insert:
+            tableName: brands
+            columns:
+              - column: {name: name, value: 'Audi'}
+        - insert:
+            tableName: brands
+            columns:
+              - column: {name: name, value: 'Volkswagen'}
+        - insert:
+            tableName: brands
+            columns:
+              - column: {name: name, value: 'Tesla'}
+        - insert:
+            tableName: brands
+            columns:
+              - column: {name: name, value: 'Dacia'}
+        - insert:
+            tableName: brands
+            columns:
+              - column: {name: name, value: 'Peugeot'}
+        - insert:
+            tableName: brands
+            columns:
+              - column: {name: name, value: 'Renault'}
+        - insert:
+            tableName: brands
+            columns:
+              - column: {name: name, value: 'Toyota'}
+
+  - changeSet:
+      id: 004-seed-models
+      author: backtaxes
+      comment: Seed sample models
+      changes:
+        # BMW Models
+        - insert:
+            tableName: models
+            columns:
+              - column: {name: brand_id, valueComputed: "(SELECT id FROM brands WHERE name = 'BMW')"}
+              - column: {name: name, value: 'Serie 3'}
+        - insert:
+            tableName: models
+            columns:
+              - column: {name: brand_id, valueComputed: "(SELECT id FROM brands WHERE name = 'BMW')"}
+              - column: {name: name, value: 'Serie 5'}
+        - insert:
+            tableName: models
+            columns:
+              - column: {name: brand_id, valueComputed: "(SELECT id FROM brands WHERE name = 'BMW')"}
+              - column: {name: name, value: 'X3'}
+        # Audi Models
+        - insert:
+            tableName: models
+            columns:
+              - column: {name: brand_id, valueComputed: "(SELECT id FROM brands WHERE name = 'Audi')"}
+              - column: {name: name, value: 'A3'}
+        - insert:
+            tableName: models
+            columns:
+              - column: {name: brand_id, valueComputed: "(SELECT id FROM brands WHERE name = 'Audi')"}
+              - column: {name: name, value: 'A4'}
+        - insert:
+            tableName: models
+            columns:
+              - column: {name: brand_id, valueComputed: "(SELECT id FROM brands WHERE name = 'Audi')"}
+              - column: {name: name, value: 'e-tron'}
+        # Volkswagen Models
+        - insert:
+            tableName: models
+            columns:
+              - column: {name: brand_id, valueComputed: "(SELECT id FROM brands WHERE name = 'Volkswagen')"}
+              - column: {name: name, value: 'Golf'}
+        - insert:
+            tableName: models
+            columns:
+              - column: {name: brand_id, valueComputed: "(SELECT id FROM brands WHERE name = 'Volkswagen')"}
+              - column: {name: name, value: 'ID.4'}
+        - insert:
+            tableName: models
+            columns:
+              - column: {name: brand_id, valueComputed: "(SELECT id FROM brands WHERE name = 'Volkswagen')"}
+              - column: {name: name, value: 'Tiguan'}
+        # Tesla Models
+        - insert:
+            tableName: models
+            columns:
+              - column: {name: brand_id, valueComputed: "(SELECT id FROM brands WHERE name = 'Tesla')"}
+              - column: {name: name, value: 'Model 3'}
+        - insert:
+            tableName: models
+            columns:
+              - column: {name: brand_id, valueComputed: "(SELECT id FROM brands WHERE name = 'Tesla')"}
+              - column: {name: name, value: 'Model Y'}
+        # Dacia Models
+        - insert:
+            tableName: models
+            columns:
+              - column: {name: brand_id, valueComputed: "(SELECT id FROM brands WHERE name = 'Dacia')"}
+              - column: {name: name, value: 'Sandero'}
+        - insert:
+            tableName: models
+            columns:
+              - column: {name: brand_id, valueComputed: "(SELECT id FROM brands WHERE name = 'Dacia')"}
+              - column: {name: name, value: 'Duster'}
+        # Peugeot Models
+        - insert:
+            tableName: models
+            columns:
+              - column: {name: brand_id, valueComputed: "(SELECT id FROM brands WHERE name = 'Peugeot')"}
+              - column: {name: name, value: '208'}
+        - insert:
+            tableName: models
+            columns:
+              - column: {name: brand_id, valueComputed: "(SELECT id FROM brands WHERE name = 'Peugeot')"}
+              - column: {name: name, value: '308'}
+        - insert:
+            tableName: models
+            columns:
+              - column: {name: brand_id, valueComputed: "(SELECT id FROM brands WHERE name = 'Peugeot')"}
+              - column: {name: name, value: 'e-208'}
+        # Renault Models
+        - insert:
+            tableName: models
+            columns:
+              - column: {name: brand_id, valueComputed: "(SELECT id FROM brands WHERE name = 'Renault')"}
+              - column: {name: name, value: 'Clio'}
+        - insert:
+            tableName: models
+            columns:
+              - column: {name: brand_id, valueComputed: "(SELECT id FROM brands WHERE name = 'Renault')"}
+              - column: {name: name, value: 'Megane E-Tech'}
+        # Toyota Models
+        - insert:
+            tableName: models
+            columns:
+              - column: {name: brand_id, valueComputed: "(SELECT id FROM brands WHERE name = 'Toyota')"}
+              - column: {name: name, value: 'Yaris'}
+        - insert:
+            tableName: models
+            columns:
+              - column: {name: brand_id, valueComputed: "(SELECT id FROM brands WHERE name = 'Toyota')"}
+              - column: {name: name, value: 'Corolla'}
+
+  - changeSet:
+      id: 004-seed-variants
+      author: backtaxes
+      comment: Seed sample variants
+      changes:
+        # BMW Serie 3
+        - insert:
+            tableName: variants
+            columns:
+              - column: {name: model_id, valueComputed: "(SELECT m.id FROM models m JOIN brands b ON m.brand_id = b.id WHERE b.name = 'BMW' AND m.name = 'Serie 3')"}
+              - column: {name: name, value: '318i'}
+              - column: {name: year_start, valueNumeric: 2019}
+              - column: {name: displacement_cc, valueNumeric: 1998}
+              - column: {name: power_kw, valueNumeric: 115}
+              - column: {name: fiscal_hp, valueNumeric: 8}
+              - column: {name: fuel, value: 'petrol'}
+              - column: {name: euro_norm, value: 'euro_6d'}
+              - column: {name: co2_wltp, valueNumeric: 142}
+              - column: {name: mma_kg, valueNumeric: 1985}
+        - insert:
+            tableName: variants
+            columns:
+              - column: {name: model_id, valueComputed: "(SELECT m.id FROM models m JOIN brands b ON m.brand_id = b.id WHERE b.name = 'BMW' AND m.name = 'Serie 3')"}
+              - column: {name: name, value: '320d'}
+              - column: {name: year_start, valueNumeric: 2019}
+              - column: {name: displacement_cc, valueNumeric: 1995}
+              - column: {name: power_kw, valueNumeric: 140}
+              - column: {name: fiscal_hp, valueNumeric: 9}
+              - column: {name: fuel, value: 'diesel'}
+              - column: {name: euro_norm, value: 'euro_6d'}
+              - column: {name: co2_wltp, valueNumeric: 128}
+              - column: {name: mma_kg, valueNumeric: 2060}
+              - column: {name: has_particle_filter, valueBoolean: true}
+        - insert:
+            tableName: variants
+            columns:
+              - column: {name: model_id, valueComputed: "(SELECT m.id FROM models m JOIN brands b ON m.brand_id = b.id WHERE b.name = 'BMW' AND m.name = 'Serie 3')"}
+              - column: {name: name, value: '330e Hybrid'}
+              - column: {name: year_start, valueNumeric: 2021}
+              - column: {name: displacement_cc, valueNumeric: 1998}
+              - column: {name: power_kw, valueNumeric: 215}
+              - column: {name: fiscal_hp, valueNumeric: 12}
+              - column: {name: fuel, value: 'plug_in_hybrid_petrol'}
+              - column: {name: euro_norm, value: 'euro_6d'}
+              - column: {name: co2_wltp, valueNumeric: 38}
+              - column: {name: mma_kg, valueNumeric: 2225}
+
+        # Audi e-tron (Electric)
+        - insert:
+            tableName: variants
+            columns:
+              - column: {name: model_id, valueComputed: "(SELECT m.id FROM models m JOIN brands b ON m.brand_id = b.id WHERE b.name = 'Audi' AND m.name = 'e-tron')"}
+              - column: {name: name, value: '50 quattro'}
+              - column: {name: year_start, valueNumeric: 2021}
+              - column: {name: power_kw, valueNumeric: 230}
+              - column: {name: fiscal_hp, valueNumeric: 1}
+              - column: {name: fuel, value: 'electric'}
+              - column: {name: euro_norm, value: 'euro_6d'}
+              - column: {name: co2_wltp, valueNumeric: 0}
+              - column: {name: mma_kg, valueNumeric: 2965}
+        - insert:
+            tableName: variants
+            columns:
+              - column: {name: model_id, valueComputed: "(SELECT m.id FROM models m JOIN brands b ON m.brand_id = b.id WHERE b.name = 'Audi' AND m.name = 'e-tron')"}
+              - column: {name: name, value: '55 quattro'}
+              - column: {name: year_start, valueNumeric: 2021}
+              - column: {name: power_kw, valueNumeric: 300}
+              - column: {name: fiscal_hp, valueNumeric: 1}
+              - column: {name: fuel, value: 'electric'}
+              - column: {name: euro_norm, value: 'euro_6d'}
+              - column: {name: co2_wltp, valueNumeric: 0}
+              - column: {name: mma_kg, valueNumeric: 3040}
+
+        # Tesla Model 3
+        - insert:
+            tableName: variants
+            columns:
+              - column: {name: model_id, valueComputed: "(SELECT m.id FROM models m JOIN brands b ON m.brand_id = b.id WHERE b.name = 'Tesla' AND m.name = 'Model 3')"}
+              - column: {name: name, value: 'Standard Range Plus'}
+              - column: {name: year_start, valueNumeric: 2021}
+              - column: {name: power_kw, valueNumeric: 208}
+              - column: {name: fiscal_hp, valueNumeric: 1}
+              - column: {name: fuel, value: 'electric'}
+              - column: {name: euro_norm, value: 'euro_6d'}
+              - column: {name: co2_wltp, valueNumeric: 0}
+              - column: {name: mma_kg, valueNumeric: 2180}
+        - insert:
+            tableName: variants
+            columns:
+              - column: {name: model_id, valueComputed: "(SELECT m.id FROM models m JOIN brands b ON m.brand_id = b.id WHERE b.name = 'Tesla' AND m.name = 'Model 3')"}
+              - column: {name: name, value: 'Long Range AWD'}
+              - column: {name: year_start, valueNumeric: 2021}
+              - column: {name: power_kw, valueNumeric: 324}
+              - column: {name: fiscal_hp, valueNumeric: 1}
+              - column: {name: fuel, value: 'electric'}
+              - column: {name: euro_norm, value: 'euro_6d'}
+              - column: {name: co2_wltp, valueNumeric: 0}
+              - column: {name: mma_kg, valueNumeric: 2260}
+        - insert:
+            tableName: variants
+            columns:
+              - column: {name: model_id, valueComputed: "(SELECT m.id FROM models m JOIN brands b ON m.brand_id = b.id WHERE b.name = 'Tesla' AND m.name = 'Model 3')"}
+              - column: {name: name, value: 'Performance'}
+              - column: {name: year_start, valueNumeric: 2021}
+              - column: {name: power_kw, valueNumeric: 377}
+              - column: {name: fiscal_hp, valueNumeric: 1}
+              - column: {name: fuel, value: 'electric'}
+              - column: {name: euro_norm, value: 'euro_6d'}
+              - column: {name: co2_wltp, valueNumeric: 0}
+              - column: {name: mma_kg, valueNumeric: 2260}
+
+        # VW ID.4 (Electric)
+        - insert:
+            tableName: variants
+            columns:
+              - column: {name: model_id, valueComputed: "(SELECT m.id FROM models m JOIN brands b ON m.brand_id = b.id WHERE b.name = 'Volkswagen' AND m.name = 'ID.4')"}
+              - column: {name: name, value: 'Pure'}
+              - column: {name: year_start, valueNumeric: 2021}
+              - column: {name: power_kw, valueNumeric: 125}
+              - column: {name: fiscal_hp, valueNumeric: 1}
+              - column: {name: fuel, value: 'electric'}
+              - column: {name: euro_norm, value: 'euro_6d'}
+              - column: {name: co2_wltp, valueNumeric: 0}
+              - column: {name: mma_kg, valueNumeric: 2450}
+        - insert:
+            tableName: variants
+            columns:
+              - column: {name: model_id, valueComputed: "(SELECT m.id FROM models m JOIN brands b ON m.brand_id = b.id WHERE b.name = 'Volkswagen' AND m.name = 'ID.4')"}
+              - column: {name: name, value: 'Pro Performance'}
+              - column: {name: year_start, valueNumeric: 2021}
+              - column: {name: power_kw, valueNumeric: 150}
+              - column: {name: fiscal_hp, valueNumeric: 1}
+              - column: {name: fuel, value: 'electric'}
+              - column: {name: euro_norm, value: 'euro_6d'}
+              - column: {name: co2_wltp, valueNumeric: 0}
+              - column: {name: mma_kg, valueNumeric: 2555}
+
+        # VW Golf
+        - insert:
+            tableName: variants
+            columns:
+              - column: {name: model_id, valueComputed: "(SELECT m.id FROM models m JOIN brands b ON m.brand_id = b.id WHERE b.name = 'Volkswagen' AND m.name = 'Golf')"}
+              - column: {name: name, value: '1.5 TSI 130'}
+              - column: {name: year_start, valueNumeric: 2020}
+              - column: {name: displacement_cc, valueNumeric: 1498}
+              - column: {name: power_kw, valueNumeric: 96}
+              - column: {name: fiscal_hp, valueNumeric: 7}
+              - column: {name: fuel, value: 'petrol'}
+              - column: {name: euro_norm, value: 'euro_6d'}
+              - column: {name: co2_wltp, valueNumeric: 126}
+              - column: {name: mma_kg, valueNumeric: 1810}
+        - insert:
+            tableName: variants
+            columns:
+              - column: {name: model_id, valueComputed: "(SELECT m.id FROM models m JOIN brands b ON m.brand_id = b.id WHERE b.name = 'Volkswagen' AND m.name = 'Golf')"}
+              - column: {name: name, value: '2.0 TDI 150'}
+              - column: {name: year_start, valueNumeric: 2020}
+              - column: {name: displacement_cc, valueNumeric: 1968}
+              - column: {name: power_kw, valueNumeric: 110}
+              - column: {name: fiscal_hp, valueNumeric: 8}
+              - column: {name: fuel, value: 'diesel'}
+              - column: {name: euro_norm, value: 'euro_6d'}
+              - column: {name: co2_wltp, valueNumeric: 118}
+              - column: {name: mma_kg, valueNumeric: 1890}
+              - column: {name: has_particle_filter, valueBoolean: true}
+
+        # Dacia Sandero (Budget)
+        - insert:
+            tableName: variants
+            columns:
+              - column: {name: model_id, valueComputed: "(SELECT m.id FROM models m JOIN brands b ON m.brand_id = b.id WHERE b.name = 'Dacia' AND m.name = 'Sandero')"}
+              - column: {name: name, value: '1.0 SCe 65'}
+              - column: {name: year_start, valueNumeric: 2021}
+              - column: {name: displacement_cc, valueNumeric: 999}
+              - column: {name: power_kw, valueNumeric: 49}
+              - column: {name: fiscal_hp, valueNumeric: 5}
+              - column: {name: fuel, value: 'petrol'}
+              - column: {name: euro_norm, value: 'euro_6d'}
+              - column: {name: co2_wltp, valueNumeric: 127}
+              - column: {name: mma_kg, valueNumeric: 1560}
+        - insert:
+            tableName: variants
+            columns:
+              - column: {name: model_id, valueComputed: "(SELECT m.id FROM models m JOIN brands b ON m.brand_id = b.id WHERE b.name = 'Dacia' AND m.name = 'Sandero')"}
+              - column: {name: name, value: '1.0 TCe 90 LPG'}
+              - column: {name: year_start, valueNumeric: 2021}
+              - column: {name: displacement_cc, valueNumeric: 999}
+              - column: {name: power_kw, valueNumeric: 74}
+              - column: {name: fiscal_hp, valueNumeric: 6}
+              - column: {name: fuel, value: 'lpg'}
+              - column: {name: euro_norm, value: 'euro_6d'}
+              - column: {name: co2_wltp, valueNumeric: 115}
+              - column: {name: mma_kg, valueNumeric: 1655}
+
+        # Dacia Duster
+        - insert:
+            tableName: variants
+            columns:
+              - column: {name: model_id, valueComputed: "(SELECT m.id FROM models m JOIN brands b ON m.brand_id = b.id WHERE b.name = 'Dacia' AND m.name = 'Duster')"}
+              - column: {name: name, value: '1.5 Blue dCi 115'}
+              - column: {name: year_start, valueNumeric: 2021}
+              - column: {name: displacement_cc, valueNumeric: 1461}
+              - column: {name: power_kw, valueNumeric: 84}
+              - column: {name: fiscal_hp, valueNumeric: 6}
+              - column: {name: fuel, value: 'diesel'}
+              - column: {name: euro_norm, value: 'euro_6d'}
+              - column: {name: co2_wltp, valueNumeric: 130}
+              - column: {name: mma_kg, valueNumeric: 1880}
+              - column: {name: has_particle_filter, valueBoolean: true}
+
+        # Peugeot e-208 (Electric)
+        - insert:
+            tableName: variants
+            columns:
+              - column: {name: model_id, valueComputed: "(SELECT m.id FROM models m JOIN brands b ON m.brand_id = b.id WHERE b.name = 'Peugeot' AND m.name = 'e-208')"}
+              - column: {name: name, value: 'Allure'}
+              - column: {name: year_start, valueNumeric: 2020}
+              - column: {name: power_kw, valueNumeric: 100}
+              - column: {name: fiscal_hp, valueNumeric: 1}
+              - column: {name: fuel, value: 'electric'}
+              - column: {name: euro_norm, value: 'euro_6d'}
+              - column: {name: co2_wltp, valueNumeric: 0}
+              - column: {name: mma_kg, valueNumeric: 1910}
+        - insert:
+            tableName: variants
+            columns:
+              - column: {name: model_id, valueComputed: "(SELECT m.id FROM models m JOIN brands b ON m.brand_id = b.id WHERE b.name = 'Peugeot' AND m.name = 'e-208')"}
+              - column: {name: name, value: 'GT'}
+              - column: {name: year_start, valueNumeric: 2020}
+              - column: {name: power_kw, valueNumeric: 115}
+              - column: {name: fiscal_hp, valueNumeric: 1}
+              - column: {name: fuel, value: 'electric'}
+              - column: {name: euro_norm, value: 'euro_6d'}
+              - column: {name: co2_wltp, valueNumeric: 0}
+              - column: {name: mma_kg, valueNumeric: 1940}
+
+        # Toyota Yaris Hybrid
+        - insert:
+            tableName: variants
+            columns:
+              - column: {name: model_id, valueComputed: "(SELECT m.id FROM models m JOIN brands b ON m.brand_id = b.id WHERE b.name = 'Toyota' AND m.name = 'Yaris')"}
+              - column: {name: name, value: '1.5 Hybrid 116'}
+              - column: {name: year_start, valueNumeric: 2020}
+              - column: {name: displacement_cc, valueNumeric: 1490}
+              - column: {name: power_kw, valueNumeric: 85}
+              - column: {name: fiscal_hp, valueNumeric: 6}
+              - column: {name: fuel, value: 'hybrid_petrol'}
+              - column: {name: euro_norm, value: 'euro_6d'}
+              - column: {name: co2_wltp, valueNumeric: 87}
+              - column: {name: mma_kg, valueNumeric: 1615}
+
+        # Toyota Corolla Hybrid
+        - insert:
+            tableName: variants
+            columns:
+              - column: {name: model_id, valueComputed: "(SELECT m.id FROM models m JOIN brands b ON m.brand_id = b.id WHERE b.name = 'Toyota' AND m.name = 'Corolla')"}
+              - column: {name: name, value: '1.8 Hybrid 122'}
+              - column: {name: year_start, valueNumeric: 2019}
+              - column: {name: displacement_cc, valueNumeric: 1798}
+              - column: {name: power_kw, valueNumeric: 90}
+              - column: {name: fiscal_hp, valueNumeric: 7}
+              - column: {name: fuel, value: 'hybrid_petrol'}
+              - column: {name: euro_norm, value: 'euro_6d'}
+              - column: {name: co2_wltp, valueNumeric: 96}
+              - column: {name: mma_kg, valueNumeric: 1850}
+        - insert:
+            tableName: variants
+            columns:
+              - column: {name: model_id, valueComputed: "(SELECT m.id FROM models m JOIN brands b ON m.brand_id = b.id WHERE b.name = 'Toyota' AND m.name = 'Corolla')"}
+              - column: {name: name, value: '2.0 Hybrid 184'}
+              - column: {name: year_start, valueNumeric: 2019}
+              - column: {name: displacement_cc, valueNumeric: 1987}
+              - column: {name: power_kw, valueNumeric: 135}
+              - column: {name: fiscal_hp, valueNumeric: 9}
+              - column: {name: fuel, value: 'hybrid_petrol'}
+              - column: {name: euro_norm, value: 'euro_6d'}
+              - column: {name: co2_wltp, valueNumeric: 102}
+              - column: {name: mma_kg, valueNumeric: 1920}

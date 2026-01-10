@@ -1,11 +1,11 @@
 databaseChangeLog:
   # ============================================
-  # USERS & AUTH
+  # USERS & AUTHENTICATION
   # ============================================
   - changeSet:
-      id: 2
+      id: 002-users
       author: backtaxes
-      comment: "Create users table"
+      comment: Create users table
       changes:
         - createTable:
             tableName: users
@@ -25,8 +25,11 @@ databaseChangeLog:
               - column:
                   name: password_hash
                   type: varchar(255)
+              - column:
+                  name: google_id
+                  type: varchar(255)
                   constraints:
-                    nullable: false
+                    unique: true
               - column:
                   name: is_moderator
                   type: boolean
@@ -41,9 +44,9 @@ databaseChangeLog:
                   defaultValueComputed: CURRENT_TIMESTAMP
 
   - changeSet:
-      id: 3
+      id: 002-access-tokens
       author: backtaxes
-      comment: "Create access_tokens table for OAT authentication"
+      comment: Create access_tokens table for OAT authentication
       changes:
         - createTable:
             tableName: access_tokens
@@ -59,7 +62,6 @@ databaseChangeLog:
                   type: varchar(64)
                   constraints:
                     nullable: false
-                    unique: true
               - column:
                   name: user_id
                   type: bigint
@@ -100,14 +102,20 @@ databaseChangeLog:
             columns:
               - column:
                   name: user_id
+        - createIndex:
+            tableName: access_tokens
+            indexName: idx_access_tokens_expires
+            columns:
+              - column:
+                  name: expires_at
 
   # ============================================
   # VEHICLES
   # ============================================
   - changeSet:
-      id: 4
+      id: 002-brands
       author: backtaxes
-      comment: "Create brands table"
+      comment: Create brands table
       changes:
         - createTable:
             tableName: brands
@@ -130,9 +138,9 @@ databaseChangeLog:
                   defaultValueComputed: CURRENT_TIMESTAMP
 
   - changeSet:
-      id: 5
+      id: 002-models
       author: backtaxes
-      comment: "Create models table"
+      comment: Create models table
       changes:
         - createTable:
             tableName: models
@@ -169,9 +177,9 @@ databaseChangeLog:
             constraintName: uk_models_brand_name
 
   - changeSet:
-      id: 6
+      id: 002-variants
       author: backtaxes
-      comment: "Create variants table"
+      comment: Create variants table
       changes:
         - createTable:
             tableName: variants
@@ -260,9 +268,9 @@ databaseChangeLog:
   # SUBMISSIONS
   # ============================================
   - changeSet:
-      id: 7
+      id: 002-vehicle-submissions
       author: backtaxes
-      comment: "Create vehicle_submissions table"
+      comment: Create vehicle_submissions table
       changes:
         - createTable:
             tableName: vehicle_submissions
@@ -387,9 +395,9 @@ databaseChangeLog:
   # SAVED SEARCHES
   # ============================================
   - changeSet:
-      id: 8
+      id: 002-saved-searches
       author: backtaxes
-      comment: "Create saved_searches table"
+      comment: Create saved_searches table
       changes:
         - createTable:
             tableName: saved_searches
@@ -453,12 +461,12 @@ databaseChangeLog:
                   name: user_id
 
   # ============================================
-  # TAX TABLES
+  # TAX CONFIGURATION
   # ============================================
   - changeSet:
-      id: 9
+      id: 002-tax-brackets
       author: backtaxes
-      comment: "Create tax_brackets table"
+      comment: Create tax_brackets table
       changes:
         - createTable:
             tableName: tax_brackets
@@ -508,7 +516,7 @@ databaseChangeLog:
                   type: date
         - createIndex:
             tableName: tax_brackets
-            indexName: idx_brackets_lookup
+            indexName: idx_tax_brackets_lookup
             columns:
               - column:
                   name: region
@@ -517,12 +525,12 @@ databaseChangeLog:
               - column:
                   name: bracket_key
               - column:
-                  name: min_value
+                  name: valid_from
 
   - changeSet:
-      id: 10
+      id: 002-age-coefficients
       author: backtaxes
-      comment: "Create age_coefficients table"
+      comment: Create age_coefficients table
       changes:
         - createTable:
             tableName: age_coefficients
@@ -568,7 +576,7 @@ databaseChangeLog:
             constraintName: uk_age_coefficients
         - createIndex:
             tableName: age_coefficients
-            indexName: idx_age_lookup
+            indexName: idx_age_coefficients_lookup
             columns:
               - column:
                   name: region
@@ -578,9 +586,9 @@ databaseChangeLog:
                   name: vehicle_age_years
 
   - changeSet:
-      id: 11
+      id: 002-tax-parameters
       author: backtaxes
-      comment: "Create tax_parameters table"
+      comment: Create tax_parameters table
       changes:
         - createTable:
             tableName: tax_parameters
@@ -626,7 +634,7 @@ databaseChangeLog:
             constraintName: uk_tax_parameters
         - createIndex:
             tableName: tax_parameters
-            indexName: idx_params_lookup
+            indexName: idx_tax_parameters_lookup
             columns:
               - column:
                   name: region
@@ -636,9 +644,9 @@ databaseChangeLog:
                   name: param_key
 
   - changeSet:
-      id: 12
+      id: 002-tax-exemptions
       author: backtaxes
-      comment: "Create tax_exemptions table"
+      comment: Create tax_exemptions table
       changes:
         - createTable:
             tableName: tax_exemptions
@@ -660,6 +668,9 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: fuel_type
+                  type: fuel_type
+              - column:
                   name: condition_key
                   type: varchar(50)
                   constraints:
@@ -673,14 +684,24 @@ databaseChangeLog:
               - column:
                   name: valid_to
                   type: date
+        - createIndex:
+            tableName: tax_exemptions
+            indexName: idx_tax_exemptions_lookup
+            columns:
+              - column:
+                  name: region
+              - column:
+                  name: tax_type
+              - column:
+                  name: fuel_type
 
   # ============================================
   # USER REDUCTIONS
   # ============================================
   - changeSet:
-      id: 100
+      id: 002-user-reduction-types
       author: backtaxes
-      comment: "Create user_reduction_types table"
+      comment: Create user_reduction_types table
       changes:
         - createTable:
             tableName: user_reduction_types
@@ -702,9 +723,9 @@ databaseChangeLog:
                   type: text
 
   - changeSet:
-      id: 101
+      id: 002-user-reductions
       author: backtaxes
-      comment: "Create user_reductions table"
+      comment: Create user_reductions table
       changes:
         - createTable:
             tableName: user_reductions
@@ -762,9 +783,9 @@ databaseChangeLog:
   # ANALYTICS
   # ============================================
   - changeSet:
-      id: 102
+      id: 002-search-events
       author: backtaxes
-      comment: "Create search_events table"
+      comment: Create search_events table for analytics
       changes:
         - createTable:
             tableName: search_events
@@ -863,9 +884,9 @@ databaseChangeLog:
                   name: created_at
 
   - changeSet:
-      id: 103
+      id: 002-tax-calculations
       author: backtaxes
-      comment: "Create tax_calculations table"
+      comment: Create tax_calculations table for analytics
       changes:
         - createTable:
             tableName: tax_calculations
@@ -942,9 +963,9 @@ databaseChangeLog:
             constraintName: fk_tax_calculations_submission
 
   - changeSet:
-      id: 104
+      id: 002-daily-aggregates
       author: backtaxes
-      comment: "Create daily_aggregates table"
+      comment: Create daily_aggregates table for analytics
       changes:
         - createTable:
             tableName: daily_aggregates
@@ -1016,9 +1037,9 @@ databaseChangeLog:
                   name: date
 
   - changeSet:
-      id: 105
+      id: 002-popular-vehicles
       author: backtaxes
-      comment: "Create popular_vehicles table"
+      comment: Create popular_vehicles table for analytics
       changes:
         - createTable:
             tableName: popular_vehicles
@@ -1102,9 +1123,9 @@ databaseChangeLog:
             constraintName: uk_popular_vehicles
 
   - changeSet:
-      id: 106
+      id: 002-analytics-reports
       author: backtaxes
-      comment: "Create analytics_reports table"
+      comment: Create analytics_reports table
       changes:
         - createTable:
             tableName: analytics_reports
@@ -1165,9 +1186,9 @@ databaseChangeLog:
                   name: report_type
 
   - changeSet:
-      id: 107
+      id: 002-pending-calculations
       author: backtaxes
-      comment: "Create pending_calculations table"
+      comment: Create pending_calculations table
       changes:
         - createTable:
             tableName: pending_calculations

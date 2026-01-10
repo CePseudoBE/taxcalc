@@ -47,6 +47,10 @@ public class SecurityHeadersConfig {
                 response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
                 response.setHeader("Pragma", "no-cache");
 
+                // HSTS: Force HTTPS for 1 year (only in production with HTTPS)
+                // This header is ignored by browsers when served over HTTP
+                response.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
+
                 filterChain.doFilter(request, response);
             }
         };

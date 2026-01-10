@@ -217,10 +217,8 @@ class SecurityIntegrationTest {
 
     // Helper methods
     private User createUser(Long id, String email, boolean isModerator, boolean isAdmin) {
-        User user = new User();
+        User user = new User(email, "google-" + id);
         user.setId(id);
-        user.setEmail(email);
-        user.setPasswordHash("hashed");
         user.setIsModerator(isModerator);
         user.setIsAdmin(isAdmin);
         return user;

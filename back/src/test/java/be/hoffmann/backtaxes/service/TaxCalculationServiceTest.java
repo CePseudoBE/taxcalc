@@ -361,14 +361,16 @@ class TaxCalculationServiceTest {
         @Test
         @DisplayName("should add LPG supplement")
         void shouldAddLpgSupplement() {
+            // Test with 8CV LPG in Brussels (8-13 CV bracket = 148.68€)
             TaxCalculationService.VehicleData vehicleData = new TaxCalculationService.VehicleData(
                     100, 8, FuelType.lpg, EuroNorm.euro_6d, null, null, null);
 
             when(taxConfigService.isZeroEmissionExempt(any(), any(), any(), any())).thenReturn(false);
             when(taxConfigService.findBracket(eq(Region.brussels), eq(TaxType.annual), eq("fiscal_hp"), any(Integer.class), any()))
                     .thenReturn(Optional.of(createTaxBracket(BigDecimal.valueOf(300))));
-            when(taxConfigService.getParameter(eq(Region.brussels), eq(TaxType.annual), eq("lpg_supplement_per_hp"), any(), any()))
-                    .thenReturn(BigDecimal.valueOf(99.16));
+            // LPG supplement is now bracket-based (≤7: 89.16€, 8-13: 148.68€, ≥14: 208.20€)
+            when(taxConfigService.findBracket(eq(Region.brussels), eq(TaxType.annual), eq("lpg_supplement"), eq(8), any()))
+                    .thenReturn(Optional.of(createTaxBracket(BigDecimal.valueOf(148.68))));
             when(taxConfigService.getMinAmount(eq(Region.brussels), eq(TaxType.annual), any())).thenReturn(BigDecimal.valueOf(87));
             when(taxConfigService.getMaxAmount(eq(Region.brussels), eq(TaxType.annual), any())).thenReturn(Optional.empty());
 
@@ -376,6 +378,8 @@ class TaxCalculationServiceTest {
                     vehicleData, Region.brussels, TaxType.annual, LocalDate.now());
 
             assertThat(response.getBreakdown()).containsKey("lpgSupplement");
+            // Base 300 + LPG 148.68 = 448.68
+            assertThat(response.getAmount()).isEqualByComparingTo(BigDecimal.valueOf(448.68));
         }
 
         @Test

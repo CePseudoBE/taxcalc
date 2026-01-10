@@ -1,5 +1,5 @@
 # Back-Taxes - Docker Compose
-# Production deployment with PostgreSQL, Backend, and Frontend
+# Production deployment with PostgreSQL, Redis, Backend, and Frontend
 
 services:
   # ============================================
@@ -27,6 +27,26 @@ services:
       - backtaxes-network
 
   # ============================================
+  # Redis (rate limiting)
+  # ============================================
+  redis:
+    image: redis:7-alpine
+    container_name: backtaxes-redis
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backtaxes-network
+
+  # ============================================
   # Backend (Spring Boot)
   # ============================================
   backend:
@@ -38,6 +58,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      redis:
+        condition: service_healthy
     ports:
       - "${BACKEND_PORT:-8080}:8080"
     environment:
@@ -45,6 +67,10 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB:-backtaxes}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-postgres}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      # Redis
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-}
       # Spring profiles
       SPRING_PROFILES_ACTIVE: prod
       # Security
@@ -81,8 +107,8 @@ services:
       # Backend URL (internal Docker network)
       NUXT_BACKEND_URL: http://backend:8080/api
       NUXT_PUBLIC_API_BASE_URL: http://backend:8080/api
-      # Session secret (override in .env for production!)
-      NUXT_SESSION_SECRET: ${SESSION_SECRET:-super-secret-session-key-minimum-32-characters!!}
+      # Session secret (REQUIRED in production!)
+      NUXT_SESSION_SECRET: ${SESSION_SECRET}
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:3000/"]
       interval: 30s
@@ -104,4 +130,6 @@ networks:
 # ============================================
 volumes:
   postgres_data:
+    driver: local
+  redis_data:
     driver: local

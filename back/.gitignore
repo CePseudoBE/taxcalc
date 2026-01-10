@@ -39,8 +39,12 @@ out/
 .claude/
 
 ### Sensitive/Local files ###
+.env
 cookies.txt
 *.txt.bak
 
 ### Windows artifacts ###
 nul
+
+### Logs ###
+logs/

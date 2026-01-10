@@ -96,7 +96,7 @@ class TokenServiceTest {
             User user = createUser(1L, "test@example.com");
             AccessToken token = createToken("valid-token", user, Instant.now().plus(1, ChronoUnit.HOURS));
 
-            when(tokenRepository.findByToken("valid-token")).thenReturn(Optional.of(token));
+            when(tokenRepository.findByTokenWithUser("valid-token")).thenReturn(Optional.of(token));
             when(tokenRepository.save(any(AccessToken.class))).thenAnswer(inv -> inv.getArgument(0));
 
             Optional<User> result = tokenService.validateToken("valid-token");
@@ -113,7 +113,7 @@ class TokenServiceTest {
         @Test
         @DisplayName("should return empty when token not found")
         void shouldReturnEmptyWhenTokenNotFound() {
-            when(tokenRepository.findByToken("unknown-token")).thenReturn(Optional.empty());
+            when(tokenRepository.findByTokenWithUser("unknown-token")).thenReturn(Optional.empty());
 
             Optional<User> result = tokenService.validateToken("unknown-token");
 
@@ -127,7 +127,7 @@ class TokenServiceTest {
             User user = createUser(1L, "test@example.com");
             AccessToken expiredToken = createToken("expired-token", user, Instant.now().minus(1, ChronoUnit.HOURS));
 
-            when(tokenRepository.findByToken("expired-token")).thenReturn(Optional.of(expiredToken));
+            when(tokenRepository.findByTokenWithUser("expired-token")).thenReturn(Optional.of(expiredToken));
 
             Optional<User> result = tokenService.validateToken("expired-token");
 

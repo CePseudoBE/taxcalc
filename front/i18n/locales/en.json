@@ -4,6 +4,36 @@
     "tagline": "Belgian car tax calculator",
     "description": "Easily calculate registration and annual road tax for your vehicle in Belgium"
   },
+  "seo": {
+    "home": {
+      "title": "CalcTax - Belgian Car Tax Calculator | Registration & Road Tax",
+      "description": "Calculate registration tax (TMC/BIV) and annual road tax for your vehicle in Belgium for free. Compare Wallonia, Flanders and Brussels. No sign-up required, 100% free."
+    },
+    "calculator": {
+      "title": "Registration and Road Tax Calculator | CalcTax Belgium",
+      "description": "Instantly calculate your Belgian car taxes. TMC/BIV and annual tax for all 3 regions. Free, no account needed, no ads."
+    },
+    "compare": {
+      "title": "Compare Car Taxes Between Belgian Regions | CalcTax",
+      "description": "Compare car taxes between Wallonia, Flanders and Brussels. Find the cheapest region for your vehicle. Instant and free comparison."
+    },
+    "search": {
+      "title": "Vehicle Search | Belgian Car Database | CalcTax",
+      "description": "Search among thousands of vehicles in our database. Find your brand, model and variant to calculate your taxes."
+    },
+    "auth": {
+      "title": "Sign in | CalcTax",
+      "description": "Sign in with Google to save your searches and contribute to our vehicle database."
+    },
+    "account": {
+      "title": "My Account | CalcTax",
+      "description": "Manage your account, saved searches and vehicle submissions."
+    },
+    "submit": {
+      "title": "Submit a Vehicle | CalcTax",
+      "description": "Contribute to our database by submitting a missing vehicle. Your contribution helps the community."
+    }
+  },
   "home": {
     "heroTitle": "Calculate your car taxes in Belgium",
     "heroSubtitle": "Registration and annual road tax for all three regions. Official 2025 data.",
@@ -42,6 +72,7 @@
   },
   "fuel": {
     "title": "Fuel type",
+    "select": "Select a fuel type",
     "petrol": "Petrol",
     "diesel": "Diesel",
     "electric": "Electric",
@@ -55,6 +86,7 @@
   },
   "euroNorm": {
     "title": "Euro standard",
+    "select": "Select a Euro standard",
     "euro_1": "Euro 1",
     "euro_2": "Euro 2",
     "euro_3": "Euro 3",
@@ -67,22 +99,34 @@
   },
   "vehicle": {
     "brand": "Brand",
+    "brandPlaceholder": "e.g. Volkswagen",
     "model": "Model",
+    "modelPlaceholder": "e.g. Golf",
     "variant": "Variant",
+    "variantPlaceholder": "e.g. 1.5 TSI 150hp",
     "selectBrand": "Select a brand",
     "selectModel": "Select a model",
     "selectVariant": "Select a variant",
+    "selectMonth": "Select a month",
     "power": "Power",
     "powerKw": "Power (kW)",
+    "powerKwPlaceholder": "e.g. 110",
     "fiscalHp": "Fiscal HP",
+    "fiscalHpPlaceholder": "e.g. 8",
+    "fiscalHpHelp": "Found on your vehicle registration",
     "co2": "CO₂ emissions",
     "co2Wltp": "CO₂ WLTP (g/km)",
+    "co2WltpPlaceholder": "e.g. 120",
+    "co2WltpHelp": "Important for Wallonia and Flanders",
     "co2Nedc": "CO₂ NEDC (g/km)",
     "displacement": "Displacement (cc)",
     "displacementCc": "Displacement (cm³)",
     "displacementCcPlaceholder": "e.g. 1998",
     "displacementCcHelp": "Alternative to fiscal HP. Use if you don't know your HP.",
     "mass": "Mass (kg)",
+    "mmaKg": "GVW (kg)",
+    "mmaKgPlaceholder": "e.g. 1850",
+    "mmaKgHelp": "Gross Vehicle Weight (Wallonia only)",
     "yearStart": "Start year",
     "yearEnd": "End year",
     "particleFilter": "Particle filter",
@@ -115,10 +159,23 @@
     "subtitle": "Calculate registration and annual tax for your vehicle",
     "selectVehicle": "Vehicle selection",
     "orManual": "or manual entry",
+    "inputMode": "Input mode",
     "manualEntry": "Manual entry",
     "manualDescription": "Enter your vehicle specifications if it's not in our database",
     "fromCatalog": "From catalog",
-    "catalogDescription": "Search for your vehicle among available models"
+    "catalogDescription": "Search for your vehicle among available models",
+    "vehicleSpecs": "Vehicle specifications",
+    "requiredInfo": "Important information",
+    "requiredInfoDetails": "For accurate calculation in Wallonia, add CO₂ and GVW. For Flanders, add CO₂ and Euro standard.",
+    "noCatalogData": "The vehicle catalog is empty. Use manual entry to calculate your taxes.",
+    "fillForm": "Fill in the form to see the result",
+    "saveSearch": "Save search",
+    "searchLabel": "Search name",
+    "searchLabelPlaceholder": "e.g. My Golf",
+    "searchSaved": "Search saved!",
+    "shareTitle": "Tax calculation",
+    "loggedInSubmissionNotice": "As a logged-in user, your vehicle will be submitted to the catalog for moderation.",
+    "submissionSuccess": "Vehicle submitted! A moderator will review it."
   },
   "search": {
     "title": "Search vehicles",
@@ -126,25 +183,27 @@
     "filters": "Filters",
     "clearFilters": "Clear filters",
     "noResults": "No results found",
-    "results": "{count} result | {count} results"
+    "results": "{count} result | {count} results",
+    "selectBrand": "Select a brand",
+    "selectModel": "Select a model",
+    "selectToStart": "Select a brand and model to get started"
   },
   "compare": {
     "title": "Compare regions",
     "subtitle": "Compare taxes for your vehicle across the three Belgian regions",
-    "selectVehicle": "Select a vehicle to compare"
+    "selectVehicle": "Select a vehicle to compare",
+    "compare": "Compare",
+    "cheapest": "Cheapest"
   },
   "auth": {
     "login": "Login",
-    "register": "Register",
-    "email": "Email address",
-    "password": "Password",
-    "confirmPassword": "Confirm password",
-    "forgotPassword": "Forgot password?",
-    "noAccount": "Don't have an account?",
-    "hasAccount": "Already have an account?",
-    "loginButton": "Sign in",
-    "registerButton": "Sign up",
-    "logoutButton": "Sign out"
+    "loginTitle": "Sign in",
+    "loginSubtitle": "Sign in to save your searches and contribute to the database",
+    "continueWithGoogle": "Continue with Google",
+    "googleNotLoaded": "Google authentication is not available",
+    "googleError": "An error occurred with Google authentication",
+    "loginFailed": "Login failed. Please try again.",
+    "termsNotice": "By continuing, you accept our terms of use and privacy policy."
   },
   "account": {
     "title": "My account",
@@ -152,7 +211,21 @@
     "savedSearches": "Saved searches",
     "submissions": "My submissions",
     "noSavedSearches": "No saved searches",
-    "noSubmissions": "No submissions"
+    "noSubmissions": "No submissions",
+    "submittedOn": "Submitted on",
+    "feedback": "Moderator feedback",
+    "memberSince": "Member since",
+    "role": "Role",
+    "moderator": "Moderator",
+    "dangerZone": "Danger zone",
+    "deleteAccount": "Delete my account",
+    "deleteConfirm": "Are you sure you want to delete your account? This action cannot be undone.",
+    "confirmDelete": "Yes, delete"
+  },
+  "status": {
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected"
   },
   "submission": {
     "title": "Submit a vehicle",
@@ -176,6 +249,8 @@
     "cancel": "Cancel",
     "delete": "Delete",
     "edit": "Edit",
+    "share": "Share",
+    "copied": "Copied!",
     "loading": "Loading...",
     "error": "Error",
     "success": "Success",
@@ -190,7 +265,9 @@
     "previous": "Previous",
     "close": "Close",
     "confirm": "Confirm",
-    "language": "Language"
+    "language": "Language",
+    "view": "View",
+    "present": "Present"
   },
   "errors": {
     "generic": "An error occurred",
@@ -198,6 +275,17 @@
     "unauthorized": "Unauthorized access",
     "validation": "Please check the form fields",
     "network": "Server connection error"
+  },
+  "trust": {
+    "free": "100% Free",
+    "freeShort": "100% Free",
+    "freeDesc": "Unlimited calculations",
+    "noAccount": "No sign-up",
+    "noAccountDesc": "No email required",
+    "noAds": "No ads",
+    "noAdsDesc": "No commercial tracking",
+    "threeRegions": "3 regions",
+    "threeRegionsDesc": "Instant comparison"
   },
   "footer": {
     "copyright": "© {year} Back-Taxes. All rights reserved.",

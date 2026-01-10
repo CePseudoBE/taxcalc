@@ -26,6 +26,9 @@ public class SecurityConfig {
     @Value("${app.security.enabled:true}")
     private boolean securityEnabled;
 
+    @Value("${app.security.require-https:false}")
+    private boolean requireHttps;
+
     private final TokenAuthenticationFilter tokenAuthenticationFilter;
 
     public SecurityConfig(TokenAuthenticationFilter tokenAuthenticationFilter) {
@@ -48,6 +51,11 @@ public class SecurityConfig {
             )
             // Ajouter le filtre d'authentification par token
             .addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+        // HTTPS enforcement in production
+        if (requireHttps) {
+            http.requiresChannel(channel -> channel.anyRequest().requiresSecure());
+        }
 
         if (securityEnabled) {
             // Mode production: securite activee

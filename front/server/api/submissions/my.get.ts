@@ -40,7 +40,7 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const submissions = await backendFetch<SubmissionResponse[]>('/submissions/my', {
+    const submissions = await backendFetch<SubmissionResponse[]>('/submissions/mine', {
       token
     })
 

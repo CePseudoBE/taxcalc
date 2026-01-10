@@ -1,9 +1,8 @@
 import { defineEventHandler, readBody, createError } from 'h3'
 import { backendFetch, sessionConfig } from '../../utils/backend'
 
-interface LoginRequest {
-  email: string
-  password: string
+interface GoogleAuthRequest {
+  idToken: string
 }
 
 interface UserResponse {
@@ -20,17 +19,17 @@ interface AuthResponse {
 }
 
 export default defineEventHandler(async (event) => {
-  const body = await readBody<LoginRequest>(event)
+  const body = await readBody<GoogleAuthRequest>(event)
 
-  if (!body.email || !body.password) {
+  if (!body.idToken) {
     throw createError({
       statusCode: 400,
-      message: 'Email and password are required'
+      message: 'Google ID token is required'
     })
   }
 
   try {
-    const authResponse = await backendFetch<AuthResponse>('/auth/login', {
+    const authResponse = await backendFetch<AuthResponse>('/auth/google', {
       method: 'POST',
       body
     })
@@ -47,12 +46,12 @@ export default defineEventHandler(async (event) => {
     // Retourner uniquement les infos utilisateur (sans le token)
     return {
       data: authResponse.user,
-      message: 'Login successful'
+      message: 'Google login successful'
     }
   } catch (error: any) {
     throw createError({
       statusCode: error.statusCode || 401,
-      message: error.message || 'Invalid email or password'
+      message: error.message || 'Google authentication failed'
     })
   }
 })

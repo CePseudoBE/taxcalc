@@ -70,7 +70,7 @@ public class TokenService {
      */
     @Transactional
     public Optional<User> validateToken(String tokenValue) {
-        return tokenRepository.findByToken(tokenValue)
+        return tokenRepository.findByTokenWithUser(tokenValue)
                 .filter(token -> !token.isExpired())
                 .map(token -> {
                     // Mettre a jour la date de derniere utilisation

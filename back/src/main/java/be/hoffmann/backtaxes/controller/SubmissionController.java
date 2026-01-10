@@ -10,13 +10,14 @@ import be.hoffmann.backtaxes.entity.User;
 import be.hoffmann.backtaxes.entity.VehicleSubmission;
 import be.hoffmann.backtaxes.entity.enums.SubmissionStatus;
 import be.hoffmann.backtaxes.service.SubmissionService;
-import be.hoffmann.backtaxes.service.UserService;
+import be.hoffmann.backtaxes.util.PaginationUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-import org.springframework.data.domain.PageRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,14 +31,12 @@ import java.util.List;
 @RequestMapping("/api")
 public class SubmissionController {
 
-    private static final String USER_SESSION_KEY = "user_id";
+    private static final Logger audit = LoggerFactory.getLogger("audit");
 
     private final SubmissionService submissionService;
-    private final UserService userService;
 
-    public SubmissionController(SubmissionService submissionService, UserService userService) {
+    public SubmissionController(SubmissionService submissionService) {
         this.submissionService = submissionService;
-        this.userService = userService;
     }
 
     // ==================== Endpoints Utilisateur ====================
@@ -95,10 +94,8 @@ public class SubmissionController {
             return ResponseEntity.ok(ApiResponse.success(SubmissionMapper.toResponseList(submissions)));
         }
 
-        // Pagination avec valeurs par defaut
-        int pageNum = page != null ? page : 0;
-        int pageSize = size != null ? size : 20;
-        var pageable = PageRequest.of(pageNum, pageSize, Sort.by("createdAt").descending());
+        // Pagination avec limites de securite (max 100 elements par page)
+        var pageable = PaginationUtils.createPageable(page, size, Sort.by("createdAt").descending());
 
         var pagedSubmissions = submissionService.findByStatus(status, pageable);
         var response = PagedResponse.from(pagedSubmissions, SubmissionMapper::toResponse);
@@ -120,9 +117,14 @@ public class SubmissionController {
         if (Boolean.TRUE.equals(request.approved())) {
             submission = submissionService.approve(id, reviewer);
             message = "Submission approved.";
+            audit.info("SUBMISSION_APPROVED reviewer_id={} submission_id={} submitter_id={}",
+                    reviewer.getId(), submission.getId(), submission.getSubmitter().getId());
         } else {
             submission = submissionService.reject(id, reviewer, request.feedback());
             message = "Submission rejected.";
+            audit.info("SUBMISSION_REJECTED reviewer_id={} submission_id={} submitter_id={} feedback={}",
+                    reviewer.getId(), submission.getId(), submission.getSubmitter().getId(),
+                    request.feedback() != null ? request.feedback() : "none");
         }
 
         return ResponseEntity.ok(ApiResponse.success(SubmissionMapper.toResponse(submission), message));

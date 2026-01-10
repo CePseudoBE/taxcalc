@@ -7,10 +7,15 @@ const router = useRouter()
 const auth = useAuth()
 const savedSearches = useSavedSearches()
 
-useSeoMeta({
-  title: () => `${t('calculator.title')} - ${t('app.name')}`,
-  description: () => t('calculator.subtitle')
-})
+useSeo('calculator')
+
+// Add structured data (JSON-LD) for calculator
+const jsonLd = useJsonLd()
+jsonLd.addCalculatorSchema()
+jsonLd.addBreadcrumbSchema([
+  { name: t('nav.home'), url: '/' },
+  { name: t('nav.calculator') }
+])
 
 const vehicles = useVehicles()
 const tax = useTax()
@@ -263,7 +268,7 @@ const saveSuccess = ref(false)
 
 function openSaveModal() {
   if (!auth.isAuthenticated.value) {
-    router.push('/auth/login?redirect=/calculator')
+    router.push('/auth?redirect=/calculator')
     return
   }
   if (inputMode.value === 'manual') {
@@ -358,7 +363,21 @@ async function handleShare() {
       <!-- Header -->
       <div class="max-w-2xl mb-12">
         <h1 class="text-3xl font-bold mb-3">{{ t('calculator.title') }}</h1>
-        <p class="text-stone-500 dark:text-stone-400">{{ t('calculator.subtitle') }}</p>
+        <p class="text-stone-500 dark:text-stone-400 mb-4">{{ t('calculator.subtitle') }}</p>
+        <div class="flex flex-wrap items-center gap-4 text-sm text-stone-500 dark:text-stone-400">
+          <span class="flex items-center gap-1.5">
+            <UIcon name="i-lucide-check-circle" class="w-4 h-4 text-green-500" />
+            {{ t('trust.freeShort') }}
+          </span>
+          <span class="flex items-center gap-1.5">
+            <UIcon name="i-lucide-check-circle" class="w-4 h-4 text-green-500" />
+            {{ t('trust.noAccount') }}
+          </span>
+          <span class="flex items-center gap-1.5">
+            <UIcon name="i-lucide-check-circle" class="w-4 h-4 text-green-500" />
+            {{ t('trust.noAds') }}
+          </span>
+        </div>
       </div>
 
       <div class="grid lg:grid-cols-3 gap-8">

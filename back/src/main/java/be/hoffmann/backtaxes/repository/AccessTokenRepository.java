@@ -15,6 +15,9 @@ public interface AccessTokenRepository extends JpaRepository<AccessToken, Long> 
 
     Optional<AccessToken> findByToken(String token);
 
+    @Query("SELECT a FROM AccessToken a JOIN FETCH a.user WHERE a.token = :token")
+    Optional<AccessToken> findByTokenWithUser(String token);
+
     List<AccessToken> findByUserId(Long userId);
 
     boolean existsByToken(String token);

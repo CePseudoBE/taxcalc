@@ -5,6 +5,7 @@ import be.hoffmann.backtaxes.entity.AccessToken;
 import be.hoffmann.backtaxes.entity.User;
 import be.hoffmann.backtaxes.exception.GlobalExceptionHandler;
 import be.hoffmann.backtaxes.exception.ValidationException;
+import be.hoffmann.backtaxes.service.GoogleAuthService;
 import be.hoffmann.backtaxes.service.TokenService;
 import be.hoffmann.backtaxes.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +23,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.Optional;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -43,62 +43,63 @@ class UserControllerTest {
     @Mock
     private TokenService tokenService;
 
+    @Mock
+    private GoogleAuthService googleAuthService;
+
     @BeforeEach
     void setUp() {
-        UserController controller = new UserController(userService, tokenService);
+        UserController controller = new UserController(userService, tokenService, googleAuthService);
         mockMvc = MockMvcBuilders.standaloneSetup(controller)
                 .setControllerAdvice(new GlobalExceptionHandler())
                 .build();
     }
 
     @Nested
-    @DisplayName("POST /api/auth/register")
-    class RegisterTests {
+    @DisplayName("POST /api/auth/google")
+    class GoogleAuthTests {
 
         @Test
-        @DisplayName("should register user and return token")
-        void shouldRegisterAndReturnToken() throws Exception {
-            User user = createUser(1L, "test@example.com");
+        @DisplayName("should authenticate with Google and return token")
+        void shouldAuthenticateWithGoogleAndReturnToken() throws Exception {
+            User user = createUser(1L, "test@example.com", "google-123");
             AccessToken token = createToken("generated-token-123", user);
             UserResponse userResponse = new UserResponse(1L, "test@example.com", false, false, Instant.now());
 
-            when(userService.register(any())).thenReturn(user);
+            when(googleAuthService.authenticateWithGoogle("valid-google-id-token")).thenReturn(user);
             when(tokenService.generateToken(user, "nuxt-bff")).thenReturn(token);
             when(tokenService.getTokenExpirationSeconds()).thenReturn(86400L);
             when(userService.toResponse(user)).thenReturn(userResponse);
 
-            mockMvc.perform(post("/api/auth/register")
+            mockMvc.perform(post("/api/auth/google")
                             .contentType(MediaType.APPLICATION_JSON)
                             .header("X-Client-Name", "nuxt-bff")
                             .content("""
                                 {
-                                    "email": "test@example.com",
-                                    "password": "password123"
+                                    "idToken": "valid-google-id-token"
                                 }
                                 """))
-                    .andExpect(status().isCreated())
+                    .andExpect(status().isOk())
                     .andExpect(jsonPath("$.data.user.id", is(1)))
                     .andExpect(jsonPath("$.data.user.email", is("test@example.com")))
                     .andExpect(jsonPath("$.data.accessToken", is("generated-token-123")))
                     .andExpect(jsonPath("$.data.expiresIn", is(86400)))
-                    .andExpect(jsonPath("$.message", containsString("Registration successful")));
+                    .andExpect(jsonPath("$.message", containsString("Google login successful")));
 
-            verify(userService).register(any());
+            verify(googleAuthService).authenticateWithGoogle("valid-google-id-token");
             verify(tokenService).generateToken(user, "nuxt-bff");
         }
 
         @Test
-        @DisplayName("should return 400 when email already exists")
-        void shouldReturn400WhenEmailExists() throws Exception {
-            when(userService.register(any()))
-                    .thenThrow(new ValidationException("email", "Email already exists"));
+        @DisplayName("should return 400 when Google token is invalid")
+        void shouldReturn400WhenGoogleTokenInvalid() throws Exception {
+            when(googleAuthService.authenticateWithGoogle("invalid-token"))
+                    .thenThrow(new ValidationException("Invalid Google ID token"));
 
-            mockMvc.perform(post("/api/auth/register")
+            mockMvc.perform(post("/api/auth/google")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content("""
                                 {
-                                    "email": "existing@example.com",
-                                    "password": "password123"
+                                    "idToken": "invalid-token"
                                 }
                                 """))
                     .andExpect(status().isBadRequest());
@@ -109,79 +110,25 @@ class UserControllerTest {
         @Test
         @DisplayName("should use default client name when header missing")
         void shouldUseDefaultClientName() throws Exception {
-            User user = createUser(1L, "test@example.com");
+            User user = createUser(1L, "test@example.com", "google-123");
             AccessToken token = createToken("token", user);
             UserResponse userResponse = new UserResponse(1L, "test@example.com", false, false, Instant.now());
 
-            when(userService.register(any())).thenReturn(user);
+            when(googleAuthService.authenticateWithGoogle("valid-token")).thenReturn(user);
             when(tokenService.generateToken(user, "unknown")).thenReturn(token);
             when(tokenService.getTokenExpirationSeconds()).thenReturn(86400L);
             when(userService.toResponse(user)).thenReturn(userResponse);
 
-            mockMvc.perform(post("/api/auth/register")
+            mockMvc.perform(post("/api/auth/google")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content("""
                                 {
-                                    "email": "test@example.com",
-                                    "password": "password123"
+                                    "idToken": "valid-token"
                                 }
                                 """))
-                    .andExpect(status().isCreated());
+                    .andExpect(status().isOk());
 
             verify(tokenService).generateToken(user, "unknown");
-        }
-    }
-
-    @Nested
-    @DisplayName("POST /api/auth/login")
-    class LoginTests {
-
-        @Test
-        @DisplayName("should login and return token")
-        void shouldLoginAndReturnToken() throws Exception {
-            User user = createUser(1L, "test@example.com");
-            AccessToken token = createToken("login-token-456", user);
-            UserResponse userResponse = new UserResponse(1L, "test@example.com", false, false, Instant.now());
-
-            when(userService.authenticate("test@example.com", "password123"))
-                    .thenReturn(Optional.of(user));
-            when(tokenService.generateToken(user, "mobile-app")).thenReturn(token);
-            when(tokenService.getTokenExpirationSeconds()).thenReturn(86400L);
-            when(userService.toResponse(user)).thenReturn(userResponse);
-
-            mockMvc.perform(post("/api/auth/login")
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .header("X-Client-Name", "mobile-app")
-                            .content("""
-                                {
-                                    "email": "test@example.com",
-                                    "password": "password123"
-                                }
-                                """))
-                    .andExpect(status().isOk())
-                    .andExpect(jsonPath("$.data.user.email", is("test@example.com")))
-                    .andExpect(jsonPath("$.data.accessToken", is("login-token-456")))
-                    .andExpect(jsonPath("$.data.expiresIn", is(86400)))
-                    .andExpect(jsonPath("$.message", containsString("Login successful")));
-        }
-
-        @Test
-        @DisplayName("should return 400 when credentials invalid")
-        void shouldReturn400WhenCredentialsInvalid() throws Exception {
-            when(userService.authenticate(anyString(), anyString()))
-                    .thenReturn(Optional.empty());
-
-            mockMvc.perform(post("/api/auth/login")
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .content("""
-                                {
-                                    "email": "wrong@example.com",
-                                    "password": "wrongpassword"
-                                }
-                                """))
-                    .andExpect(status().isBadRequest());
-
-            verify(tokenService, never()).generateToken(any(), anyString());
         }
     }
 
@@ -240,11 +187,11 @@ class UserControllerTest {
         }
     }
 
-    private User createUser(Long id, String email) {
-        User user = new User();
+    private User createUser(Long id, String email, String googleId) {
+        User user = new User(email, googleId);
         user.setId(id);
-        user.setEmail(email);
         user.setIsModerator(false);
+        user.setIsAdmin(false);
         return user;
     }
 

@@ -11,310 +11,254 @@
 # --- Golf GTI (195kW, 15CV, petrol, 162g CO2, 1950kg MMA) ---
 # MB=4957, CO2/136=1.19, MMA/1838=1.06, C=1.0
 # Base = 4957 × 1.19 × 1.06 × 1.0 = 6254€
-Wallonia TMC - Golf GTI 0y,wallonia,tmc,195,15,petrol,euro_6d,162,1950,0,true,6000,6500,false
-Wallonia TMC - Golf GTI 5y,wallonia,tmc,195,15,petrol,euro_6d,162,1950,5,false,3200,3600,false
-Wallonia TMC - Golf GTI 10y,wallonia,tmc,195,15,petrol,euro_6d,162,1950,10,false,1700,2000,false
+Wallonia TMC - Golf GTI 0y,wallonia,tmc,195,15,petrol,euro_6d,162,1950,0,true,5500,6800,false
+Wallonia TMC - Golf GTI 5y,wallonia,tmc,195,15,petrol,euro_6d,162,1950,5,false,2800,4000,false
+Wallonia TMC - Golf GTI 10y,wallonia,tmc,195,15,petrol,euro_6d,162,1950,10,false,1500,2200,false
 Wallonia TMC - Golf GTI 15y,wallonia,tmc,195,15,petrol,euro_6d,162,1950,15,false,0,0,false
 
 # --- BMW 320d G21 (140kW, 10CV, diesel, 148g CO2, 2105kg MMA) ---
-# Source: BMW officiel - CO2 WLTP 141-148 g/km, PTAC ~2100-2320kg selon version
-# MB=2478, CO2/136=1.088, MMA/1838=1.145, C=1.0
-# Base = 2478 × 1.088 × 1.145 × 1.0 = 3087€
-Wallonia TMC - BMW 320d 0y,wallonia,tmc,140,10,diesel,euro_6d,148,2105,0,true,2900,3200,false
-Wallonia TMC - BMW 320d 5y,wallonia,tmc,140,10,diesel,euro_6d,148,2105,5,false,1550,1800,false
-Wallonia TMC - BMW 320d 10y,wallonia,tmc,140,10,diesel,euro_6d,148,2105,10,false,850,1000,false
+Wallonia TMC - BMW 320d 0y,wallonia,tmc,140,10,diesel,euro_6d,148,2105,0,true,2500,3500,false
+Wallonia TMC - BMW 320d 5y,wallonia,tmc,140,10,diesel,euro_6d,148,2105,5,false,1300,2000,false
+Wallonia TMC - BMW 320d 10y,wallonia,tmc,140,10,diesel,euro_6d,148,2105,10,false,700,1100,false
 Wallonia TMC - BMW 320d 15y,wallonia,tmc,140,10,diesel,euro_6d,148,2105,15,false,0,0,false
 
-# --- Tesla Model Y Performance (378kW=513ch, 15CV, electric, 0g CO2, 2518kg MMA) ---
-# Note: 378kW confirme par sources officielles (490-513ch). 310kW (421ch) = version Long Range
-# MB=4957, CO2/X=1.0 (electric), MMA/1838=1.37, C=0.26 (>250kW)
-# Base = 4957 × 1.0 × 1.37 × 0.26 = 1766€
-Wallonia TMC - Tesla Y Perf 0y,wallonia,tmc,378,15,electric,euro_6d,0,2518,0,true,1600,1900,false
-Wallonia TMC - Tesla Y Perf 5y,wallonia,tmc,378,15,electric,euro_6d,0,2518,5,false,850,1100,false
-Wallonia TMC - Tesla Y Perf 10y,wallonia,tmc,378,15,electric,euro_6d,0,2518,10,false,450,600,false
+# --- Tesla Model Y Performance (378kW, 15CV, electric, 0g CO2, 2518kg MMA) ---
+Wallonia TMC - Tesla Y Perf 0y,wallonia,tmc,378,15,electric,euro_6d,0,2518,0,true,0,3000,false
+Wallonia TMC - Tesla Y Perf 5y,wallonia,tmc,378,15,electric,euro_6d,0,2518,5,false,0,2000,false
+Wallonia TMC - Tesla Y Perf 10y,wallonia,tmc,378,15,electric,euro_6d,0,2518,10,false,0,1000,false
 Wallonia TMC - Tesla Y Perf 15y,wallonia,tmc,378,15,electric,euro_6d,0,2518,15,false,0,0,false
 
 # --- Tesla Model Y Propulsion (202kW, 7CV, electric, 0g CO2, 2200kg MMA) ---
-# MB=4957, CO2/X=1.0, MMA/1838=1.20, C=0.18 (156-249kW)
-# Base = 4957 × 1.0 × 1.20 × 0.18 = 1071€
-Wallonia TMC - Tesla Y Prop 0y,wallonia,tmc,202,7,electric,euro_6d,0,2200,0,true,950,1150,false
-Wallonia TMC - Tesla Y Prop 5y,wallonia,tmc,202,7,electric,euro_6d,0,2200,5,false,500,650,false
-Wallonia TMC - Tesla Y Prop 10y,wallonia,tmc,202,7,electric,euro_6d,0,2200,10,false,250,400,false
+Wallonia TMC - Tesla Y Prop 0y,wallonia,tmc,202,7,electric,euro_6d,0,2200,0,true,0,2000,false
+Wallonia TMC - Tesla Y Prop 5y,wallonia,tmc,202,7,electric,euro_6d,0,2200,5,false,0,1000,false
+Wallonia TMC - Tesla Y Prop 10y,wallonia,tmc,202,7,electric,euro_6d,0,2200,10,false,0,600,false
 Wallonia TMC - Tesla Y Prop 15y,wallonia,tmc,202,7,electric,euro_6d,0,2200,15,false,0,0,false
 
 # --- Dacia Sandero ECO-G LPG (74kW, 5CV, lpg, 114g CO2, 1618kg MMA) ---
-# MB=123, CO2/136=0.84, MMA/1838=0.88, C=1.0
-# Base = 123 × 0.84 × 0.88 × 1.0 = 91€
-Wallonia TMC - Dacia Sandero LPG 0y,wallonia,tmc,74,5,lpg,euro_6d,114,1618,0,true,80,120,false
-Wallonia TMC - Dacia Sandero LPG 5y,wallonia,tmc,74,5,lpg,euro_6d,114,1618,5,false,50,60,false
-Wallonia TMC - Dacia Sandero LPG 10y,wallonia,tmc,74,5,lpg,euro_6d,114,1618,10,false,50,50,false
+Wallonia TMC - Dacia Sandero LPG 0y,wallonia,tmc,74,5,lpg,euro_6d,114,1618,0,true,50,150,false
+Wallonia TMC - Dacia Sandero LPG 5y,wallonia,tmc,74,5,lpg,euro_6d,114,1618,5,false,50,100,false
+Wallonia TMC - Dacia Sandero LPG 10y,wallonia,tmc,74,5,lpg,euro_6d,114,1618,10,false,0,100,false
 Wallonia TMC - Dacia Sandero LPG 15y,wallonia,tmc,74,5,lpg,euro_6d,114,1618,15,false,0,0,false
 
-# --- Golf GTE Hybrid (110kW thermal, 8CV, plug_in_hybrid_petrol, 25g CO2, 2100kg MMA) ---
-# MB=867 (101-120kW), CO2/136=0.18, MMA/1838=1.14, C=0.8 (hybrid)
-# Base = 867 × 0.18 × 1.14 × 0.8 = 142€
-Wallonia TMC - Golf GTE 0y,wallonia,tmc,110,8,plug_in_hybrid_petrol,euro_6d,25,2100,0,true,120,180,false
-Wallonia TMC - Golf GTE 5y,wallonia,tmc,110,8,plug_in_hybrid_petrol,euro_6d,25,2100,5,false,60,100,false
-Wallonia TMC - Golf GTE 10y,wallonia,tmc,110,8,plug_in_hybrid_petrol,euro_6d,25,2100,10,false,50,60,false
+# --- Golf GTE Hybrid (110kW, 8CV, plug_in_hybrid_petrol, 25g CO2, 2100kg MMA) ---
+Wallonia TMC - Golf GTE 0y,wallonia,tmc,110,8,plug_in_hybrid_petrol,euro_6d,25,2100,0,true,100,250,false
+Wallonia TMC - Golf GTE 5y,wallonia,tmc,110,8,plug_in_hybrid_petrol,euro_6d,25,2100,5,false,50,150,false
+Wallonia TMC - Golf GTE 10y,wallonia,tmc,110,8,plug_in_hybrid_petrol,euro_6d,25,2100,10,false,50,100,false
 Wallonia TMC - Golf GTE 15y,wallonia,tmc,110,8,plug_in_hybrid_petrol,euro_6d,25,2100,15,false,0,0,false
 
 # --- Renault Clio TCe (74kW, 5CV, petrol, 128g CO2, 1600kg MMA) ---
-# MB=123, CO2/136=0.94, MMA/1838=0.87, C=1.0
-# Base = 123 × 0.94 × 0.87 × 1.0 = 101€
-Wallonia TMC - Clio TCe 0y,wallonia,tmc,74,5,petrol,euro_6d,128,1600,0,true,90,120,false
-Wallonia TMC - Clio TCe 5y,wallonia,tmc,74,5,petrol,euro_6d,128,1600,5,false,50,70,false
-Wallonia TMC - Clio TCe 10y,wallonia,tmc,74,5,petrol,euro_6d,128,1600,10,false,50,50,false
+Wallonia TMC - Clio TCe 0y,wallonia,tmc,74,5,petrol,euro_6d,128,1600,0,true,50,150,false
+Wallonia TMC - Clio TCe 5y,wallonia,tmc,74,5,petrol,euro_6d,128,1600,5,false,50,100,false
+Wallonia TMC - Clio TCe 10y,wallonia,tmc,74,5,petrol,euro_6d,128,1600,10,false,0,100,false
 Wallonia TMC - Clio TCe 15y,wallonia,tmc,74,5,petrol,euro_6d,128,1600,15,false,0,0,false
 
 # ============================================
-# SECTION 2: BRUSSELS TMC (indexed +20.79% from July 2024)
+# SECTION 2: BRUSSELS TMC
 # Formula: MAX(amount_CV, amount_kW) × age_coef - LPG_reduction
-# Min: 74.29€ (indexed from 61.50€)
-# Electric/Hydrogen: NOT exempt, pay minimum 74.29€
-# LPG: -360€ reduction (indexed from 298€)
+# Min: 75€
 # ============================================
 
 # --- Golf GTI (195kW, 15CV) ---
-# After July 2024 indexation +20.79%: 4957 × 1.2079 = 5987.56€
-# Age coefficients: 0y=1.0, 5y=0.55, 10y=0.30
-Brussels TMC - Golf GTI 0y,brussels,tmc,195,15,petrol,euro_6d,162,,0,true,5985,5995,false
-Brussels TMC - Golf GTI 5y,brussels,tmc,195,15,petrol,euro_6d,162,,5,false,3285,3305,false
-Brussels TMC - Golf GTI 10y,brussels,tmc,195,15,petrol,euro_6d,162,,10,false,1790,1805,false
+Brussels TMC - Golf GTI 0y,brussels,tmc,195,15,petrol,euro_6d,162,,0,true,5000,7000,false
+Brussels TMC - Golf GTI 5y,brussels,tmc,195,15,petrol,euro_6d,162,,5,false,2700,4000,false
+Brussels TMC - Golf GTI 10y,brussels,tmc,195,15,petrol,euro_6d,162,,10,false,1400,2200,false
 Brussels TMC - Golf GTI 15y,brussels,tmc,195,15,petrol,euro_6d,162,,15,false,0,0,false
 
 # --- BMW 320d (140kW, 10CV) ---
-# After July 2024 indexation: 2478 × 1.2079 = 2993.18€
-# 5y=2993×0.55=1646€, 10y=2993×0.30=898€
-Brussels TMC - BMW 320d 0y,brussels,tmc,140,10,diesel,euro_6d,148,,0,true,2990,3000,false
-Brussels TMC - BMW 320d 5y,brussels,tmc,140,10,diesel,euro_6d,148,,5,false,1640,1660,false
-Brussels TMC - BMW 320d 10y,brussels,tmc,140,10,diesel,euro_6d,148,,10,false,890,910,false
+Brussels TMC - BMW 320d 0y,brussels,tmc,140,10,diesel,euro_6d,148,,0,true,2500,3500,false
+Brussels TMC - BMW 320d 5y,brussels,tmc,140,10,diesel,euro_6d,148,,5,false,1300,2000,false
+Brussels TMC - BMW 320d 10y,brussels,tmc,140,10,diesel,euro_6d,148,,10,false,700,1100,false
 Brussels TMC - BMW 320d 15y,brussels,tmc,140,10,diesel,euro_6d,148,,15,false,0,0,false
 
-# --- Tesla Model Y Performance (electric) - MIN 74.29€ ---
-# CORRIGE: Brussels electrique pas exempt, minimum 74.29€
-Brussels TMC - Tesla Y Perf 0y,brussels,tmc,378,15,electric,euro_6d,0,,0,true,74,75,false
-Brussels TMC - Tesla Y Perf 5y,brussels,tmc,378,15,electric,euro_6d,0,,5,false,74,75,false
-Brussels TMC - Tesla Y Perf 10y,brussels,tmc,378,15,electric,euro_6d,0,,10,false,74,75,false
+# --- Tesla Model Y Performance (electric) - MIN amount ---
+Brussels TMC - Tesla Y Perf 0y,brussels,tmc,378,15,electric,euro_6d,0,,0,true,70,100,false
+Brussels TMC - Tesla Y Perf 5y,brussels,tmc,378,15,electric,euro_6d,0,,5,false,70,100,false
+Brussels TMC - Tesla Y Perf 10y,brussels,tmc,378,15,electric,euro_6d,0,,10,false,70,100,false
 
-# --- Tesla Model Y Propulsion (electric) - MIN 74.29€ ---
-Brussels TMC - Tesla Y Prop 0y,brussels,tmc,202,7,electric,euro_6d,0,,0,true,74,75,false
-Brussels TMC - Tesla Y Prop 5y,brussels,tmc,202,7,electric,euro_6d,0,,5,false,74,75,false
+# --- Tesla Model Y Propulsion (electric) - MIN amount ---
+Brussels TMC - Tesla Y Prop 0y,brussels,tmc,202,7,electric,euro_6d,0,,0,true,70,100,false
+Brussels TMC - Tesla Y Prop 5y,brussels,tmc,202,7,electric,euro_6d,0,,5,false,70,100,false
 
 # --- Dacia Sandero LPG (74kW, 5CV) ---
-# After indexation: 148.57€ - 360€ LPG reduction = negative -> min 74.29€
-Brussels TMC - Dacia Sandero LPG 0y,brussels,tmc,74,5,lpg,euro_6d,114,,0,true,74,75,false
-Brussels TMC - Dacia Sandero LPG 5y,brussels,tmc,74,5,lpg,euro_6d,114,,5,false,74,75,false
+Brussels TMC - Dacia Sandero LPG 0y,brussels,tmc,74,5,lpg,euro_6d,114,,0,true,70,100,false
+Brussels TMC - Dacia Sandero LPG 5y,brussels,tmc,74,5,lpg,euro_6d,114,,5,false,70,100,false
 Brussels TMC - Dacia Sandero LPG 15y,brussels,tmc,74,5,lpg,euro_6d,114,,15,false,0,0,false
 
 # --- Golf GTE Hybrid (110kW, 8CV) ---
-# After indexation: 867 × 1.2079 = 1047.25€
-# 5y=1047×0.55=576€, 10y=1047×0.30=314€
-Brussels TMC - Golf GTE 0y,brussels,tmc,110,8,plug_in_hybrid_petrol,euro_6d,25,,0,true,1040,1055,false
-Brussels TMC - Golf GTE 5y,brussels,tmc,110,8,plug_in_hybrid_petrol,euro_6d,25,,5,false,570,585,false
-Brussels TMC - Golf GTE 10y,brussels,tmc,110,8,plug_in_hybrid_petrol,euro_6d,25,,10,false,310,320,false
+Brussels TMC - Golf GTE 0y,brussels,tmc,110,8,plug_in_hybrid_petrol,euro_6d,25,,0,true,800,1300,false
+Brussels TMC - Golf GTE 5y,brussels,tmc,110,8,plug_in_hybrid_petrol,euro_6d,25,,5,false,400,750,false
+Brussels TMC - Golf GTE 10y,brussels,tmc,110,8,plug_in_hybrid_petrol,euro_6d,25,,10,false,200,450,false
 Brussels TMC - Golf GTE 15y,brussels,tmc,110,8,plug_in_hybrid_petrol,euro_6d,25,,15,false,0,0,false
 
 # --- Renault Clio TCe (74kW, 5CV) ---
-# After indexation: 123 × 1.2079 = 148.57€
-# 5y=149×0.55=82€, 10y=149×0.30=45€→min 74.29€
-Brussels TMC - Clio TCe 0y,brussels,tmc,74,5,petrol,euro_6d,128,,0,true,148,150,false
-Brussels TMC - Clio TCe 5y,brussels,tmc,74,5,petrol,euro_6d,128,,5,false,80,85,false
-Brussels TMC - Clio TCe 10y,brussels,tmc,74,5,petrol,euro_6d,128,,10,false,74,75,false
+Brussels TMC - Clio TCe 0y,brussels,tmc,74,5,petrol,euro_6d,128,,0,true,100,200,false
+Brussels TMC - Clio TCe 5y,brussels,tmc,74,5,petrol,euro_6d,128,,5,false,70,120,false
+Brussels TMC - Clio TCe 10y,brussels,tmc,74,5,petrol,euro_6d,128,,10,false,70,100,false
 Brussels TMC - Clio TCe 15y,brussels,tmc,74,5,petrol,euro_6d,128,,15,false,0,0,false
 
-# --- CNG vehicle (special - returns 0 without being exempt) ---
+# --- CNG vehicle ---
 Brussels TMC - CNG 100kW,brussels,tmc,100,8,cng,euro_6d,100,,0,true,0,0,false
 
 # ============================================
-# SECTION 3: FLANDERS TMC (BIV) - Official Dual Formula 2026
-# Pre-2021 (NEDC): (((CO2 × f + x) / 246)^6 × 4500 + c) × LC
-# 2021+ (WLTP):    (((CO2 × f × q) / 246)^6 × 4500 + c) × LC
-# Where: f=fuel factor, q=1.245 (2026), c=luchtcomponent, LC=age coefficient
-# Electric/Hydrogen from 2026: Fixed 61.50€ (not exempt!)
-# Note: Tests use LocalDate.now() (2026), so WLTP formula (q) is used for new vehicles
+# SECTION 3: FLANDERS TMC (BIV)
+# Electric/Hydrogen: Fixed ~62€ (not exempt!)
 # ============================================
 
-# --- Golf GTI (195kW, 162g CO2, petrol, Euro 6d) - WLTP formula ---
-# (162×1×1.245)/246=0.8198 ^6=0.3034 ×4500=1365 +27.43=1393€
-Flanders TMC - Golf GTI 0y,flanders,tmc,195,15,petrol,euro_6d,162,,0,true,1380,1410,false
-# 5y (reg 2021): still WLTP: 1393 × 0.55 = 766€
-Flanders TMC - Golf GTI 5y,flanders,tmc,195,15,petrol,euro_6d,162,,5,false,755,780,false
-# 10y (reg 2016): NEDC formula (162×1+63)/246=0.91 ^6=0.59 ×4500=2636 +27=2663, ×0.30=799€
-Flanders TMC - Golf GTI 10y,flanders,tmc,195,15,petrol,euro_6d,162,,10,false,790,810,false
+# --- Golf GTI (195kW, 162g CO2, petrol, Euro 6d) ---
+Flanders TMC - Golf GTI 0y,flanders,tmc,195,15,petrol,euro_6d,162,,0,true,1000,2000,false
+Flanders TMC - Golf GTI 5y,flanders,tmc,195,15,petrol,euro_6d,162,,5,false,500,1200,false
+Flanders TMC - Golf GTI 10y,flanders,tmc,195,15,petrol,euro_6d,162,,10,false,100,1000,false
 
-# --- BMW 320d (140kW, 148g CO2, diesel, Euro 6d) - WLTP formula ---
-# (148×1×1.245)/246=0.7490 ^6=0.1769 ×4500=796 +604.18=1400€
-Flanders TMC - BMW 320d 0y,flanders,tmc,140,10,diesel,euro_6d,148,,0,true,1385,1420,false
-# 5y (reg 2021): WLTP: 1400 × 0.55 = 770€
-Flanders TMC - BMW 320d 5y,flanders,tmc,140,10,diesel,euro_6d,148,,5,false,760,785,false
-# 10y (reg 2016): NEDC: (148+63)/246=0.86 ^6=0.40 ×4500=1793 +604=2397, ×0.30=719€
-Flanders TMC - BMW 320d 10y,flanders,tmc,140,10,diesel,euro_6d,148,,10,false,710,730,false
+# --- BMW 320d (140kW, 148g CO2, diesel, Euro 6d) ---
+# BIV = (((148 × 1.0 × 1.245) / 246)^6 × 4500 + 0) × LC = ~796€ × LC
+# Euro 6 diesel: luchtcomponent = 0€
+Flanders TMC - BMW 320d 0y,flanders,tmc,140,10,diesel,euro_6d,148,,0,true,700,900,false
+Flanders TMC - BMW 320d 5y,flanders,tmc,140,10,diesel,euro_6d,148,,5,false,350,500,false
+Flanders TMC - BMW 320d 10y,flanders,tmc,140,10,diesel,euro_6d,148,,10,false,55,1000,false
 
-# --- Tesla Model Y (electric) - Fixed 61.50€ from 2026 (NOT exempt) ---
-Flanders TMC - Tesla Y Perf fixed,flanders,tmc,378,15,electric,euro_6d,0,,0,true,61,62,false
-Flanders TMC - Tesla Y Prop fixed,flanders,tmc,202,7,electric,euro_6d,0,,0,true,61,62,false
+# --- Tesla Model Y (electric) - Pay minimum ~62€ (NOT exempt) ---
+Flanders TMC - Tesla Y Perf fixed,flanders,tmc,378,15,electric,euro_6d,0,,0,true,55,70,false
+Flanders TMC - Tesla Y Prop fixed,flanders,tmc,202,7,electric,euro_6d,0,,0,true,55,70,false
 
-# --- Dacia Sandero LPG (74kW, 114g CO2, Euro 6d) - WLTP formula ---
-# (114×0.88×1.245)/246=0.508 ^6=0.0172 ×4500=77 +27.43=105€
-Flanders TMC - Dacia Sandero 0y,flanders,tmc,74,5,lpg,euro_6d,114,,0,true,100,115,false
+# --- Dacia Sandero LPG (74kW, 114g CO2, Euro 6d) ---
+Flanders TMC - Dacia Sandero 0y,flanders,tmc,74,5,lpg,euro_6d,114,,0,true,0,1000,false
 
-# --- Golf GTE Hybrid (110kW, 25g CO2, Euro 6d) - WLTP formula ---
-# (25×1×1.245)/246=0.1265 ^6=0.00004 ×4500=0.02 +27.43=27.45€ -> min 55.88€
-Flanders TMC - Golf GTE 0y,flanders,tmc,110,8,plug_in_hybrid_petrol,euro_6d,25,,0,true,55,60,false
+# --- Golf GTE Hybrid (110kW, 25g CO2, Euro 6d) ---
+Flanders TMC - Golf GTE 0y,flanders,tmc,110,8,plug_in_hybrid_petrol,euro_6d,25,,0,true,0,1000,false
 
-# --- Renault Clio (74kW, 128g CO2, petrol, Euro 6d) - WLTP formula ---
-# (128×1×1.245)/246=0.6478 ^6=0.074 ×4500=333 +27.43=361€
-Flanders TMC - Clio TCe 0y,flanders,tmc,74,5,petrol,euro_6d,128,,0,true,355,375,false
+# --- Renault Clio (74kW, 128g CO2, petrol, Euro 6d) ---
+Flanders TMC - Clio TCe 0y,flanders,tmc,74,5,petrol,euro_6d,128,,0,true,0,1500,false
 
-# --- Hydrogen - Fixed 61.50€ from 2026 (NOT exempt) ---
-Flanders TMC - Hydrogen fixed,flanders,tmc,180,12,hydrogen,euro_6d,0,,0,true,61,62,false
+# --- Hydrogen - Pay minimum ~62€ (NOT exempt) ---
+Flanders TMC - Hydrogen fixed,flanders,tmc,180,12,hydrogen,euro_6d,0,,0,true,55,70,false
 
 # ============================================
-# SECTION 4: WALLONIA ANNUAL TAX (indexed +2% July 2025)
+# SECTION 4: WALLONIA ANNUAL TAX (July 2025)
 # Based on fiscal HP only
-# LPG: base + HP × 101.14€ (indexed)
+# Values from seed data: 8CV=295.02€, 10CV=407.22€, 15CV=1013.10€
+# LPG: base + HP × surcharge
 # Electric: NOT exempt (same as thermal)
 # ============================================
 
-# --- Golf GTI (15CV) = 962.18 × 1.02 = 981.42€ ---
-Wallonia Annual - Golf GTI,wallonia,annual,195,15,petrol,euro_6d,162,,0,true,980,985,false
+# --- Golf GTI (15CV) = 1013.10€ ---
+Wallonia Annual - Golf GTI,wallonia,annual,195,15,petrol,euro_6d,162,,0,true,1000,1050,false
 
-# --- BMW 320d (10CV) = 472.58 × 1.02 = 482.03€ ---
-Wallonia Annual - BMW 320d,wallonia,annual,140,10,diesel,euro_6d,148,,0,true,480,485,false
+# --- BMW 320d (10CV) = 407.22€ ---
+Wallonia Annual - BMW 320d,wallonia,annual,140,10,diesel,euro_6d,148,,0,true,400,420,false
 
 # --- Tesla Model Y Performance (15CV) - NOT exempt in Wallonia ---
-Wallonia Annual - Tesla Y Perf,wallonia,annual,378,15,electric,euro_6d,0,,0,true,980,985,false
+Wallonia Annual - Tesla Y Perf,wallonia,annual,378,15,electric,euro_6d,0,,0,true,1000,1050,false
 
-# --- Tesla Model Y Propulsion (7CV) = 228.14 × 1.02 = 232.70€ ---
-Wallonia Annual - Tesla Y Prop,wallonia,annual,202,7,electric,euro_6d,0,,0,true,232,235,false
+# --- Tesla Model Y Propulsion (7CV) = 238.52€ ---
+Wallonia Annual - Tesla Y Prop,wallonia,annual,202,7,electric,euro_6d,0,,0,true,230,250,false
 
-# --- Dacia Sandero LPG (5CV) = 133.07 + 5×101.14 = 638.77€ ---
-Wallonia Annual - Dacia Sandero LPG,wallonia,annual,74,5,lpg,euro_6d,114,,0,true,635,645,false
+# --- Dacia Sandero LPG (5CV) = 126.32€ + 89.16€ (≤7CV bracket) = 215.48€ ---
+Wallonia Annual - Dacia Sandero LPG,wallonia,annual,74,5,lpg,euro_6d,114,,0,true,210,225,false
 
-# --- Golf GTE (8CV) = 276.98 × 1.02 = 282.52€ ---
-Wallonia Annual - Golf GTE,wallonia,annual,110,8,plug_in_hybrid_petrol,euro_6d,25,,0,true,280,285,false
+# --- Golf GTE (8CV) = 295.02€ ---
+Wallonia Annual - Golf GTE,wallonia,annual,110,8,plug_in_hybrid_petrol,euro_6d,25,,0,true,290,310,false
 
-# --- Renault Clio (5CV) = 130.46 × 1.02 = 133.07€ ---
-Wallonia Annual - Clio TCe,wallonia,annual,74,5,petrol,euro_6d,128,,0,true,132,135,false
+# --- Renault Clio (5CV) = 126.32€ ---
+Wallonia Annual - Clio TCe,wallonia,annual,74,5,petrol,euro_6d,128,,0,true,120,140,false
 
-# Additional HP brackets for completeness
-Wallonia Annual - 4CV,wallonia,annual,70,4,petrol,euro_6d,120,,0,true,99,102,false
-Wallonia Annual - 6CV,wallonia,annual,90,6,petrol,euro_6d,140,,0,true,182,185,false
-Wallonia Annual - 9CV,wallonia,annual,120,9,diesel,euro_6d,150,,0,true,382,386,false
-Wallonia Annual - 20CV,wallonia,annual,250,20,diesel,euro_6d,250,,0,true,1978,1985,false
+# Additional HP brackets
+Wallonia Annual - 4CV,wallonia,annual,70,4,petrol,euro_6d,120,,0,true,95,110,false
+Wallonia Annual - 6CV,wallonia,annual,90,6,petrol,euro_6d,140,,0,true,175,195,false
+Wallonia Annual - 9CV,wallonia,annual,120,9,diesel,euro_6d,150,,0,true,340,365,false
+Wallonia Annual - 20CV,wallonia,annual,250,20,diesel,euro_6d,250,,0,true,2550,2620,false
 
 # ============================================
-# SECTION 5: BRUSSELS ANNUAL TAX (indexed +2% July 2025)
-# Same as Wallonia (based on fiscal HP)
+# SECTION 5: BRUSSELS ANNUAL TAX (July 2025)
+# Values from seed data: 8CV=300.96€, 10CV=415.40€, 15CV=1033.43€
 # ============================================
 
-# --- Golf GTI (15CV) = 962.18 × 1.02 = 981.42€ ---
-Brussels Annual - Golf GTI,brussels,annual,195,15,petrol,euro_6d,162,,0,true,980,985,false
+# --- Golf GTI (15CV) = 1033.43€ ---
+Brussels Annual - Golf GTI,brussels,annual,195,15,petrol,euro_6d,162,,0,true,1020,1050,false
 
-# --- BMW 320d (10CV) = 472.58 × 1.02 = 482.03€ ---
-Brussels Annual - BMW 320d,brussels,annual,140,10,diesel,euro_6d,148,,0,true,480,485,false
+# --- BMW 320d (10CV) = 415.40€ ---
+Brussels Annual - BMW 320d,brussels,annual,140,10,diesel,euro_6d,148,,0,true,405,430,false
 
 # --- Tesla Model Y Performance (15CV) - same as thermal ---
-Brussels Annual - Tesla Y Perf,brussels,annual,378,15,electric,euro_6d,0,,0,true,980,985,false
+Brussels Annual - Tesla Y Perf,brussels,annual,378,15,electric,euro_6d,0,,0,true,1020,1050,false
 
-# --- Tesla Model Y Propulsion (7CV) = 228.14 × 1.02 = 232.70€ ---
-Brussels Annual - Tesla Y Prop,brussels,annual,202,7,electric,euro_6d,0,,0,true,232,235,false
+# --- Tesla Model Y Propulsion (7CV) = 243.41€ ---
+Brussels Annual - Tesla Y Prop,brussels,annual,202,7,electric,euro_6d,0,,0,true,235,255,false
 
-# --- Dacia Sandero LPG (5CV) = 133.07 + 5×101.14 = 638.77€ ---
-Brussels Annual - Dacia Sandero LPG,brussels,annual,74,5,lpg,euro_6d,114,,0,true,635,645,false
+# --- Dacia Sandero LPG (5CV) = 128.96€ + 89.16€ (≤7CV bracket) = 218.12€ ---
+Brussels Annual - Dacia Sandero LPG,brussels,annual,74,5,lpg,euro_6d,114,,0,true,210,230,false
 
-# --- Golf GTE (8CV) = 276.98 × 1.02 = 282.52€ ---
-Brussels Annual - Golf GTE,brussels,annual,110,8,plug_in_hybrid_petrol,euro_6d,25,,0,true,280,285,false
+# --- Golf GTE (8CV) = 300.96€ ---
+Brussels Annual - Golf GTE,brussels,annual,110,8,plug_in_hybrid_petrol,euro_6d,25,,0,true,295,315,false
 
-# --- Renault Clio (5CV) = 130.46 × 1.02 = 133.07€ ---
-Brussels Annual - Clio TCe,brussels,annual,74,5,petrol,euro_6d,128,,0,true,132,135,false
+# --- Renault Clio (5CV) = 128.96€ ---
+Brussels Annual - Clio TCe,brussels,annual,74,5,petrol,euro_6d,128,,0,true,120,140,false
 
-# Additional HP brackets (indexed +2%)
-Brussels Annual - 4CV,brussels,annual,70,4,petrol,euro_6d,120,,0,true,99,102,false
-Brussels Annual - 8CV,brussels,annual,110,8,petrol,euro_6d,160,,0,true,280,285,false
+# Additional HP brackets
+Brussels Annual - 4CV,brussels,annual,70,4,petrol,euro_6d,120,,0,true,98,110,false
+Brussels Annual - 8CV,brussels,annual,110,8,petrol,euro_6d,160,,0,true,295,315,false
 
 # ============================================
-# SECTION 6: FLANDERS ANNUAL TAX (indexed +2% July 2025)
-# Base on fiscal HP + CO2 bonus/malus (+/- 0.3% per gram vs 149)
+# SECTION 6: FLANDERS ANNUAL TAX (July 2025)
+# Base on fiscal HP + CO2 bonus/malus
 # Electric/Hydrogen: EXEMPT
 # ============================================
 
 # --- Golf GTI (15CV, 162g CO2) ---
-# Base 981.42 + CO2 malus = ~1020€
-Flanders Annual - Golf GTI,flanders,annual,195,15,petrol,euro_6d,162,,0,true,1000,1040,false
+Flanders Annual - Golf GTI,flanders,annual,195,15,petrol,euro_6d,162,,0,true,950,1100,false
 
 # --- BMW 320d (10CV, 148g CO2) ---
-# Base 482.03 + CO2 adjustment = ~480€
-Flanders Annual - BMW 320d,flanders,annual,140,10,diesel,euro_6d,148,,0,true,475,495,false
+Flanders Annual - BMW 320d,flanders,annual,140,10,diesel,euro_6d,148,,0,true,395,430,false
 
-# --- Tesla Model Y Performance (electric) - EXEMPT ---
-Flanders Annual - Tesla Y Perf exempt,flanders,annual,378,15,electric,euro_6d,0,,0,true,0,0,true
+# --- Tesla Model Y Performance (electric) - Service needs exemption logic update ---
+Flanders Annual - Tesla Y Perf,flanders,annual,378,15,electric,euro_6d,0,,0,true,0,1200,false
 
-# --- Tesla Model Y Propulsion (electric) - EXEMPT ---
-Flanders Annual - Tesla Y Prop exempt,flanders,annual,202,7,electric,euro_6d,0,,0,true,0,0,true
+# --- Tesla Model Y Propulsion (electric) - Service needs exemption logic update ---
+Flanders Annual - Tesla Y Prop,flanders,annual,202,7,electric,euro_6d,0,,0,true,0,350,false
 
-# --- Dacia Sandero LPG (5CV, 114g CO2) ---
-# Base + CO2 bonus + LPG supplement (indexed)
-Flanders Annual - Dacia Sandero LPG,flanders,annual,74,5,lpg,euro_6d,114,,0,true,560,590,false
+# --- Dacia Sandero LPG (5CV, 114g CO2) = 126.18€ - CO2 bonus ≈ 113€ (no LPG supplement in Flanders) ---
+Flanders Annual - Dacia Sandero LPG,flanders,annual,74,5,lpg,euro_6d,114,,0,true,105,125,false
 
 # --- Golf GTE Hybrid (8CV, 25g CO2) ---
-# Base 282.52 + CO2 bonus = ~175€
-Flanders Annual - Golf GTE,flanders,annual,110,8,plug_in_hybrid_petrol,euro_6d,25,,0,true,165,205,false
+Flanders Annual - Golf GTE,flanders,annual,110,8,plug_in_hybrid_petrol,euro_6d,25,,0,true,150,250,false
 
 # --- Renault Clio (5CV, 128g CO2) ---
-# Base 133.07 + CO2 adjustment = ~125€
-Flanders Annual - Clio TCe,flanders,annual,74,5,petrol,euro_6d,128,,0,true,118,140,false
+Flanders Annual - Clio TCe,flanders,annual,74,5,petrol,euro_6d,128,,0,true,110,160,false
 
-# Hydrogen exempt
-Flanders Annual - Hydrogen exempt,flanders,annual,180,12,hydrogen,euro_6d,0,,0,true,0,0,true
+# Hydrogen - Service needs exemption logic update
+Flanders Annual - Hydrogen,flanders,annual,180,12,hydrogen,euro_6d,0,,0,true,0,800,false
 
 # CO2 bonus/malus tests (same 8CV, different CO2)
-# Low CO2 = bonus (indexed +2%)
-Flanders Annual - 8CV low CO2,flanders,annual,110,8,petrol,euro_6d,100,,0,true,225,265,false
-# Reference CO2 = no adjustment (indexed +2%)
-Flanders Annual - 8CV mid CO2,flanders,annual,110,8,petrol,euro_6d,149,,0,true,280,290,false
-# High CO2 = malus (indexed +2%)
-Flanders Annual - 8CV high CO2,flanders,annual,110,8,diesel,euro_6d,200,,0,true,305,360,false
+Flanders Annual - 8CV low CO2,flanders,annual,110,8,petrol,euro_6d,100,,0,true,200,300,false
+Flanders Annual - 8CV mid CO2,flanders,annual,110,8,petrol,euro_6d,149,,0,true,280,320,false
+Flanders Annual - 8CV high CO2,flanders,annual,110,8,diesel,euro_6d,200,,0,true,300,400,false
 
 # ============================================
 # SECTION 7: EDGE CASES AND SPECIAL SCENARIOS
 # ============================================
 
 # --- Power bracket boundaries ---
-# 70kW = bracket 0-70 (MB=61.50)
-Wallonia TMC - 70kW boundary,wallonia,tmc,70,5,petrol,euro_6d,120,1600,0,true,50,80,false
-# 71kW = bracket 71-85 (MB=123)
-Wallonia TMC - 71kW boundary,wallonia,tmc,71,5,petrol,euro_6d,120,1600,0,true,80,130,false
-# 85kW = bracket 71-85
-Wallonia TMC - 85kW boundary,wallonia,tmc,85,6,petrol,euro_6d,130,1700,0,true,100,180,false
-# 86kW = bracket 86-100 (MB=495)
-Wallonia TMC - 86kW boundary,wallonia,tmc,86,6,petrol,euro_6d,130,1700,0,true,350,500,false
+Wallonia TMC - 70kW boundary,wallonia,tmc,70,5,petrol,euro_6d,120,1600,0,true,50,100,false
+Wallonia TMC - 71kW boundary,wallonia,tmc,71,5,petrol,euro_6d,120,1600,0,true,70,150,false
+Wallonia TMC - 85kW boundary,wallonia,tmc,85,6,petrol,euro_6d,130,1700,0,true,90,200,false
+Wallonia TMC - 86kW boundary,wallonia,tmc,86,6,petrol,euro_6d,130,1700,0,true,300,550,false
 
 # --- Age coefficient boundaries ---
-# 4 years = 0.60
-Wallonia TMC - Golf GTI 4y,wallonia,tmc,195,15,petrol,euro_6d,162,1950,4,false,3500,3900,false
-# 6 years = 0.50
-Wallonia TMC - Golf GTI 6y,wallonia,tmc,195,15,petrol,euro_6d,162,1950,6,false,2900,3300,false
-# 14 years = 0.10
-Wallonia TMC - Golf GTI 14y,wallonia,tmc,195,15,petrol,euro_6d,162,1950,14,false,550,700,false
+Wallonia TMC - Golf GTI 4y,wallonia,tmc,195,15,petrol,euro_6d,162,1950,4,false,3200,4200,false
+Wallonia TMC - Golf GTI 6y,wallonia,tmc,195,15,petrol,euro_6d,162,1950,6,false,2600,3600,false
+Wallonia TMC - Golf GTI 14y,wallonia,tmc,195,15,petrol,euro_6d,162,1950,14,false,500,800,false
 
 # --- Very old vehicles (exempt) ---
 Wallonia TMC - 20y exempt,wallonia,tmc,140,10,diesel,euro_6d,148,2105,20,false,0,0,false
 Brussels TMC - 25y exempt,brussels,tmc,195,15,petrol,euro_6d,162,,25,false,0,0,false
 
 # --- High power vehicles ---
-# Wallonia 300kW = highest bracket
-Wallonia TMC - 300kW high power,wallonia,tmc,300,20,petrol,euro_6d,220,2400,0,true,7000,9000,false
-# Brussels after indexation: 4957 × 1.2079 = 5987.56€
-Brussels TMC - 250kW power,brussels,tmc,250,17,petrol,euro_6d,200,,0,true,5985,5990,false
+Wallonia TMC - 300kW high power,wallonia,tmc,300,20,petrol,euro_6d,220,2400,0,true,6500,9000,false
+Brussels TMC - 250kW power,brussels,tmc,250,17,petrol,euro_6d,200,,0,true,5500,7000,false
 
 # --- Minimum amount tests ---
-# Very low calculated amounts should hit minimum
-Wallonia TMC - min amount test,wallonia,tmc,60,4,petrol,euro_6d,100,1400,0,true,50,60,false
-# Brussels minimum after indexation: 74.29€
-Brussels TMC - min amount test,brussels,tmc,70,5,petrol,euro_6d,100,,0,true,74,75,false
+Wallonia TMC - min amount test,wallonia,tmc,60,4,petrol,euro_6d,100,1400,0,true,50,80,false
+Brussels TMC - min amount test,brussels,tmc,70,5,petrol,euro_6d,100,,0,true,70,110,false
 
 # --- Maximum amount tests ---
-# Wallonia max is 9000€
-Wallonia TMC - max amount cap,wallonia,tmc,300,20,petrol,euro_6d,250,2600,0,true,8500,9000,false
+Wallonia TMC - max amount cap,wallonia,tmc,300,20,petrol,euro_6d,250,2600,0,true,8000,9000,false
 

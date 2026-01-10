@@ -62,9 +62,42 @@ export async function backendFetch<T>(
 /**
  * Configuration de session pour stocker le token.
  * Le secret doit etre au moins 32 caracteres.
+ *
+ * SECURITY: In production, NUXT_SESSION_SECRET MUST be set.
+ * The application will fail to start without it.
  */
+function getSessionSecret(): string {
+  const secret = process.env.NUXT_SESSION_SECRET
+
+  if (process.env.NODE_ENV === 'production') {
+    if (!secret || secret.length < 32) {
+      throw new Error(
+        'CRITICAL: NUXT_SESSION_SECRET must be set in production and be at least 32 characters. ' +
+        'Generate one with: openssl rand -base64 32'
+      )
+    }
+    return secret
+  }
+
+  // Development mode: allow fallback but warn
+  if (!secret) {
+    console.warn(
+      '[SECURITY WARNING] NUXT_SESSION_SECRET not set. Using insecure default for development only.'
+    )
+    return 'dev-only-secret-change-in-production!!'
+  }
+
+  return secret
+}
+
 export const sessionConfig = {
-  password: process.env.NUXT_SESSION_SECRET || 'development-secret-key-minimum-32-chars!!'
+  password: getSessionSecret(),
+  cookie: {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict' as const,
+    maxAge: 60 * 60 * 24 * 7 // 7 jours
+  }
 }
 
 /**

@@ -2,11 +2,7 @@
 import type { FuelType, EuroNorm, BrandResponse, ModelResponse, VariantResponse } from '~/types/api'
 
 const { t } = useI18n()
-
-useSeoMeta({
-  title: () => `${t('search.title')} - ${t('app.name')}`,
-  description: () => t('app.description')
-})
+useSeo('search')
 
 const vehicles = useVehicles()
 

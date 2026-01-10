@@ -566,11 +566,18 @@ public class TaxCalculationService {
         response.addBreakdownItem("baseAmount", baseAmount);
         response.addBreakdownItem("fiscalHp", vehicleData.fiscalHp);
 
-        // Supplement LPG
-        if (vehicleData.fuel == FuelType.lpg) {
-            BigDecimal lpgSupplement = taxConfigService.getParameter(
-                            region, TaxType.annual, "lpg_supplement_per_hp", date, BigDecimal.valueOf(99.16))
-                    .multiply(BigDecimal.valueOf(vehicleData.fiscalHp));
+        // Supplement LPG (Wallonia & Brussels only - Flanders has no LPG supplement)
+        // Official rates: ≤7 CV: 89.16€, 8-13 CV: 148.68€, ≥14 CV: 208.20€
+        if (vehicleData.fuel == FuelType.lpg && region != Region.flanders) {
+            BigDecimal lpgSupplement = taxConfigService.findBracket(
+                            region, TaxType.annual, "lpg_supplement", vehicleData.fiscalHp, date)
+                    .map(TaxBracket::getAmount)
+                    .orElseGet(() -> {
+                        // Fallback to official rates if no bracket found
+                        if (vehicleData.fiscalHp <= 7) return BigDecimal.valueOf(89.16);
+                        if (vehicleData.fiscalHp <= 13) return BigDecimal.valueOf(148.68);
+                        return BigDecimal.valueOf(208.20);
+                    });
             baseAmount = baseAmount.add(lpgSupplement);
             response.addBreakdownItem("lpgSupplement", lpgSupplement);
         }

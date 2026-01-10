@@ -6,17 +6,15 @@ const router = useRouter()
 const auth = useAuth()
 const submissions = useSubmissions()
 
+// SEO with noindex (requires auth, not public content)
+useSeo('submit', { noindex: true })
+
 // Redirect if not authenticated
 onMounted(async () => {
   await auth.checkAuth()
   if (!auth.isAuthenticated.value) {
-    router.push('/auth/login?redirect=/submit')
+    router.push('/auth?redirect=/submit')
   }
-})
-
-useSeoMeta({
-  title: () => `${t('submission.title')} - ${t('app.name')}`,
-  description: () => t('submission.subtitle')
 })
 
 // Form state

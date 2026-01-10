@@ -2,11 +2,7 @@
 import type { Region, BrandResponse, ModelResponse, VariantResponse, TaxCalculationResponse } from '~/types/api'
 
 const { t, locale } = useI18n()
-
-useSeoMeta({
-  title: () => `${t('compare.title')} - ${t('app.name')}`,
-  description: () => t('compare.subtitle')
-})
+useSeo('compare')
 
 const vehicles = useVehicles()
 const tax = useTax()

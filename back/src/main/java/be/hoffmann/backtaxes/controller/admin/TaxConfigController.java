@@ -13,6 +13,7 @@ import be.hoffmann.backtaxes.repository.AgeCoefficientRepository;
 import be.hoffmann.backtaxes.repository.TaxBracketRepository;
 import be.hoffmann.backtaxes.repository.TaxExemptionRepository;
 import be.hoffmann.backtaxes.repository.TaxParameterRepository;
+import be.hoffmann.backtaxes.util.PaginationUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -59,15 +60,13 @@ public class TaxConfigController {
         // Si pas de pagination demandee, retourner toutes les tranches
         if (page == null && size == null) {
             List<TaxBracket> brackets = (region != null || taxType != null)
-                    ? taxBracketRepository.findByFilters(region, taxType, PageRequest.of(0, Integer.MAX_VALUE)).getContent()
+                    ? taxBracketRepository.findByFilters(region, taxType, PageRequest.of(0, PaginationUtils.MAX_PAGE_SIZE)).getContent()
                     : taxBracketRepository.findAll();
             return ResponseEntity.ok(ApiResponse.success(brackets));
         }
 
-        // Pagination avec valeurs par defaut
-        int pageNum = page != null ? page : 0;
-        int pageSize = size != null ? size : 50;
-        var pageable = PageRequest.of(pageNum, pageSize, Sort.by("region", "taxType", "bracketKey", "minValue").ascending());
+        // Pagination avec limites de securite (max 100 elements par page)
+        var pageable = PaginationUtils.createPageable(page, size, Sort.by("region", "taxType", "bracketKey", "minValue").ascending());
 
         var pagedBrackets = taxBracketRepository.findByFilters(region, taxType, pageable);
         var response = PagedResponse.from(pagedBrackets);

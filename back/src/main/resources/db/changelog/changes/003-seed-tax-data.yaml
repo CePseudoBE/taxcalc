@@ -1,0 +1,2101 @@
+databaseChangeLog:
+  # ============================================
+  # WALLONIA TMC (power_kw brackets) - 2025
+  # ============================================
+  - changeSet:
+      id: 003-wallonia-tmc-brackets
+      author: backtaxes
+      comment: Seed Wallonia TMC brackets based on power kW for 2025
+      changes:
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 0 }
+              - column: { name: max_value, valueNumeric: 70 }
+              - column: { name: amount, valueNumeric: 61.50 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 71 }
+              - column: { name: max_value, valueNumeric: 85 }
+              - column: { name: amount, valueNumeric: 123.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 86 }
+              - column: { name: max_value, valueNumeric: 100 }
+              - column: { name: amount, valueNumeric: 495.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 101 }
+              - column: { name: max_value, valueNumeric: 110 }
+              - column: { name: amount, valueNumeric: 867.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 111 }
+              - column: { name: max_value, valueNumeric: 120 }
+              - column: { name: amount, valueNumeric: 1239.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 121 }
+              - column: { name: max_value, valueNumeric: 155 }
+              - column: { name: amount, valueNumeric: 2478.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 156 }
+              - column: { name: max_value, value: null }
+              - column: { name: amount, valueNumeric: 4957.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  # ============================================
+  # BRUSSELS TMC (power_kw brackets) - 2025
+  # Indexed +2.3% compared to base rates
+  # ============================================
+  - changeSet:
+      id: 003-brussels-tmc-brackets
+      author: backtaxes
+      comment: Seed Brussels TMC brackets based on power kW for 2025 (indexed +2.3%)
+      changes:
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 0 }
+              - column: { name: max_value, valueNumeric: 70 }
+              - column: { name: amount, valueNumeric: 75.79 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 71 }
+              - column: { name: max_value, valueNumeric: 85 }
+              - column: { name: amount, valueNumeric: 151.57 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 86 }
+              - column: { name: max_value, valueNumeric: 100 }
+              - column: { name: amount, valueNumeric: 610.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 101 }
+              - column: { name: max_value, valueNumeric: 110 }
+              - column: { name: amount, valueNumeric: 1069.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 111 }
+              - column: { name: max_value, valueNumeric: 120 }
+              - column: { name: amount, valueNumeric: 1528.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 121 }
+              - column: { name: max_value, valueNumeric: 155 }
+              - column: { name: amount, valueNumeric: 3055.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 156 }
+              - column: { name: max_value, value: null }
+              - column: { name: amount, valueNumeric: 6108.90 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  # ============================================
+  # FLANDERS BIV (power_kw brackets) - 2025
+  # Indexed +2% compared to base rates
+  # ============================================
+  - changeSet:
+      id: 003-flanders-tmc-brackets
+      author: backtaxes
+      comment: Seed Flanders BIV brackets based on power kW for 2025 (indexed +2%)
+      changes:
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 0 }
+              - column: { name: max_value, valueNumeric: 70 }
+              - column: { name: amount, valueNumeric: 62.73 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 71 }
+              - column: { name: max_value, valueNumeric: 85 }
+              - column: { name: amount, valueNumeric: 125.46 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 86 }
+              - column: { name: max_value, valueNumeric: 100 }
+              - column: { name: amount, valueNumeric: 504.90 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 101 }
+              - column: { name: max_value, valueNumeric: 110 }
+              - column: { name: amount, valueNumeric: 884.34 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 111 }
+              - column: { name: max_value, valueNumeric: 120 }
+              - column: { name: amount, valueNumeric: 1263.78 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 121 }
+              - column: { name: max_value, valueNumeric: 155 }
+              - column: { name: amount, valueNumeric: 2527.56 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: power_kw }
+              - column: { name: min_value, valueNumeric: 156 }
+              - column: { name: max_value, value: null }
+              - column: { name: amount, valueNumeric: 5056.14 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  # ============================================
+  # WALLONIA ANNUAL TAX (fiscal_hp brackets) - July 2025
+  # Official rates from SPW Finances
+  # ============================================
+  - changeSet:
+      id: 003-wallonia-annual-brackets
+      author: backtaxes
+      comment: Seed Wallonia annual tax brackets based on fiscal HP (July 2025 - June 2026)
+      changes:
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 0 }
+              - column: { name: max_value, valueNumeric: 4 }
+              - column: { name: amount, valueNumeric: 100.98 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 5 }
+              - column: { name: max_value, valueNumeric: 5 }
+              - column: { name: amount, valueNumeric: 126.32 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 6 }
+              - column: { name: max_value, valueNumeric: 6 }
+              - column: { name: amount, valueNumeric: 182.56 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 7 }
+              - column: { name: max_value, valueNumeric: 7 }
+              - column: { name: amount, valueNumeric: 238.52 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 8 }
+              - column: { name: max_value, valueNumeric: 8 }
+              - column: { name: amount, valueNumeric: 295.02 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 9 }
+              - column: { name: max_value, valueNumeric: 9 }
+              - column: { name: amount, valueNumeric: 351.27 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 10 }
+              - column: { name: max_value, valueNumeric: 10 }
+              - column: { name: amount, valueNumeric: 407.22 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 11 }
+              - column: { name: max_value, valueNumeric: 11 }
+              - column: { name: amount, valueNumeric: 528.40 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 12 }
+              - column: { name: max_value, valueNumeric: 12 }
+              - column: { name: amount, valueNumeric: 649.70 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 13 }
+              - column: { name: max_value, valueNumeric: 13 }
+              - column: { name: amount, valueNumeric: 770.62 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 14 }
+              - column: { name: max_value, valueNumeric: 14 }
+              - column: { name: amount, valueNumeric: 891.79 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 15 }
+              - column: { name: max_value, valueNumeric: 15 }
+              - column: { name: amount, valueNumeric: 1013.10 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 16 }
+              - column: { name: max_value, valueNumeric: 16 }
+              - column: { name: amount, valueNumeric: 1326.86 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 17 }
+              - column: { name: max_value, valueNumeric: 17 }
+              - column: { name: amount, valueNumeric: 1640.89 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 18 }
+              - column: { name: max_value, valueNumeric: 18 }
+              - column: { name: amount, valueNumeric: 1954.92 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 19 }
+              - column: { name: max_value, valueNumeric: 19 }
+              - column: { name: amount, valueNumeric: 2268.29 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 20 }
+              - column: { name: max_value, value: null }
+              - column: { name: amount, valueNumeric: 2582.32 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  # ============================================
+  # BRUSSELS ANNUAL TAX (fiscal_hp brackets) - July 2025
+  # Official rates from Cartax/Bruxelles Fiscalité
+  # ============================================
+  - changeSet:
+      id: 003-brussels-annual-brackets
+      author: backtaxes
+      comment: Seed Brussels annual tax brackets based on fiscal HP (July 2025 - June 2026)
+      changes:
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 0 }
+              - column: { name: max_value, valueNumeric: 4 }
+              - column: { name: amount, valueNumeric: 102.96 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 5 }
+              - column: { name: max_value, valueNumeric: 5 }
+              - column: { name: amount, valueNumeric: 128.96 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 6 }
+              - column: { name: max_value, valueNumeric: 6 }
+              - column: { name: amount, valueNumeric: 186.25 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 7 }
+              - column: { name: max_value, valueNumeric: 7 }
+              - column: { name: amount, valueNumeric: 243.41 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 8 }
+              - column: { name: max_value, valueNumeric: 8 }
+              - column: { name: amount, valueNumeric: 300.96 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 9 }
+              - column: { name: max_value, valueNumeric: 9 }
+              - column: { name: amount, valueNumeric: 358.51 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 10 }
+              - column: { name: max_value, valueNumeric: 10 }
+              - column: { name: amount, valueNumeric: 415.40 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 11 }
+              - column: { name: max_value, valueNumeric: 11 }
+              - column: { name: amount, valueNumeric: 539.09 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 12 }
+              - column: { name: max_value, valueNumeric: 12 }
+              - column: { name: amount, valueNumeric: 662.64 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 13 }
+              - column: { name: max_value, valueNumeric: 13 }
+              - column: { name: amount, valueNumeric: 786.06 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 14 }
+              - column: { name: max_value, valueNumeric: 14 }
+              - column: { name: amount, valueNumeric: 909.74 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 15 }
+              - column: { name: max_value, valueNumeric: 15 }
+              - column: { name: amount, valueNumeric: 1033.43 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 16 }
+              - column: { name: max_value, valueNumeric: 16 }
+              - column: { name: amount, valueNumeric: 1353.53 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 17 }
+              - column: { name: max_value, valueNumeric: 17 }
+              - column: { name: amount, valueNumeric: 1673.89 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 18 }
+              - column: { name: max_value, valueNumeric: 18 }
+              - column: { name: amount, valueNumeric: 1994.26 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 19 }
+              - column: { name: max_value, valueNumeric: 19 }
+              - column: { name: amount, valueNumeric: 2313.83 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 20 }
+              - column: { name: max_value, value: null }
+              - column: { name: amount, valueNumeric: 2634.32 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  # ============================================
+  # FLANDERS ANNUAL TAX (fiscal_hp brackets) - July 2025
+  # Base rates before CO2/Euro bonus-malus corrections
+  # Minimum after corrections: 58.55€
+  # ============================================
+  - changeSet:
+      id: 003-flanders-annual-brackets
+      author: backtaxes
+      comment: Seed Flanders annual tax brackets based on fiscal HP (July 2025 - June 2026)
+      changes:
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 0 }
+              - column: { name: max_value, valueNumeric: 4 }
+              - column: { name: amount, valueNumeric: 100.89 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 5 }
+              - column: { name: max_value, valueNumeric: 5 }
+              - column: { name: amount, valueNumeric: 126.18 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 6 }
+              - column: { name: max_value, valueNumeric: 6 }
+              - column: { name: amount, valueNumeric: 182.32 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 7 }
+              - column: { name: max_value, valueNumeric: 7 }
+              - column: { name: amount, valueNumeric: 238.14 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 8 }
+              - column: { name: max_value, valueNumeric: 8 }
+              - column: { name: amount, valueNumeric: 294.50 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 9 }
+              - column: { name: max_value, valueNumeric: 9 }
+              - column: { name: amount, valueNumeric: 350.62 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 10 }
+              - column: { name: max_value, valueNumeric: 10 }
+              - column: { name: amount, valueNumeric: 406.42 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 11 }
+              - column: { name: max_value, valueNumeric: 11 }
+              - column: { name: amount, valueNumeric: 527.31 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 12 }
+              - column: { name: max_value, valueNumeric: 12 }
+              - column: { name: amount, valueNumeric: 648.34 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 13 }
+              - column: { name: max_value, valueNumeric: 13 }
+              - column: { name: amount, valueNumeric: 768.99 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 14 }
+              - column: { name: max_value, valueNumeric: 14 }
+              - column: { name: amount, valueNumeric: 889.91 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 15 }
+              - column: { name: max_value, valueNumeric: 15 }
+              - column: { name: amount, valueNumeric: 1010.96 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 16 }
+              - column: { name: max_value, valueNumeric: 16 }
+              - column: { name: amount, valueNumeric: 1324.06 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 17 }
+              - column: { name: max_value, valueNumeric: 17 }
+              - column: { name: amount, valueNumeric: 1637.43 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 18 }
+              - column: { name: max_value, valueNumeric: 18 }
+              - column: { name: amount, valueNumeric: 1950.81 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 19 }
+              - column: { name: max_value, valueNumeric: 19 }
+              - column: { name: amount, valueNumeric: 2263.51 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 20 }
+              - column: { name: max_value, value: null }
+              - column: { name: amount, valueNumeric: 2576.89 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  # ============================================
+  # TAX PARAMETERS - WALLONIA - 2025
+  # ============================================
+  - changeSet:
+      id: 003-wallonia-tmc-parameters
+      author: backtaxes
+      comment: Seed Wallonia TMC parameters for 2025
+      changes:
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: co2_reference_wltp }
+              - column: { name: param_value, valueNumeric: 149.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: co2_reference_nedc }
+              - column: { name: param_value, valueNumeric: 122.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: min_amount }
+              - column: { name: param_value, valueNumeric: 61.5000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: max_amount }
+              - column: { name: param_value, valueNumeric: 9000.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: co2_malus_per_gram }
+              - column: { name: param_value, valueNumeric: 2.5000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: diesel_surcharge_percent }
+              - column: { name: param_value, valueNumeric: 0.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  # ============================================
+  # TAX PARAMETERS - BRUSSELS - 2025
+  # ============================================
+  - changeSet:
+      id: 003-brussels-tmc-parameters
+      author: backtaxes
+      comment: Seed Brussels TMC parameters for 2025
+      changes:
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: co2_reference_wltp }
+              - column: { name: param_value, valueNumeric: 145.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: co2_reference_nedc }
+              - column: { name: param_value, valueNumeric: 120.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: min_amount }
+              - column: { name: param_value, valueNumeric: 75.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: max_amount }
+              - column: { name: param_value, valueNumeric: 9000.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: co2_malus_per_gram }
+              - column: { name: param_value, valueNumeric: 2.5000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: diesel_surcharge_percent }
+              - column: { name: param_value, valueNumeric: 0.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  # ============================================
+  # TAX PARAMETERS - FLANDERS BIV - 2025
+  # ============================================
+  - changeSet:
+      id: 003-flanders-tmc-parameters
+      author: backtaxes
+      comment: Seed Flanders BIV parameters for 2025
+      changes:
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: co2_reference_wltp }
+              - column: { name: param_value, valueNumeric: 136.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: co2_reference_nedc }
+              - column: { name: param_value, valueNumeric: 115.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: min_amount }
+              - column: { name: param_value, valueNumeric: 50.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: max_amount }
+              - column: { name: param_value, valueNumeric: 9000.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: co2_coefficient }
+              - column: { name: param_value, valueNumeric: 4.5000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: euro_norm_malus_euro1 }
+              - column: { name: param_value, valueNumeric: 1500.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: euro_norm_malus_euro2 }
+              - column: { name: param_value, valueNumeric: 1250.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: euro_norm_malus_euro3 }
+              - column: { name: param_value, valueNumeric: 1000.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: euro_norm_malus_euro4 }
+              - column: { name: param_value, valueNumeric: 500.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: diesel_surcharge_percent }
+              - column: { name: param_value, valueNumeric: 4.5000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        # Fixed amount for electric vehicles (indexed +2% from 61.50€)
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: electric_fixed_amount }
+              - column: { name: param_value, valueNumeric: 62.73 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        # Fixed amount for hydrogen vehicles (same as electric)
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: hydrogen_fixed_amount }
+              - column: { name: param_value, valueNumeric: 62.73 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  # ============================================
+  # TAX PARAMETERS - ANNUAL TAX (all regions) - 2025
+  # ============================================
+  - changeSet:
+      id: 003-wallonia-annual-parameters
+      author: backtaxes
+      comment: Seed Wallonia annual tax parameters for 2025
+      changes:
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: annual }
+              - column: { name: param_key, value: lpg_surcharge }
+              - column: { name: param_value, valueNumeric: 99.98 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: annual }
+              - column: { name: param_key, value: diesel_eco_malus_base }
+              - column: { name: param_value, valueNumeric: 0.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  - changeSet:
+      id: 003-brussels-annual-parameters
+      author: backtaxes
+      comment: Seed Brussels annual tax parameters for 2025
+      changes:
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: annual }
+              - column: { name: param_key, value: lpg_surcharge }
+              - column: { name: param_value, valueNumeric: 102.28 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: annual }
+              - column: { name: param_key, value: diesel_eco_malus_base }
+              - column: { name: param_value, valueNumeric: 0.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  - changeSet:
+      id: 003-flanders-annual-parameters
+      author: backtaxes
+      comment: Seed Flanders annual tax parameters for 2025
+      changes:
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: annual }
+              - column: { name: param_key, value: lpg_surcharge }
+              - column: { name: param_value, valueNumeric: 101.98 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: annual }
+              - column: { name: param_key, value: diesel_eco_malus_base }
+              - column: { name: param_value, valueNumeric: 0.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  # ============================================
+  # AGE COEFFICIENTS - TMC (all regions) - 2025
+  # Applies age-based reduction to TMC
+  # ============================================
+  - changeSet:
+      id: 003-wallonia-age-coefficients
+      author: backtaxes
+      comment: Seed Wallonia TMC age coefficients for 2025
+      changes:
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 0 }
+              - column: { name: coefficient, valueNumeric: 1.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 1 }
+              - column: { name: coefficient, valueNumeric: 0.9000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 2 }
+              - column: { name: coefficient, valueNumeric: 0.8000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 3 }
+              - column: { name: coefficient, valueNumeric: 0.7000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 4 }
+              - column: { name: coefficient, valueNumeric: 0.6000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 5 }
+              - column: { name: coefficient, valueNumeric: 0.5500 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 6 }
+              - column: { name: coefficient, valueNumeric: 0.5000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 7 }
+              - column: { name: coefficient, valueNumeric: 0.4500 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 8 }
+              - column: { name: coefficient, valueNumeric: 0.4000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 9 }
+              - column: { name: coefficient, valueNumeric: 0.3500 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 10 }
+              - column: { name: coefficient, valueNumeric: 0.3000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 11 }
+              - column: { name: coefficient, valueNumeric: 0.2500 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 12 }
+              - column: { name: coefficient, valueNumeric: 0.2000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 13 }
+              - column: { name: coefficient, valueNumeric: 0.1500 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 14 }
+              - column: { name: coefficient, valueNumeric: 0.1000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 15 }
+              - column: { name: coefficient, valueNumeric: 0.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  - changeSet:
+      id: 003-brussels-age-coefficients
+      author: backtaxes
+      comment: Seed Brussels TMC age coefficients for 2025
+      changes:
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 0 }
+              - column: { name: coefficient, valueNumeric: 1.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 1 }
+              - column: { name: coefficient, valueNumeric: 0.9000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 2 }
+              - column: { name: coefficient, valueNumeric: 0.8000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 3 }
+              - column: { name: coefficient, valueNumeric: 0.7000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 4 }
+              - column: { name: coefficient, valueNumeric: 0.6000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 5 }
+              - column: { name: coefficient, valueNumeric: 0.5500 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 6 }
+              - column: { name: coefficient, valueNumeric: 0.5000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 7 }
+              - column: { name: coefficient, valueNumeric: 0.4500 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 8 }
+              - column: { name: coefficient, valueNumeric: 0.4000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 9 }
+              - column: { name: coefficient, valueNumeric: 0.3500 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 10 }
+              - column: { name: coefficient, valueNumeric: 0.3000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 11 }
+              - column: { name: coefficient, valueNumeric: 0.2500 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 12 }
+              - column: { name: coefficient, valueNumeric: 0.2000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 13 }
+              - column: { name: coefficient, valueNumeric: 0.1500 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 14 }
+              - column: { name: coefficient, valueNumeric: 0.1000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 15 }
+              - column: { name: coefficient, valueNumeric: 0.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  - changeSet:
+      id: 003-flanders-age-coefficients
+      author: backtaxes
+      comment: Seed Flanders BIV age coefficients for 2025
+      changes:
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 0 }
+              - column: { name: coefficient, valueNumeric: 1.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 1 }
+              - column: { name: coefficient, valueNumeric: 0.9000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 2 }
+              - column: { name: coefficient, valueNumeric: 0.8000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 3 }
+              - column: { name: coefficient, valueNumeric: 0.7000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 4 }
+              - column: { name: coefficient, valueNumeric: 0.6000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 5 }
+              - column: { name: coefficient, valueNumeric: 0.5500 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 6 }
+              - column: { name: coefficient, valueNumeric: 0.5000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 7 }
+              - column: { name: coefficient, valueNumeric: 0.4500 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 8 }
+              - column: { name: coefficient, valueNumeric: 0.4000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 9 }
+              - column: { name: coefficient, valueNumeric: 0.3500 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 10 }
+              - column: { name: coefficient, valueNumeric: 0.3000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 11 }
+              - column: { name: coefficient, valueNumeric: 0.2500 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 12 }
+              - column: { name: coefficient, valueNumeric: 0.2000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 13 }
+              - column: { name: coefficient, valueNumeric: 0.1500 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 14 }
+              - column: { name: coefficient, valueNumeric: 0.1000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: age_coefficients
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: vehicle_age_years, valueNumeric: 15 }
+              - column: { name: coefficient, valueNumeric: 0.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  # ============================================
+  # WALLONIA TMC - Additional Parameters
+  # ============================================
+  - changeSet:
+      id: 003-wallonia-tmc-additional-params
+      author: backtaxes
+      comment: Additional Wallonia TMC parameters (MMA reference, energy coefficients)
+      changes:
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: mma_reference }
+              - column: { name: param_value, valueNumeric: 1838.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: energy_hybrid }
+              - column: { name: param_value, valueNumeric: 0.8000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: energy_thermal }
+              - column: { name: param_value, valueNumeric: 1.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  # ============================================
+  # WALLONIA TMC - Energy Coefficients for Electric (by power kW)
+  # Lower coefficient = lower tax for electric vehicles
+  # ============================================
+  - changeSet:
+      id: 003-wallonia-energy-electric-brackets
+      author: backtaxes
+      comment: Wallonia TMC energy coefficients for electric vehicles by power
+      changes:
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: energy_electric_kw }
+              - column: { name: min_value, valueNumeric: 0 }
+              - column: { name: max_value, valueNumeric: 120 }
+              - column: { name: amount, valueNumeric: 0.01 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: energy_electric_kw }
+              - column: { name: min_value, valueNumeric: 121 }
+              - column: { name: max_value, valueNumeric: 160 }
+              - column: { name: amount, valueNumeric: 0.05 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: energy_electric_kw }
+              - column: { name: min_value, valueNumeric: 161 }
+              - column: { name: max_value, valueNumeric: 200 }
+              - column: { name: amount, valueNumeric: 0.10 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: energy_electric_kw }
+              - column: { name: min_value, valueNumeric: 201 }
+              - column: { name: max_value, valueNumeric: 250 }
+              - column: { name: amount, valueNumeric: 0.15 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: energy_electric_kw }
+              - column: { name: min_value, valueNumeric: 251 }
+              - column: { name: max_value, value: null }
+              - column: { name: amount, valueNumeric: 0.26 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  # ============================================
+  # BRUSSELS TMC - Fiscal HP Brackets
+  # Brussels uses MAX(fiscal_hp amount, power_kw amount)
+  # ============================================
+  - changeSet:
+      id: 003-brussels-tmc-fiscal-hp-brackets
+      author: backtaxes
+      comment: Brussels TMC brackets based on fiscal HP
+      changes:
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 0 }
+              - column: { name: max_value, valueNumeric: 4 }
+              - column: { name: amount, valueNumeric: 75.79 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 5 }
+              - column: { name: max_value, valueNumeric: 5 }
+              - column: { name: amount, valueNumeric: 107.84 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 6 }
+              - column: { name: max_value, valueNumeric: 6 }
+              - column: { name: amount, valueNumeric: 183.48 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 7 }
+              - column: { name: max_value, valueNumeric: 7 }
+              - column: { name: amount, valueNumeric: 259.63 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 8 }
+              - column: { name: max_value, valueNumeric: 8 }
+              - column: { name: amount, valueNumeric: 383.52 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 9 }
+              - column: { name: max_value, valueNumeric: 9 }
+              - column: { name: amount, valueNumeric: 507.53 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 10 }
+              - column: { name: max_value, valueNumeric: 10 }
+              - column: { name: amount, valueNumeric: 631.04 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 11 }
+              - column: { name: max_value, valueNumeric: 11 }
+              - column: { name: amount, valueNumeric: 878.18 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 12 }
+              - column: { name: max_value, valueNumeric: 12 }
+              - column: { name: amount, valueNumeric: 1125.57 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 13 }
+              - column: { name: max_value, valueNumeric: 13 }
+              - column: { name: amount, valueNumeric: 1372.70 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 14 }
+              - column: { name: max_value, valueNumeric: 14 }
+              - column: { name: amount, valueNumeric: 1619.72 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 15 }
+              - column: { name: max_value, valueNumeric: 15 }
+              - column: { name: amount, valueNumeric: 1866.87 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 16 }
+              - column: { name: max_value, valueNumeric: 16 }
+              - column: { name: amount, valueNumeric: 2361.03 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 17 }
+              - column: { name: max_value, valueNumeric: 17 }
+              - column: { name: amount, valueNumeric: 2855.19 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 18 }
+              - column: { name: max_value, valueNumeric: 18 }
+              - column: { name: amount, valueNumeric: 3349.48 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 19 }
+              - column: { name: max_value, valueNumeric: 19 }
+              - column: { name: amount, valueNumeric: 3843.64 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: fiscal_hp }
+              - column: { name: min_value, valueNumeric: 20 }
+              - column: { name: max_value, value: null }
+              - column: { name: amount, valueNumeric: 4337.80 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  # ============================================
+  # BRUSSELS TMC - Additional Parameters
+  # ============================================
+  - changeSet:
+      id: 003-brussels-tmc-additional-params
+      author: backtaxes
+      comment: Brussels TMC additional parameters (electric min, LPG reduction)
+      changes:
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: electric_min_amount }
+              - column: { name: param_value, valueNumeric: 74.29 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: lpg_reduction }
+              - column: { name: param_value, valueNumeric: 298.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  # ============================================
+  # FLANDERS TMC - Formula Parameters
+  # BIV = (((CO2 × f × q) / 246)^6 × 4500 + c) × LC
+  # ============================================
+  - changeSet:
+      id: 003-flanders-tmc-formula-params
+      author: backtaxes
+      comment: Flanders BIV formula parameters
+      changes:
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: formula_divisor }
+              - column: { name: param_value, valueNumeric: 246.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: formula_constant }
+              - column: { name: param_value, valueNumeric: 4500.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: wltp_q_factor }
+              - column: { name: param_value, valueNumeric: 1.2450 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: co2_correction_x }
+              - column: { name: param_value, valueNumeric: 63.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: fuel_factor_lpg }
+              - column: { name: param_value, valueNumeric: 0.8800 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: fuel_factor_cng }
+              - column: { name: param_value, valueNumeric: 0.9300 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: param_key, value: fuel_factor_default }
+              - column: { name: param_value, valueNumeric: 1.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  # ============================================
+  # FLANDERS TMC - Luchtcomponent Brackets (by Euro Norm)
+  # Diesel vehicles have higher luchtcomponent
+  # ============================================
+  - changeSet:
+      id: 003-flanders-luchtcomponent-brackets
+      author: backtaxes
+      comment: Flanders BIV luchtcomponent brackets by Euro norm
+      changes:
+        # Petrol/LPG/CNG luchtcomponent by Euro norm
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: luchtcomponent_petrol }
+              - column: { name: min_value, valueNumeric: 1 }
+              - column: { name: max_value, valueNumeric: 1 }
+              - column: { name: amount, valueNumeric: 1500.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: luchtcomponent_petrol }
+              - column: { name: min_value, valueNumeric: 2 }
+              - column: { name: max_value, valueNumeric: 2 }
+              - column: { name: amount, valueNumeric: 1250.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: luchtcomponent_petrol }
+              - column: { name: min_value, valueNumeric: 3 }
+              - column: { name: max_value, valueNumeric: 3 }
+              - column: { name: amount, valueNumeric: 1000.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: luchtcomponent_petrol }
+              - column: { name: min_value, valueNumeric: 4 }
+              - column: { name: max_value, valueNumeric: 4 }
+              - column: { name: amount, valueNumeric: 500.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: luchtcomponent_petrol }
+              - column: { name: min_value, valueNumeric: 5 }
+              - column: { name: max_value, valueNumeric: 5 }
+              - column: { name: amount, valueNumeric: 0.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: luchtcomponent_petrol }
+              - column: { name: min_value, valueNumeric: 6 }
+              - column: { name: max_value, valueNumeric: 7 }
+              - column: { name: amount, valueNumeric: 0.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        # Diesel luchtcomponent by Euro norm (higher values)
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: luchtcomponent_diesel }
+              - column: { name: min_value, valueNumeric: 1 }
+              - column: { name: max_value, valueNumeric: 1 }
+              - column: { name: amount, valueNumeric: 2000.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: luchtcomponent_diesel }
+              - column: { name: min_value, valueNumeric: 2 }
+              - column: { name: max_value, valueNumeric: 2 }
+              - column: { name: amount, valueNumeric: 1750.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: luchtcomponent_diesel }
+              - column: { name: min_value, valueNumeric: 3 }
+              - column: { name: max_value, valueNumeric: 3 }
+              - column: { name: amount, valueNumeric: 1500.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: luchtcomponent_diesel }
+              - column: { name: min_value, valueNumeric: 4 }
+              - column: { name: max_value, valueNumeric: 4 }
+              - column: { name: amount, valueNumeric: 1000.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: luchtcomponent_diesel }
+              - column: { name: min_value, valueNumeric: 5 }
+              - column: { name: max_value, valueNumeric: 5 }
+              - column: { name: amount, valueNumeric: 500.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: tmc }
+              - column: { name: bracket_key, value: luchtcomponent_diesel }
+              - column: { name: min_value, valueNumeric: 6 }
+              - column: { name: max_value, valueNumeric: 7 }
+              - column: { name: amount, valueNumeric: 0.00 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  # ============================================
+  # ANNUAL TAX - LPG Supplement Brackets (Wallonia & Brussels only)
+  # Official rates: ≤7 CV: 89.16€, 8-13 CV: 148.68€, ≥14 CV: 208.20€
+  # Note: Flanders has NO LPG supplement on annual tax
+  # ============================================
+  - changeSet:
+      id: 003-annual-lpg-supplement-brackets
+      author: backtaxes
+      comment: Annual tax LPG supplement brackets (Wallonia & Brussels)
+      changes:
+        # Wallonia LPG supplement brackets
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: lpg_supplement }
+              - column: { name: min_value, valueNumeric: 0 }
+              - column: { name: max_value, valueNumeric: 7 }
+              - column: { name: amount, valueNumeric: 89.16 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: lpg_supplement }
+              - column: { name: min_value, valueNumeric: 8 }
+              - column: { name: max_value, valueNumeric: 13 }
+              - column: { name: amount, valueNumeric: 148.68 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: wallonia }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: lpg_supplement }
+              - column: { name: min_value, valueNumeric: 14 }
+              - column: { name: max_value, value: null }
+              - column: { name: amount, valueNumeric: 208.20 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        # Brussels LPG supplement brackets (same rates)
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: lpg_supplement }
+              - column: { name: min_value, valueNumeric: 0 }
+              - column: { name: max_value, valueNumeric: 7 }
+              - column: { name: amount, valueNumeric: 89.16 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: lpg_supplement }
+              - column: { name: min_value, valueNumeric: 8 }
+              - column: { name: max_value, valueNumeric: 13 }
+              - column: { name: amount, valueNumeric: 148.68 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_brackets
+            columns:
+              - column: { name: region, value: brussels }
+              - column: { name: tax_type, value: annual }
+              - column: { name: bracket_key, value: lpg_supplement }
+              - column: { name: min_value, valueNumeric: 14 }
+              - column: { name: max_value, value: null }
+              - column: { name: amount, valueNumeric: 208.20 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  # ============================================
+  # FLANDERS ANNUAL - CO2 Bonus/Malus Parameters
+  # ============================================
+  - changeSet:
+      id: 003-flanders-annual-co2-params
+      author: backtaxes
+      comment: Flanders annual tax CO2 bonus/malus parameters
+      changes:
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: annual }
+              - column: { name: param_key, value: co2_reference_wltp }
+              - column: { name: param_value, valueNumeric: 149.0000 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+        - insert:
+            tableName: tax_parameters
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: annual }
+              - column: { name: param_key, value: co2_correction_percent }
+              - column: { name: param_value, valueNumeric: 0.0030 }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+
+  # ============================================
+  # TAX EXEMPTIONS - 2025
+  # Only Flanders Annual tax exempts Electric/Hydrogen vehicles
+  # All other regions: Electric/Hydrogen pay minimum or reduced rate
+  # ============================================
+  - changeSet:
+      id: 003-tax-exemptions-flanders-annual
+      author: backtaxes
+      comment: Seed Flanders annual tax exemptions for electric and hydrogen vehicles
+      changes:
+        # Flanders - Electric Annual exemption (only region with full exemption)
+        - insert:
+            tableName: tax_exemptions
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: annual }
+              - column: { name: fuel_type, value: electric }
+              - column: { name: condition_key, value: full_exemption }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+              - column: { name: valid_to, valueDate: '2030-12-31' }
+        # Flanders - Hydrogen Annual exemption
+        - insert:
+            tableName: tax_exemptions
+            columns:
+              - column: { name: region, value: flanders }
+              - column: { name: tax_type, value: annual }
+              - column: { name: fuel_type, value: hydrogen }
+              - column: { name: condition_key, value: full_exemption }
+              - column: { name: valid_from, valueDate: '2025-07-01' }
+              - column: { name: valid_to, valueDate: '2030-12-31' }

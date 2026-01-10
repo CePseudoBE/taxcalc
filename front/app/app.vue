@@ -1,6 +1,12 @@
 <script setup lang="ts">
 const { t } = useI18n()
+const auth = useAuth()
 const currentYear = new Date().getFullYear()
+
+// Vérifier l'auth au chargement (sync avec la session serveur)
+onMounted(() => {
+  auth.checkAuth()
+})
 
 const navItems = computed(() => [
   { label: t('nav.calculator'), to: '/calculator', icon: 'i-lucide-calculator' },
@@ -30,7 +36,15 @@ const navItems = computed(() => [
 
       <template #right>
         <NuxtLink
-          to="/auth/login"
+          v-if="auth.isAuthenticated.value"
+          to="/account"
+          class="hidden sm:inline-flex px-3 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
+        >
+          {{ t('nav.account') }}
+        </NuxtLink>
+        <NuxtLink
+          v-else
+          to="/auth"
           class="hidden sm:inline-flex px-3 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
         >
           {{ t('nav.login') }}

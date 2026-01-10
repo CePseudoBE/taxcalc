@@ -4,6 +4,36 @@
     "tagline": "Calculateur de taxes automobiles belges",
     "description": "Calculez facilement la TMC et la taxe de circulation pour votre véhicule en Belgique"
   },
+  "seo": {
+    "home": {
+      "title": "CalcTax - Calculateur de Taxes Automobiles Belges | TMC & Taxe de Circulation",
+      "description": "Calculez gratuitement la TMC (taxe de mise en circulation) et la taxe annuelle pour votre véhicule en Belgique. Comparez Wallonie, Flandre et Bruxelles. Sans inscription, 100% gratuit."
+    },
+    "calculator": {
+      "title": "Calculateur TMC et Taxe de Circulation | CalcTax Belgique",
+      "description": "Calculez instantanément vos taxes automobiles belges. TMC/BIV et taxe annuelle pour les 3 régions. Gratuit, sans compte, sans publicité."
+    },
+    "compare": {
+      "title": "Comparer les Taxes Auto entre Régions Belges | CalcTax",
+      "description": "Comparez les taxes automobiles entre Wallonie, Flandre et Bruxelles. Trouvez la région la moins chère pour votre véhicule. Comparaison instantanée et gratuite."
+    },
+    "search": {
+      "title": "Recherche de Véhicules | Base de Données Auto Belge | CalcTax",
+      "description": "Recherchez parmi des milliers de véhicules dans notre base de données. Trouvez votre marque, modèle et variante pour calculer vos taxes."
+    },
+    "auth": {
+      "title": "Connexion | CalcTax",
+      "description": "Connectez-vous avec Google pour sauvegarder vos recherches et contribuer à notre base de données de véhicules."
+    },
+    "account": {
+      "title": "Mon Compte | CalcTax",
+      "description": "Gérez votre compte, vos recherches sauvegardées et vos soumissions de véhicules."
+    },
+    "submit": {
+      "title": "Proposer un Véhicule | CalcTax",
+      "description": "Contribuez à notre base de données en proposant un véhicule manquant. Votre contribution aide la communauté."
+    }
+  },
   "home": {
     "heroTitle": "Calculez vos taxes automobiles en Belgique",
     "heroSubtitle": "TMC et taxe de circulation pour les trois régions. Données officielles 2025.",
@@ -153,25 +183,27 @@
     "filters": "Filtres",
     "clearFilters": "Effacer les filtres",
     "noResults": "Aucun résultat trouvé",
-    "results": "{count} résultat | {count} résultats"
+    "results": "{count} résultat | {count} résultats",
+    "selectBrand": "Sélectionnez une marque",
+    "selectModel": "Sélectionnez un modèle",
+    "selectToStart": "Sélectionnez une marque et un modèle pour commencer"
   },
   "compare": {
     "title": "Comparer les régions",
     "subtitle": "Comparez les taxes pour votre véhicule entre les trois régions belges",
-    "selectVehicle": "Sélectionnez un véhicule pour comparer"
+    "selectVehicle": "Sélectionnez un véhicule pour comparer",
+    "compare": "Comparer",
+    "cheapest": "Le moins cher"
   },
   "auth": {
     "login": "Connexion",
-    "register": "Inscription",
-    "email": "Adresse e-mail",
-    "password": "Mot de passe",
-    "confirmPassword": "Confirmer le mot de passe",
-    "forgotPassword": "Mot de passe oublié ?",
-    "noAccount": "Pas encore de compte ?",
-    "hasAccount": "Déjà un compte ?",
-    "loginButton": "Se connecter",
-    "registerButton": "S'inscrire",
-    "logoutButton": "Se déconnecter"
+    "loginTitle": "Se connecter",
+    "loginSubtitle": "Connectez-vous pour sauvegarder vos recherches et contribuer à la base de données",
+    "continueWithGoogle": "Continuer avec Google",
+    "googleNotLoaded": "L'authentification Google n'est pas disponible",
+    "googleError": "Une erreur s'est produite avec l'authentification Google",
+    "loginFailed": "La connexion a échoué. Veuillez réessayer.",
+    "termsNotice": "En continuant, vous acceptez nos conditions d'utilisation et notre politique de confidentialité."
   },
   "account": {
     "title": "Mon compte",
@@ -179,7 +211,21 @@
     "savedSearches": "Recherches sauvegardées",
     "submissions": "Mes soumissions",
     "noSavedSearches": "Aucune recherche sauvegardée",
-    "noSubmissions": "Aucune soumission"
+    "noSubmissions": "Aucune soumission",
+    "submittedOn": "Soumis le",
+    "feedback": "Retour du modérateur",
+    "memberSince": "Membre depuis",
+    "role": "Rôle",
+    "moderator": "Modérateur",
+    "dangerZone": "Zone de danger",
+    "deleteAccount": "Supprimer mon compte",
+    "deleteConfirm": "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.",
+    "confirmDelete": "Oui, supprimer"
+  },
+  "status": {
+    "pending": "En attente",
+    "approved": "Approuvé",
+    "rejected": "Rejeté"
   },
   "submission": {
     "title": "Soumettre un véhicule",
@@ -219,7 +265,9 @@
     "previous": "Précédent",
     "close": "Fermer",
     "confirm": "Confirmer",
-    "language": "Langue"
+    "language": "Langue",
+    "view": "Voir",
+    "present": "Présent"
   },
   "errors": {
     "generic": "Une erreur est survenue",
@@ -227,6 +275,17 @@
     "unauthorized": "Accès non autorisé",
     "validation": "Veuillez vérifier les champs du formulaire",
     "network": "Erreur de connexion au serveur"
+  },
+  "trust": {
+    "free": "100% Gratuit",
+    "freeShort": "100% Gratuit",
+    "freeDesc": "Sans limite de calculs",
+    "noAccount": "Sans inscription",
+    "noAccountDesc": "Pas d'email requis",
+    "noAds": "Sans publicité",
+    "noAdsDesc": "Aucun tracking commercial",
+    "threeRegions": "3 régions",
+    "threeRegionsDesc": "Comparaison instantanée"
   },
   "footer": {
     "copyright": "© {year} Back-Taxes. Tous droits réservés.",

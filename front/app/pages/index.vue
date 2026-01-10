@@ -1,12 +1,11 @@
 <script setup lang="ts">
 const { t } = useI18n()
+useSeo('home')
 
-useSeoMeta({
-  title: () => `${t('app.name')} - ${t('app.tagline')}`,
-  description: () => t('app.description'),
-  ogTitle: () => `${t('app.name')} - ${t('app.tagline')}`,
-  ogDescription: () => t('app.description')
-})
+// Add structured data (JSON-LD) for SEO
+const jsonLd = useJsonLd()
+jsonLd.addOrganizationSchema()
+jsonLd.addWebSiteSchema()
 </script>
 
 <template>
@@ -24,13 +23,19 @@ useSeoMeta({
 
       <UContainer class="relative py-28 md:py-40">
         <div class="max-w-2xl">
-          <!-- Badge -->
-          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300 text-sm font-medium mb-8 border border-orange-200 dark:border-orange-800/50">
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-500 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-orange-600"></span>
-            </span>
-            <span>{{ t('home.heroSubtitle') }}</span>
+          <!-- Badges -->
+          <div class="flex flex-wrap items-center gap-3 mb-8">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300 text-sm font-medium border border-green-200 dark:border-green-800/50">
+              <UIcon name="i-lucide-check" class="w-4 h-4" />
+              <span>{{ t('trust.freeShort') }}</span>
+            </div>
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300 text-sm font-medium border border-orange-200 dark:border-orange-800/50">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-500 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-orange-600"></span>
+              </span>
+              <span>{{ t('home.heroSubtitle') }}</span>
+            </div>
           </div>
 
           <!-- Title -->
@@ -45,16 +50,62 @@ useSeoMeta({
           <div class="flex flex-wrap gap-4">
             <UButton
               :label="t('home.getStarted')"
+              to="/calculator"
               size="lg"
               trailing-icon="i-lucide-arrow-right"
             />
             <UButton
               :label="t('home.viewCatalog')"
+              to="/search"
               size="lg"
               color="neutral"
               variant="outline"
               trailing-icon="i-lucide-search"
             />
+          </div>
+        </div>
+      </UContainer>
+    </div>
+
+    <!-- Trust Badges -->
+    <div class="bg-white dark:bg-stone-900 border-b border-stone-200 dark:border-stone-800">
+      <UContainer class="py-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center shrink-0">
+              <UIcon name="i-lucide-badge-check" class="w-5 h-5 text-green-600 dark:text-green-400" />
+            </div>
+            <div>
+              <p class="font-medium text-sm">{{ t('trust.free') }}</p>
+              <p class="text-xs text-stone-500 dark:text-stone-400">{{ t('trust.freeDesc') }}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center shrink-0">
+              <UIcon name="i-lucide-user-x" class="w-5 h-5 text-blue-600 dark:text-blue-400" />
+            </div>
+            <div>
+              <p class="font-medium text-sm">{{ t('trust.noAccount') }}</p>
+              <p class="text-xs text-stone-500 dark:text-stone-400">{{ t('trust.noAccountDesc') }}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center shrink-0">
+              <UIcon name="i-lucide-shield-off" class="w-5 h-5 text-purple-600 dark:text-purple-400" />
+            </div>
+            <div>
+              <p class="font-medium text-sm">{{ t('trust.noAds') }}</p>
+              <p class="text-xs text-stone-500 dark:text-stone-400">{{ t('trust.noAdsDesc') }}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center shrink-0">
+              <UIcon name="i-lucide-layers" class="w-5 h-5 text-orange-600 dark:text-orange-400" />
+            </div>
+            <div>
+              <p class="font-medium text-sm">{{ t('trust.threeRegions') }}</p>
+              <p class="text-xs text-stone-500 dark:text-stone-400">{{ t('trust.threeRegionsDesc') }}</p>
+            </div>
           </div>
         </div>
       </UContainer>
@@ -181,6 +232,7 @@ useSeoMeta({
           </div>
           <UButton
             :label="t('home.ctaButton')"
+            to="/calculator"
             size="lg"
             trailing-icon="i-lucide-arrow-right"
             class="shrink-0 bg-white text-orange-600 hover:bg-orange-50"

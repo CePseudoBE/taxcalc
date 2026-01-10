@@ -4,6 +4,36 @@
     "tagline": "Belgische autobelastingcalculator",
     "description": "Bereken eenvoudig de BIV en verkeersbelasting voor uw voertuig in België"
   },
+  "seo": {
+    "home": {
+      "title": "CalcTax - Belgische Autobelasting Calculator | BIV & Verkeersbelasting",
+      "description": "Bereken gratis de BIV (belasting op inverkeerstelling) en jaarlijkse verkeersbelasting voor uw voertuig in België. Vergelijk Wallonië, Vlaanderen en Brussel. Zonder registratie, 100% gratis."
+    },
+    "calculator": {
+      "title": "BIV en Verkeersbelasting Calculator | CalcTax België",
+      "description": "Bereken direct uw Belgische autobelastingen. BIV en jaarlijkse belasting voor de 3 gewesten. Gratis, zonder account, zonder advertenties."
+    },
+    "compare": {
+      "title": "Vergelijk Autobelasting tussen Belgische Gewesten | CalcTax",
+      "description": "Vergelijk autobelastingen tussen Wallonië, Vlaanderen en Brussel. Vind het goedkoopste gewest voor uw voertuig. Directe en gratis vergelijking."
+    },
+    "search": {
+      "title": "Voertuigen Zoeken | Belgische Auto Database | CalcTax",
+      "description": "Zoek tussen duizenden voertuigen in onze database. Vind uw merk, model en variant om uw belastingen te berekenen."
+    },
+    "auth": {
+      "title": "Inloggen | CalcTax",
+      "description": "Log in met Google om uw zoekopdrachten op te slaan en bij te dragen aan onze voertuigendatabase."
+    },
+    "account": {
+      "title": "Mijn Account | CalcTax",
+      "description": "Beheer uw account, opgeslagen zoekopdrachten en voertuiginzendingen."
+    },
+    "submit": {
+      "title": "Voertuig Indienen | CalcTax",
+      "description": "Draag bij aan onze database door een ontbrekend voertuig in te dienen. Uw bijdrage helpt de gemeenschap."
+    }
+  },
   "home": {
     "heroTitle": "Bereken uw autobelastingen in België",
     "heroSubtitle": "BIV en verkeersbelasting voor de drie gewesten. Officiële gegevens 2025.",
@@ -42,6 +72,7 @@
   },
   "fuel": {
     "title": "Brandstof",
+    "select": "Selecteer een brandstof",
     "petrol": "Benzine",
     "diesel": "Diesel",
     "electric": "Elektrisch",
@@ -55,6 +86,7 @@
   },
   "euroNorm": {
     "title": "Euronorm",
+    "select": "Selecteer een euronorm",
     "euro_1": "Euro 1",
     "euro_2": "Euro 2",
     "euro_3": "Euro 3",
@@ -67,22 +99,34 @@
   },
   "vehicle": {
     "brand": "Merk",
+    "brandPlaceholder": "bv: Volkswagen",
     "model": "Model",
+    "modelPlaceholder": "bv: Golf",
     "variant": "Variant",
+    "variantPlaceholder": "bv: 1.5 TSI 150pk",
     "selectBrand": "Selecteer een merk",
     "selectModel": "Selecteer een model",
     "selectVariant": "Selecteer een variant",
+    "selectMonth": "Selecteer een maand",
     "power": "Vermogen",
     "powerKw": "Vermogen (kW)",
+    "powerKwPlaceholder": "bv: 110",
     "fiscalHp": "Fiscale PK",
+    "fiscalHpPlaceholder": "bv: 8",
+    "fiscalHpHelp": "Vermeld op uw inschrijvingsbewijs",
     "co2": "CO₂-uitstoot",
     "co2Wltp": "CO₂ WLTP (g/km)",
+    "co2WltpPlaceholder": "bv: 120",
+    "co2WltpHelp": "Belangrijk voor Wallonië en Vlaanderen",
     "co2Nedc": "CO₂ NEDC (g/km)",
     "displacement": "Cilinderinhoud (cc)",
     "displacementCc": "Cilinderinhoud (cm³)",
     "displacementCcPlaceholder": "bv: 1998",
     "displacementCcHelp": "Alternatief voor fiscale PK. Gebruik als u uw PK niet kent.",
     "mass": "Massa (kg)",
+    "mmaKg": "MTM (kg)",
+    "mmaKgPlaceholder": "bv: 1850",
+    "mmaKgHelp": "Maximaal Toegelaten Massa (alleen Wallonië)",
     "yearStart": "Startjaar",
     "yearEnd": "Eindjaar",
     "particleFilter": "Roetfilter",
@@ -115,10 +159,23 @@
     "subtitle": "Bereken de BIV en jaarlijkse belasting voor uw voertuig",
     "selectVehicle": "Voertuig selecteren",
     "orManual": "of handmatige invoer",
+    "inputMode": "Invoermodus",
     "manualEntry": "Handmatige invoer",
     "manualDescription": "Voer de kenmerken van uw voertuig in als het niet in onze database staat",
     "fromCatalog": "Uit de catalogus",
-    "catalogDescription": "Zoek uw voertuig tussen de beschikbare modellen"
+    "catalogDescription": "Zoek uw voertuig tussen de beschikbare modellen",
+    "vehicleSpecs": "Voertuigkenmerken",
+    "requiredInfo": "Belangrijke informatie",
+    "requiredInfoDetails": "Voor een nauwkeurige berekening in Wallonië, voeg CO₂ en MTM toe. Voor Vlaanderen, voeg CO₂ en Euronorm toe.",
+    "noCatalogData": "De voertuigcatalogus is leeg. Gebruik handmatige invoer om uw belastingen te berekenen.",
+    "fillForm": "Vul het formulier in om het resultaat te zien",
+    "saveSearch": "Zoekopdracht opslaan",
+    "searchLabel": "Naam van de zoekopdracht",
+    "searchLabelPlaceholder": "bv: Mijn Golf",
+    "searchSaved": "Zoekopdracht opgeslagen!",
+    "shareTitle": "Belastingberekening",
+    "loggedInSubmissionNotice": "Als ingelogde gebruiker wordt uw voertuig ter moderatie aan de catalogus voorgelegd.",
+    "submissionSuccess": "Voertuig ingediend! Een moderator zal het controleren."
   },
   "search": {
     "title": "Voertuigen zoeken",
@@ -126,25 +183,27 @@
     "filters": "Filters",
     "clearFilters": "Filters wissen",
     "noResults": "Geen resultaten gevonden",
-    "results": "{count} resultaat | {count} resultaten"
+    "results": "{count} resultaat | {count} resultaten",
+    "selectBrand": "Selecteer een merk",
+    "selectModel": "Selecteer een model",
+    "selectToStart": "Selecteer een merk en model om te beginnen"
   },
   "compare": {
     "title": "Gewesten vergelijken",
     "subtitle": "Vergelijk de belastingen voor uw voertuig tussen de drie Belgische gewesten",
-    "selectVehicle": "Selecteer een voertuig om te vergelijken"
+    "selectVehicle": "Selecteer een voertuig om te vergelijken",
+    "compare": "Vergelijken",
+    "cheapest": "Goedkoopste"
   },
   "auth": {
     "login": "Inloggen",
-    "register": "Registreren",
-    "email": "E-mailadres",
-    "password": "Wachtwoord",
-    "confirmPassword": "Wachtwoord bevestigen",
-    "forgotPassword": "Wachtwoord vergeten?",
-    "noAccount": "Nog geen account?",
-    "hasAccount": "Al een account?",
-    "loginButton": "Inloggen",
-    "registerButton": "Registreren",
-    "logoutButton": "Uitloggen"
+    "loginTitle": "Inloggen",
+    "loginSubtitle": "Log in om uw zoekopdrachten op te slaan en bij te dragen aan de database",
+    "continueWithGoogle": "Doorgaan met Google",
+    "googleNotLoaded": "Google-authenticatie is niet beschikbaar",
+    "googleError": "Er is een fout opgetreden met Google-authenticatie",
+    "loginFailed": "Inloggen mislukt. Probeer het opnieuw.",
+    "termsNotice": "Door verder te gaan, accepteert u onze gebruiksvoorwaarden en privacybeleid."
   },
   "account": {
     "title": "Mijn account",
@@ -152,7 +211,21 @@
     "savedSearches": "Opgeslagen zoekopdrachten",
     "submissions": "Mijn inzendingen",
     "noSavedSearches": "Geen opgeslagen zoekopdrachten",
-    "noSubmissions": "Geen inzendingen"
+    "noSubmissions": "Geen inzendingen",
+    "submittedOn": "Ingediend op",
+    "feedback": "Feedback van moderator",
+    "memberSince": "Lid sinds",
+    "role": "Rol",
+    "moderator": "Moderator",
+    "dangerZone": "Gevarenzone",
+    "deleteAccount": "Account verwijderen",
+    "deleteConfirm": "Weet u zeker dat u uw account wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.",
+    "confirmDelete": "Ja, verwijderen"
+  },
+  "status": {
+    "pending": "In behandeling",
+    "approved": "Goedgekeurd",
+    "rejected": "Afgewezen"
   },
   "submission": {
     "title": "Voertuig indienen",
@@ -176,6 +249,8 @@
     "cancel": "Annuleren",
     "delete": "Verwijderen",
     "edit": "Bewerken",
+    "share": "Delen",
+    "copied": "Gekopieerd!",
     "loading": "Laden...",
     "error": "Fout",
     "success": "Succes",
@@ -190,7 +265,9 @@
     "previous": "Vorige",
     "close": "Sluiten",
     "confirm": "Bevestigen",
-    "language": "Taal"
+    "language": "Taal",
+    "view": "Bekijken",
+    "present": "Heden"
   },
   "errors": {
     "generic": "Er is een fout opgetreden",
@@ -198,6 +275,17 @@
     "unauthorized": "Geen toegang",
     "validation": "Controleer de formuliervelden",
     "network": "Verbindingsfout met de server"
+  },
+  "trust": {
+    "free": "100% Gratis",
+    "freeShort": "100% Gratis",
+    "freeDesc": "Onbeperkt berekeningen",
+    "noAccount": "Geen registratie",
+    "noAccountDesc": "Geen e-mail vereist",
+    "noAds": "Geen advertenties",
+    "noAdsDesc": "Geen commerciële tracking",
+    "threeRegions": "3 gewesten",
+    "threeRegionsDesc": "Directe vergelijking"
   },
   "footer": {
     "copyright": "© {year} Back-Taxes. Alle rechten voorbehouden.",

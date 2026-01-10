@@ -93,9 +93,9 @@ front/
    - Comparer les taxes d'un véhicule entre les 3 régions
    - Visualisation graphique des différences
 
-4. **Authentification** (`/auth/login`, `/auth/register`)
-   - Connexion / Inscription
-   - Gestion de session
+4. **Authentification** (`/auth`)
+   - Connexion via Google OAuth uniquement
+   - Gestion de session via cookies sécurisés
 
 5. **Espace utilisateur** (`/account`)
    - Recherches sauvegardées
@@ -143,9 +143,8 @@ POST /api/tax/calculate             // Calcul complet (TMC + annuel)
 POST /api/tax/tmc                   // TMC uniquement
 POST /api/tax/annual                // Taxe annuelle uniquement
 
-// Authentification
-POST /api/auth/register             // Inscription
-POST /api/auth/login                // Connexion
+// Authentification (Google OAuth uniquement)
+POST /api/auth/google               // Connexion via Google
 POST /api/auth/logout               // Déconnexion
 GET  /api/auth/check                // Vérifier la session
 
@@ -294,8 +293,7 @@ Le backend accepte les requêtes depuis :
 |------|------|-------------|
 | `/` (index) | ✅ Complet | ⚠️ Liens à corriger |
 | `/calculator` | ✅ Complet | ✅ Oui |
-| `/auth/login` | ✅ Complet | ✅ Oui |
-| `/auth/register` | ✅ Complet | ✅ Oui |
+| `/auth` | ✅ Complet | ✅ Google OAuth uniquement |
 | `/search` | 🔲 Skeleton | ❌ Non |
 | `/compare` | 🔲 Skeleton | ❌ Non |
 | `/submit` | 🔲 Skeleton | ❌ Non |
@@ -307,7 +305,7 @@ Le backend accepte les requêtes depuis :
 
 | Composable | État | Notes |
 |------------|------|-------|
-| `useAuth.ts` | ✅ 90% | Manque `isAdmin`, refresh token |
+| `useAuth.ts` | ✅ Complet | Google OAuth uniquement, isAdmin ajouté |
 | `useApi.ts` | ✅ Complet | OK |
 | `useVehicles.ts` | ✅ 80% | Manque recherche avec filtres |
 | `useTax.ts` | ✅ 70% | Manque cache, historique |

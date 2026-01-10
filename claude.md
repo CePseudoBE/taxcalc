@@ -29,11 +29,12 @@ back-taxes/
 | Java | 24 | Langage |
 | Spring Boot | 4.0.0 | Framework |
 | Gradle | - | Build tool |
-| PostgreSQL | - | Base de données (production) |
-| H2 | - | Base de données (développement) |
+| PostgreSQL | - | Base de données (dev + prod) |
+| Redis | 7 | Cache distribué, rate limiting (prod) |
 | Liquibase | - | Migrations de base de données |
 | Spring Security | - | Authentification/Autorisation |
-| Caffeine | - | Cache en mémoire |
+| Google OAuth | - | Authentification unique (Google-only) |
+| Caffeine | - | Cache en mémoire (fallback dev) |
 
 ### Structure du Backend
 
@@ -82,22 +83,30 @@ src/main/java/be/hoffmann/backtaxes/
 | POST | `/api/tax/calculate` | Calcul TMC + taxe annuelle |
 | POST | `/api/tax/tmc` | Calcul TMC uniquement |
 | POST | `/api/tax/annual` | Calcul taxe annuelle uniquement |
-| POST | `/api/auth/register` | Inscription |
-| POST | `/api/auth/login` | Connexion |
+| POST | `/api/auth/google` | Connexion via Google OAuth |
+| POST | `/api/auth/logout` | Déconnexion |
+| GET | `/api/auth/check` | Vérifier l'authentification |
 | POST | `/api/submissions` | Soumettre un nouveau véhicule |
 
 ### Commandes de Développement
 
 ```bash
-# Mode développement (H2 en mémoire)
+# Mode développement (PostgreSQL local requis)
 ./gradlew bootRun --args='--spring.profiles.active=dev'
 
-# Mode production (nécessite PostgreSQL)
+# Mode production (PostgreSQL + Redis requis)
 ./gradlew bootRun
 
 # Lancer les tests
 ./gradlew test
 ```
+
+### Authentification
+
+L'application utilise uniquement Google OAuth pour l'authentification :
+- Pas de login/password traditionnel
+- Les utilisateurs se connectent via leur compte Google
+- Les tokens sont stockés côté serveur (OAT - Opaque Access Tokens)
 
 ### Configuration CORS
 
@@ -175,12 +184,17 @@ Le projet utilise des types ENUM PostgreSQL natifs pour la sécurité de type.
 
 | Tâche | Fichier | Description |
 |-------|---------|-------------|
-| Rate Limiting | N/A | Implémenter rate limiting (100 req/min par IP) avec Bucket4j |
-| Rôle ADMIN | `User.java`, `SecurityConfig.java` | Ajouter champ `is_admin` et gérer le rôle |
 | Supprimer fallback dev | `SubmissionController.java:117`, `SavedSearchController.java:90` | Supprimer le fallback à l'utilisateur dev (ID 1) |
 | Variables d'env credentials | `application.properties` | Utiliser `${DATABASE_URL}` au lieu de credentials en dur |
 | Activer sécurité prod | `SecurityConfig.java:31` | Changer `app.security.enabled=true` par défaut |
 | Migration utilisateur dev | `019-seed-dev-user.yaml` | Ajouter `context: dev` ou supprimer |
+
+### ✅ FAIT
+
+- Rate Limiting avec Redis (fallback in-memory en dev)
+- Rôle ADMIN ajouté
+- Google OAuth uniquement (plus de login/password)
+- Headers de sécurité HTTP (CSP, HSTS, X-Frame-Options, etc.)
 
 ### 🟠 HAUTE
 
